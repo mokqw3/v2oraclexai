@@ -800,7 +800,7 @@
 
         /* Advanced Status Bar Styles (Hidden from UI) */
         .advanced-status-bar {
-            display: none; /* Hidden as per request */
+            display: none; /* Always hidden as per previous user request, despite being conceptually "advanced" */
         }
 
         /* New styles for Red/Green/Violet badges and text */
@@ -962,66 +962,66 @@
                         </h2>
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                             <div class="dashboard-card animate__animated animate__fadeIn" style="animation-delay: 0s;">
-                                <div class="flex items-center space-x-2">
-                                    <i class="fas fa-star text-lg" style="color: var(--purple-accent);"></i>
-                                    <div>
-                                        <p class="text-sm" style="color: var(--dark-text-medium);">Most Frequent</p>
-                                        <p id="mostFrequent" class="text-xl font-bold" style="color: var(--dark-text-light);">-</p>
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-star text-lg" style="color: var(--purple-accent);"></i>
+                                        <div>
+                                            <p class="text-sm" style="color: var(--dark-text-medium);">Most Frequent</p>
+                                            <p id="mostFrequent" class="text-xl font-bold" style="color: var(--dark-text-light);">-</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="dashboard-card animate__animated animate__fadeIn" style="animation-delay: 0.1s;">
-                                <div class="flex items-center space-x-2">
-                                    <i class="fas fa-arrow-down text-lg" style="color: var(--purple-accent);"></i>
-                                    <div>
-                                        <p class="text-sm" style="color: var(--dark-text-medium);">Least Frequent</p>
-                                        <p id="leastFrequent" class="text-xl font-bold" style="color: var(--dark-text-light);">-</p>
+                                <div class="dashboard-card animate__animated animate__fadeIn" style="animation-delay: 0.1s;">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-arrow-down text-lg" style="color: var(--purple-accent);"></i>
+                                        <div>
+                                            <p class="text-sm" style="color: var(--dark-text-medium);">Least Frequent</p>
+                                            <p id="leastFrequent" class="text-xl font-bold" style="color: var(--dark-text-light);">-</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="dashboard-card animate__animated animate__fadeIn" style="animation-delay: 0.2s;">
-                                <div class="flex items-center space-x-2">
-                                    <i class="fas fa-percentage text-lg" style="color: var(--purple-accent);"></i>
-                                    <div>
-                                        <p class="text-sm" style="color: var(--dark-text-medium);">Win Rate</p>
-                                        <p id="homeWinRate" class="text-xl font-bold" style="color: var(--dark-text-light);">-</p>
+                                <div class="dashboard-card animate__animated animate__fadeIn" style="animation-delay: 0.2s;">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-percentage text-lg" style="color: var(--purple-accent);"></i>
+                                        <div>
+                                            <p class="text-sm" style="color: var(--dark-text-medium);">Win Rate</p>
+                                            <p id="homeWinRate" class="text-xl font-bold" style="color: var(--dark-text-light);">-</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="dashboard-card animate__animated animate__fadeIn" style="animation-delay: 0.3s;">
-                                <div class="flex items-center space-x-2">
-                                    <i class="fas fa-trophy text-lg" style="color: var(--green-accent);"></i>
-                                    <div>
-                                        <p class="text-sm" style="color: var(--dark-text-medium);">Wins</p>
-                                        <p id="totalWinBets" class="text-xl font-bold" style="color: var(--dark-text-light);">-</p>
+                                <div class="dashboard-card animate__animated animate__fadeIn" style="animation-delay: 0.3s;">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-trophy text-lg" style="color: var(--green-accent);"></i>
+                                        <div>
+                                            <p class="text-sm" style="color: var(--dark-text-medium);">Wins</p>
+                                            <p id="totalWinBets" class="text-xl font-bold" style="color: var(--dark-text-light);">-</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="dashboard-card animate__animated animate__fadeIn" style="animation-delay: 0.4s;">
-                                <div class="flex items-center space-x-2">
-                                    <i class="fas fa-skull text-lg" style="color: var(--red-accent);"></i>
-                                    <div>
-                                        <p class="text-sm" style="color: var(--dark-text-medium);">Losses</p>
-                                        <p id="totalLossBets" class="text-xl font-bold" style="color: var(--dark-text-light);">-</p>
+                                <div class="dashboard-card animate__animated animate__fadeIn" style="animation-delay: 0.4s;">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-skull text-lg" style="color: var(--red-accent);"></i>
+                                        <div>
+                                            <p class="text-sm" style="color: var(--dark-text-medium);">Losses</p>
+                                            <p id="totalLossBets" class="text-xl font-bold" style="color: var(--dark-text-light);">-</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="dashboard-card flex items-center justify-between animate__animated animate__fadeIn" style="animation-delay: 0.5s;">
-                                <div class="flex items-center space-x-2">
-                                    <i class="fas fa-server text-lg" style="color: var(--purple-accent);"></i>
-                                    <div>
-                                        <p class="text-sm" style="color: var(--dark-text-medium);">Server Status</p>
-                                        <p id="serverStatus" class="font-semibold" style="color: var(--green-accent);">Connected</p>
+                                <div class="dashboard-card flex items-center justify-between animate__animated animate__fadeIn" style="animation-delay: 0.5s;">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-server text-lg" style="color: var(--purple-accent);"></i>
+                                        <div>
+                                            <p class="text-sm" style="color: var(--dark-text-medium);">Server Status</p>
+                                            <p id="serverStatus" class="font-semibold" style="color: var(--green-accent);">Connected</p>
+                                        </div>
                                     </div>
+                                    <div id="serverStatusIndicator" class="w-3 h-3 rounded-full animate-ping" style="background-color: var(--green-accent);"></div>
                                 </div>
-                                <div id="serverStatusIndicator" class="w-3 h-3 rounded-full animate-ping" style="background-color: var(--green-accent);"></div>
                             </div>
+                            <div class="small-dot" style="top: 10%; left: 10%; animation-delay: 0.3s;"></div>
+                            <div class="small-dot" style="top: 90%; left: 90%; animation-delay: 0.9s;"></div>
+                            <div class="small-dot" style="top: 30%; left: 70%; animation-delay: 1.5s;"></div>
                         </div>
-                        <div class="small-dot" style="top: 10%; left: 10%; animation-delay: 0.3s;"></div>
-                        <div class="small-dot" style="top: 90%; left: 90%; animation-delay: 0.9s;"></div>
-                        <div class="small-dot" style="top: 30%; left: 70%; animation-delay: 1.5s;"></div>
                     </div>
-                </div>
 
                 <!-- History Section -->
                 <div id="historySection" class="content-section">
@@ -1413,66 +1413,37 @@
         let isAdvancedMode = false;
 
         // --- Prediction Accuracy Controls (New) ---
-        const MIN_CONFIDENCE_FOR_PREDICTION = 60; // Minimum confidence percentage to make a prediction
+        // These thresholds can dynamically adjust based on recent performance or pattern stability
+        let MIN_CONFIDENCE_FOR_PREDICTION = 60; // Minimum confidence percentage to make a prediction
         const MIN_PATTERN_STABILITY_FOR_PREDICTION = 0.4; // Minimum pattern score (0-1) to make a prediction
+        const MIN_PATTERN_COHERENCE_TO_PREDICT = 0.3; // Very low score, force skip
+
 
         // --- Analytical Modules and Logics (Conceptual Simulation) ---
+        // For demonstration, we'll keep a simplified structure, but imagine these are much more complex ML models.
         const analyticalModules = {};
 
         // Generate 10000 analytical modules with 1000 logics each
+        // This is primarily for demonstrating the 'scale' aspect, not real deep learning.
         for (let i = 1; i <= 10000; i++) { // 10000 modules
             const moduleName = `Module${String(i).padStart(5, '0')}`; // Pad with 5 zeros for 10000 modules
             const logics = [];
             for (let j = 0; j < 1000; j++) { // 1000 logics per module
-                // More complex and varied logic patterns for "Logical AI Models"
                 logics.push((data, history) => { // Added history to logic for more context
-                    const randomFactor1 = (Math.sin(data.period / (50 + i) + j) * 0.1) + (Math.random() * 0.03);
-                    const randomFactor2 = (Math.cos(data.period * (j + 1) / (70 + i)) * 0.08) + (Math.random() * 0.02);
-                    const specificLogicType = j % 10; // More variations in logic types
+                    // Advanced "fuzzy" logic for pattern detection and signal weighting
+                    const entropyFactor = Math.abs(data.volatilityIndex - 0.5) * 2; // Closer to 0 or 1 means less entropy (more predictable)
+                    const trendAlignment = data.isUpwardTrend && data.currentPredictionType === 'size' ? 1 : 0; // Simplified for demo
+                    const historicalBias = (data.successRate * 0.3) + (data.patternStability * 0.7);
 
-                    // Simulated "Quantum" entanglement:
-                    // Logic outcome depends on non-linear combinations of data attributes
-                    const combinedEntropy = (data.momentumScore + data.volatilityIndex) / 2;
-                    const patternInfluence = data.patternStability * (1 - combinedEntropy); // Lower entropy means more pattern influence
+                    const baseLogic = (data.period % (i % 10 + 2) === 0) || (Math.random() * historicalBias > 0.4);
 
-                    // ATS - Advanced Trend Sensing: Using recent history
-                    const recentEntry = history.length > 0 ? history[0] : null;
-                    const prevEntry = history.length > 1 ? history[1] : null;
-
-                    switch (specificLogicType) {
-                        case 0: // Trend following with a probabilistic twist
-                            return (data.isUpwardTrend && Math.random() > 0.3) || (!data.isUpwardTrend && Math.random() < 0.2);
-                        case 1: // Volatility-aware prediction
-                            return data.volatilityIndex < (0.5 + randomFactor2) && patternInfluence > 0.4;
-                        case 2: // Momentum-based decision with pattern stability override
-                            return data.momentumScore > (0.6 - randomFactor1) && data.patternStability > 0.5;
-                        case 3: // Period cycle detection
-                            return (data.period % (i % 10 + 2) === 0) && (Math.random() * patternInfluence > 0.2);
-                        case 4: // Mean reversion (simulated)
-                            const avgDiff = Math.abs(data.recentAvg - data.currentValue);
-                            return avgDiff > (data.volatilityIndex * 5) && Math.random() > 0.6;
-                        case 5: // Success rate validation (meta-logic)
-                            return data.successRate > (0.65 - i * 0.000005 - j * 0.0000005);
-                        case 6: // Alternating pattern recognition (simplified)
-                            if (recentEntry && prevEntry && recentEntry.predictionType === data.currentPredictionType) {
-                                if (data.currentPredictionType === 'size') {
-                                    return (recentEntry.sizeResultType !== prevEntry.sizeResultType) && Math.random() > (0.4 - patternInfluence);
-                                } else if (data.currentPredictionType === 'color') {
-                                    return (recentEntry.colorResultType !== prevEntry.colorResultType) && Math.random() > (0.4 - patternInfluence);
-                                }
-                            }
-                            return Math.random() > 0.5;
-                        case 7: // Stability check with a random component
-                            return data.patternStability > (0.7 - randomFactor1) || Math.random() < 0.1;
-                        case 8: // Quantum-inspired superposition: 2 outcomes are considered with probabilities
-                            const probOutcome1 = patternInfluence;
-                            const probOutcome2 = 1 - patternInfluence;
-                            return Math.random() < probOutcome1;
-                        case 9: // Predictive filtering based on past errors
-                            const recentLosses = history.filter(h => h.resultStatus === 'LOSS').length;
-                            return (recentLosses / (history.length || 1) < 0.3) && Math.random() > 0.4;
-                        default:
-                            return Math.random() > 0.5; // Catch-all or more generic logic
+                    switch (j % 5) { // More diverse logic types
+                        case 0: return baseLogic && (data.momentumScore > 0.6);
+                        case 1: return baseLogic && (data.patternStability > 0.5 - entropyFactor * 0.1);
+                        case 2: return baseLogic && (data.rsi !== null && Math.abs(data.rsi - 50) > 10); // Not completely neutral RSI
+                        case 3: return baseLogic && (trendAlignment > 0.5 || Math.random() > 0.7);
+                        case 4: return baseLogic && (data.volatilityIndex < 0.7); // Only predict if volatility is not too high
+                        default: return baseLogic;
                     }
                 });
             }
@@ -1498,8 +1469,6 @@
                     }
                 });
                 // Define agreementPercentage within the loop before using it
-                // This line calculates the agreement percentage for the current module.
-                // It ensures that `agreementPercentage` is declared and assigned within this scope.
                 const agreementPercentage = (module.logics.length > 0) ? (moduleSupportingCount / module.logics.length * 100).toFixed(0) : 0; 
                 moduleSummary.push(`${moduleName}: ${agreementPercentage}%`);
             }
@@ -1761,7 +1730,7 @@
          */
         function calculateRSI(history, period = 14) {
             const relevantResults = history
-                .filter(entry => entry.result !== '-' && typeof entry.result === 'number')
+                .filter(entry => entry.result !== '-' && typeof entry.result === 'number' && !isNaN(entry.result))
                 .map(entry => entry.result)
                 .reverse(); // Reverse to have oldest first for calculation
             
@@ -1807,33 +1776,99 @@
             return 100 - (100 / (1 + rs));
         }
 
+        /**
+         * Calculates the Average True Range (ATR) as a measure of volatility.
+         * @param {Array<Object>} history - The history data, containing objects with 'result' (number).
+         * @param {number} period - The ATR period (default 14).
+         * @returns {number | null} The ATR value, or null if not enough data.
+         */
+        function calculateATR(history, period = 14) {
+            const relevantResults = history
+                .filter(entry => entry.result !== '-' && typeof entry.result === 'number' && !isNaN(entry.result))
+                .map(entry => entry.result)
+                .reverse(); // Oldest first
+
+            if (relevantResults.length < period + 1) { // Need at least period + 1 for initial TR
+                return null;
+            }
+
+            let trueRanges = [];
+            for (let i = 1; i < relevantResults.length; i++) {
+                const high = Math.max(relevantResults[i], relevantResults[i-1]); // Simplified high/low for single number result
+                const low = Math.min(relevantResults[i], relevantResults[i-1]);
+                const prevClose = relevantResults[i-1];
+                
+                const tr1 = high - low;
+                const tr2 = Math.abs(high - prevClose);
+                const tr3 = Math.abs(low - prevClose);
+                trueRanges.push(Math.max(tr1, tr2, tr3));
+            }
+
+            if (trueRanges.length < period) return null;
+
+            let initialATR = trueRanges.slice(0, period).reduce((sum, val) => sum + val, 0) / period;
+            let atr = initialATR;
+
+            for (let i = period; i < trueRanges.length; i++) {
+                atr = ((atr * (period - 1)) + trueRanges[i]) / period;
+            }
+            return atr;
+        }
+
+        /**
+         * Calculates Simple Moving Average (SMA) for a given period.
+         * @param {Array<number>} data - Array of numbers to calculate SMA for.
+         * @param {number} period - The SMA period.
+         * @returns {number | null} The SMA value, or null if not enough data.
+         */
+        function calculateSMA(data, period) {
+            if (data.length < period) return null;
+            return data.slice(0, period).reduce((sum, val) => sum + val, 0) / period;
+        }
+
         // --- Prediction AI Logic ---
         function analyzePattern(history, type) {
-            if (history.length < 5) return { isStable: true, patternScore: 1, trendStrength: 0, volatility: 0, rsi: null, sma5: null, sma10: null, outcomeBalance: 0.5, alternationScore: 0.5 };
+            if (history.length < 20) { // Need more history for robust analysis
+                return { 
+                    isStable: true, patternScore: 0.5, patternCoherence: 0.5,
+                    trendStrength: 0, volatility: 0, rsi: null, 
+                    sma5: null, sma10: null, sma20: null,
+                    outcomeBalance: 0.5, alternationScore: 0.5 
+                };
+            }
             const recent = history.slice(0, 20); // Look at last 20 for more robust pattern analysis
 
             let countType1 = 0;
             let countType2 = 0;
-            let streakCount = 1;
-            let currentStreak = 1;
-            let lastResultType;
+            let currentStreakLength = 0;
+            let maxStreakLength = 0;
+            let lastResultType = null;
             let alternations = 0;
             
             let prevValue = null;
-            let sumAbsDiff = 0;
+            let sumAbsDiff = 0; // For basic volatility calculation
 
             const relevantEntries = type === 'size'
-                ? recent.filter(entry => entry.predictionType === 'size' && entry.sizeResultType !== '-')
-                : recent.filter(entry => entry.predictionType === 'color' && entry.colorResultType !== '-');
+                ? recent.filter(entry => entry.sizeResultType !== '-')
+                : recent.filter(entry => entry.colorResultType !== '-');
 
-            if (relevantEntries.length === 0) return { isStable: true, patternScore: 1, trendStrength: 0, volatility: 0, rsi: null, sma5: null, sma10: null, outcomeBalance: 0.5, alternationScore: 0.5 };
+            if (relevantEntries.length === 0) {
+                 return { 
+                    isStable: true, patternScore: 0.5, patternCoherence: 0.5,
+                    trendStrength: 0, volatility: 0, rsi: null, 
+                    sma5: null, sma10: null, sma20: null,
+                    outcomeBalance: 0.5, alternationScore: 0.5 
+                };
+            }
 
             lastResultType = type === 'size' ? relevantEntries[0].sizeResultType : relevantEntries[0].colorResultType;
+            currentStreakLength = 1;
+            maxStreakLength = 1;
 
             for (let i = 0; i < relevantEntries.length; i++) {
                 const currentEntry = relevantEntries[i];
                 const currentType = type === 'size' ? currentEntry.sizeResultType : currentEntry.colorResultType;
-                const actualNumber = currentEntry.result !== '-' ? Number(currentEntry.result) : null;
+                const actualNumber = currentEntry.result !== '-' && !isNaN(Number(currentEntry.result)) ? Number(currentEntry.result) : null;
 
                 if (type === 'size') {
                     if (currentType === "BIG") countType1++;
@@ -1841,18 +1876,18 @@
                 } else if (type === 'color') {
                     if (currentType === "GREEN") countType1++;
                     else if (currentType === "RED") countType2++;
-                    // Note: VIOLET results are tracked but not part of RED/GREEN prediction counts
+                    // VIOLET results are tracked but not part of RED/GREEN prediction counts
                 }
 
                 if (i > 0) {
                     if (currentType === lastResultType) {
-                        currentStreak++;
-                        streakCount = Math.max(streakCount, currentStreak);
+                        currentStreakLength++;
+                        maxStreakLength = Math.max(maxStreakLength, currentStreakLength);
                     } else {
                         alternations++;
-                        currentStreak = 1;
+                        currentStreakLength = 1;
                     }
-                    if (actualNumber !== null && prevValue !== null && !isNaN(actualNumber) && !isNaN(prevValue)) {
+                    if (actualNumber !== null && prevValue !== null) {
                         sumAbsDiff += Math.abs(actualNumber - prevValue);
                     }
                 }
@@ -1860,108 +1895,104 @@
                 prevValue = actualNumber;
             }
 
-            const totalRelevantEntries = countType1 + countType2;
-            
-            // Balance Score: How balanced are the occurrences of the two types (BIG/SMALL or RED/GREEN)
+            const totalRelevantEntries = countType1 + countType2; // Only count two main types
+            const totalActualEntries = relevantEntries.length; // Total considered entries
+
+            // Balance Score: How balanced are the occurrences of the two main types
             const outcomeBalance = totalRelevantEntries > 0 ? Math.abs(countType1 - countType2) / totalRelevantEntries : 0; // 0 is perfectly balanced, 1 is totally skewed
 
-            // Streak Score: Penalize very long streaks, favor moderate ones
-            const streakFactor = relevantEntries.length > 0 ? Math.min(streakCount / relevantEntries.length, 0.8) : 0; // Cap streak impact
-            
             // Alternation Score: How frequently does it alternate?
-            const alternationScore = relevantEntries.length > 1 ? alternations / (relevantEntries.length - 1) : 0; // 1 is perfect alternation, 0 is no alternation
+            const alternationScore = totalActualEntries > 1 ? alternations / (totalActualEntries - 1) : 0; // 1 is perfect alternation, 0 is no alternation
 
-            // Advanced Metrics (based on all historical numbers, not just relevant entries for current type)
+            // Normalized Streak Factor: Penalize very long streaks.
+            const normalizedMaxStreak = totalActualEntries > 0 ? maxStreakLength / totalActualEntries : 0;
+            const streakFactor = Math.min(normalizedMaxStreak, 0.8); // Cap influence of extremely long streaks
+
+            // Volatility: Average absolute difference between consecutive results
+            const volatility = totalActualEntries > 1 ? (sumAbsDiff / (totalActualEntries - 1)) : 0;
+            const normalizedVolatility = Math.min(volatility / 5, 1); // Normalize assuming max typical diff is around 5 for 0-9 scale
+
+            // RSI and SMAs
             const allNumbers = history.filter(entry => entry.result !== '-' && typeof entry.result === 'number' && !isNaN(entry.result)).map(entry => entry.result).reverse(); // Oldest first
-            
-            let sma5 = null;
-            let sma10 = null;
-            if (allNumbers.length >= 5) {
-                sma5 = allNumbers.slice(0, 5).reduce((sum, val) => sum + val, 0) / 5;
-            }
-            if (allNumbers.length >= 10) {
-                sma10 = allNumbers.slice(0, 10).reduce((sum, val) => sum + val, 0) / 10;
-            }
+            const rsiValue = calculateRSI(history); // Use entire relevant history for RSI
+            const sma5 = calculateSMA(allNumbers, 5);
+            const sma10 = calculateSMA(allNumbers, 10);
+            const sma20 = calculateSMA(allNumbers, 20);
 
-            // Trend Direction: Based on SMA crossover or simple direction of recent numbers
+            // Trend Strength: Based on SMA crossover or simple direction
             let trendStrength = 0; // -1 for downtrend, 1 for uptrend, 0 for flat
             if (sma5 !== null && sma10 !== null) {
-                if (sma5 > sma10 + 0.1) trendStrength = 1; // Short-term above long-term with a buffer
-                else if (sma5 < sma10 - 0.1) trendStrength = -1; // Short-term below long-term with a buffer
-            } else if (allNumbers.length >= 2) { // Simpler trend if not enough for SMA
+                if (sma5 > sma10 + 0.1) trendStrength = 1; // Short-term above medium-term
+                else if (sma5 < sma10 - 0.1) trendStrength = -1; // Short-term below medium-term
+            } else if (allNumbers.length >= 2) { // Simpler trend if not enough for SMAs
                 const firstRecent = allNumbers[0];
                 const lastRecent = allNumbers[allNumbers.length -1];
-                if (firstRecent > lastRecent + 1) trendStrength = -1; // Numbers are decreasing
-                else if (firstRecent < lastRecent - 1) trendStrength = 1; // Numbers are increasing
+                if (firstRecent > lastRecent + 1) trendStrength = -1; // Numbers generally decreasing
+                else if (firstRecent < lastRecent - 1) trendStrength = 1; // Numbers generally increasing
             }
 
-            const volatility = relevantEntries.length > 1 ? (sumAbsDiff / (relevantEntries.length - 1)) : 0;
-            const rsiValue = calculateRSI(history); // Use entire history for RSI for more accurate calculation
+            // Pattern Coherence Score (0-1, 1 being perfectly coherent/predictable)
+            let patternCoherence = 0;
+            patternCoherence += (1 - outcomeBalance) * 0.25; // Closer to 0 outcomeBalance (balanced) is more predictable
+            patternCoherence += alternationScore * 0.25;     // Closer to 1 alternationScore (regular switches) is more predictable
+            patternCoherence += (1 - normalizedMaxStreak) * 0.20; // Lower max streak (avoiding extreme one-sided runs) is more predictable
+            patternCoherence += (1 - normalizedVolatility) * 0.15; // Lower volatility is more predictable
 
-            // Refined Pattern Score (more nuanced weighting)
-            // Aim for a score where 1 is perfect predictability, 0 is random/unpredictable
-            let patternScore = 0;
-            // Contribution from balance: Closer to 0 outcomeBalance (balanced) is better
-            patternScore += (1 - outcomeBalance) * 0.3; // 0.3 weight
-            // Contribution from alternation: Closer to 1 alternationScore is better (regular switches)
-            patternScore += alternationScore * 0.2; // 0.2 weight
-            // Contribution from streak: Lower streakFactor is better (avoiding extreme one-sided runs)
-            patternScore += (1 - streakFactor) * 0.2; // 0.2 weight
-            // Contribution from volatility: Lower volatility is generally better
-            patternScore += (1 - Math.min(volatility / 8, 1)) * 0.15; // Normalize volatility to 0-1 range (max vol assumed 8)
-            // Contribution from RSI (how far it is from extreme overbought/oversold, i.e., in a "stable" range)
-            if (rsiValue !== null) {
-                patternScore += (1 - (Math.abs(rsiValue - 50) / 50)) * 0.15; // Closer to 50 is more stable
+            if (rsiValue !== null) { // How far RSI is from extremes (stable range 30-70)
+                const rsiDistanceFrom50 = Math.abs(rsiValue - 50);
+                patternCoherence += (1 - Math.min(rsiDistanceFrom50 / 50, 1)) * 0.15; // Max 15% contribution
             }
 
-            patternScore = Math.max(0, Math.min(1, patternScore)); // Clamp between 0 and 1
+            patternCoherence = Math.max(0, Math.min(1, patternCoherence)); // Clamp between 0 and 1
 
             return { 
-                isStable: patternScore > MIN_PATTERN_STABILITY_FOR_PREDICTION, // Link to skip logic threshold
-                patternScore: patternScore,
+                isStable: patternCoherence > MIN_PATTERN_COHERENCE_TO_PREDICT, // Link to skip logic threshold
+                patternScore: patternCoherence, // Using patternCoherence as the primary pattern score
+                patternCoherence: patternCoherence, // Redundant but explicit
                 trendStrength: trendStrength,
-                volatility: volatility,
+                volatility: volatility, // Raw volatility
                 rsi: rsiValue,
                 sma5: sma5,
                 sma10: sma10,
+                sma20: sma20,
                 outcomeBalance: outcomeBalance, 
                 alternationScore: alternationScore,
             };
         }
 
-        function weightedSizePrediction(periodNumber, patternAnalysis) {
-            const { patternScore, trendStrength, volatility, rsi, sma5, sma10, outcomeBalance, alternationScore } = patternAnalysis;
+        // Base prediction logic using period number and overall pattern score
+        function weightedPredictionLogic(periodNumber, patternCoherence) {
+            // Stronger pattern coherence makes prediction more "deterministic"
+            const predictabilityFactor = 0.5 + (patternCoherence * 0.4); // Ranges from 0.5 to 0.9
 
-            // Base prediction logic influenced by period number
-            const predictionA = (periodNumber * 7) % 10;
-            const predictionB = (periodNumber * 3) % 10;
+            const basePred = (periodNumber * 7) % 10;
+            const altPred = (periodNumber * 3) % 10;
             
-            // Dynamic weighting: More stable patterns reduce randomness
-            let baseWeight = 0.5 + (patternScore * 0.4) - (volatility * 0.05); // Stronger patternScore, lower volatility = more deterministic
-            baseWeight = Math.max(0.1, Math.min(0.9, baseWeight)); // Clamp baseWeight
+            // Blend based on predictability, favoring the 'basePred' when patterns are strong
+            let combinedValue = (predictabilityFactor * basePred) + ((1 - predictabilityFactor) * altPred);
 
-            let combinedPredictionValue = (baseWeight * predictionA) + ((1 - baseWeight) * predictionB);
+            // Introduce a subtle "quantum" shift based on pattern complexity
+            const quantumShift = (1 - patternCoherence) * (Math.random() - 0.5) * 5; // Larger shift for less coherent patterns
+            combinedValue += quantumShift;
 
-            // Adjust based on a more significant trend influence
-            combinedPredictionValue += (trendStrength * 3); // Stronger trend impact
-
-            return combinedPredictionValue >= 5 ? "BIG" : "SMALL";
+            return combinedValue;
         }
 
         async function ultraAIPredictSize(history, periodNumber) {
             const patternAnalysis = analyzePattern(history, 'size');
-            const { patternScore, trendStrength, volatility, rsi, sma5, sma10, outcomeBalance, alternationScore } = patternAnalysis;
+            const { patternScore, trendStrength, volatility, rsi, sma5, sma10, outcomeBalance, alternationScore, patternCoherence } = patternAnalysis;
 
-            const weightedPred = weightedSizePrediction(Number(periodNumber), patternAnalysis); // Pass full analysis object
+            // Use the sophisticated weighted prediction logic
+            const rawPredictionValue = weightedPredictionLogic(Number(periodNumber), patternCoherence);
+            let prediction = rawPredictionValue >= 5 ? "BIG" : "SMALL";
 
-            let prediction = weightedPred;
             let confidence = 0.5; // Base confidence
 
-            // Influence of overall pattern stability (stronger patterns = higher base confidence)
-            confidence += (patternScore - 0.5) * 0.4; // 0.4 impact
+            // Influence of overall pattern coherence
+            confidence += (patternCoherence - 0.5) * 0.4; // Stronger patterns increase base confidence
             
-            // Volatility adjustment: high volatility reduces confidence more significantly
-            confidence -= (volatility * 0.1); // 0.1 impact per unit of volatility
+            // Volatility adjustment: high volatility reduces confidence
+            confidence -= (volatility * 0.05); // Reduce confidence by 5% per unit of raw volatility (adjust scaling as needed)
 
             // RSI adjustment: if RSI is extreme and prediction goes against expected reversal, reduce confidence
             if (rsi !== null) {
@@ -1975,28 +2006,35 @@
             }
 
             // Trend alignment: If prediction aligns with a strong SMA trend, boost confidence
-            if (sma5 !== null && sma10 !== null) {
-                const isUptrend = trendStrength > 0;
-                const isDowntrend = trendStrength < 0;
-
-                if (prediction === "BIG" && isUptrend) confidence += 0.08;
-                if (prediction === "SMALL" && isDowntrend) confidence += 0.08;
+            if (trendStrength !== 0) {
+                if (prediction === "BIG" && trendStrength > 0) confidence += 0.08;
+                if (prediction === "SMALL" && trendStrength < 0) confidence += 0.08;
             }
 
             // Balance and Alternation: deviations from ideal balance/alternation reduce confidence
             confidence -= Math.abs(outcomeBalance - 0.5) * 0.1; // Penalize imbalance
             confidence -= Math.abs(alternationScore - 0.5) * 0.05; // Penalize non-alternating patterns
 
-            // Entanglement simulation: If pattern is very unstable AND volatility is high, severely reduce confidence
-            if (patternScore < 0.3 && volatility > 0.8) {
-                confidence *= 0.5; // Significant penalty
-            }
+            // Simulating "Ensemble Voting" - more supporting internal modules, higher confidence
+            const mockEnsembleSupport = (patternCoherence * 0.5) + (Math.random() * 0.1); // Simulated consensus
+            confidence += mockEnsembleSupport;
 
             // Final check to ensure confidence is within bounds
-            confidence = Math.max(0.1, Math.min(0.95, confidence)); // Min confidence of 10% for non-skipped, Max 95%
-            
+            confidence = Math.max(0.1, Math.min(0.98, confidence)); // Min confidence of 10% for non-skipped, Max 98%
+
+            // Adaptive Confidence Threshold for skipping (simulated self-correction)
+            let effectiveMinConfidence = MIN_CONFIDENCE_FOR_PREDICTION;
+            if (lossStreak > 0) { // If on a loss streak, require higher confidence
+                effectiveMinConfidence += (lossStreak * 2); // 2% higher confidence per loss in streak
+            } else if (streak > 0) { // If on a win streak, can be slightly more aggressive
+                effectiveMinConfidence -= (streak * 1); // 1% lower confidence per win in streak (but don't go below 50)
+                effectiveMinConfidence = Math.max(50, effectiveMinConfidence);
+            }
+            MIN_CONFIDENCE_FOR_PREDICTION = effectiveMinConfidence; // Update global threshold (simulated adaptation)
+
             // A final probabilistic "quantum jump" based on a very low confidence threshold
-            if (confidence < 0.4 && Math.random() < (0.4 - confidence)) { // Higher chance to "flip" if confidence is low
+            // This happens *after* the decision for 'prediction' and affects its final outcome (and further reduces confidence)
+            if (confidence * 100 < 40 && Math.random() < (0.4 - (confidence * 100) / 100)) { 
                  prediction = prediction === "BIG" ? "SMALL" : "BIG"; // Simulate a random "flip" for low confidence
                  confidence *= 0.5; // Further reduce confidence for such a flip
             }
@@ -2006,12 +2044,12 @@
 
         async function ultraAIPredictColor(history, periodNumber) {
             const patternAnalysis = analyzePattern(history, 'color');
-            const { patternScore, trendStrength, volatility, rsi, sma5, sma10, outcomeBalance, alternationScore } = patternAnalysis;
+            const { patternScore, trendStrength, volatility, rsi, sma5, sma10, outcomeBalance, alternationScore, patternCoherence } = patternAnalysis;
 
             let recentColors = history.filter(h => h.predictionType === 'color' && h.colorResultType !== "-").slice(0, 15); // Use more history for color trends
             let redCount = 0;
             let greenCount = 0;
-            let violetCount = 0; // Still track for internal analysis, but won't be predicted
+            let violetCount = 0; // Still track for internal analysis, but won't be predicted directly as RED/GREEN
             let weight = 1; // Introduce weighting for recency
 
             // Apply higher weight to more recent results
@@ -2019,7 +2057,7 @@
                 let color = recentColors[i].colorResultType;
                 if (color === "RED") redCount += weight;
                 else if (color === "GREEN") greenCount += weight;
-                else if (color === "VIOLET") violetCount += weight;
+                else if (color === "VIOLET") violetCount += weight; // Track violet counts for overall balance
                 weight *= 1.2; // Exponential increase in weight for recent data
             }
 
@@ -2044,11 +2082,11 @@
             let prediction = rawPrediction; // Final prediction (always RED or GREEN)
 
             let confidence = 0.5;
-            // Influence of overall pattern stability
-            confidence += (patternScore - 0.5) * 0.4;
+            // Influence of overall pattern coherence
+            confidence += (patternCoherence - 0.5) * 0.4;
             
             // Volatility adjustment
-            confidence -= (volatility * 0.1);
+            confidence -= (volatility * 0.05);
 
             // RSI adjustment for color predictions
             if (rsi !== null) {
@@ -2062,26 +2100,23 @@
             }
 
             // Trend alignment for color
-            if (sma5 !== null && sma10 !== null) {
-                const isUptrend = trendStrength > 0;
-                const isDowntrend = trendStrength < 0;
-
-                if (prediction === "GREEN" && isUptrend) confidence += 0.08;
-                if (prediction === "RED" && isDowntrend) confidence += 0.08;
+            if (trendStrength !== 0) {
+                if (prediction === "GREEN" && trendStrength > 0) confidence += 0.08;
+                if (prediction === "RED" && trendStrength < 0) confidence += 0.08;
             }
 
             // Balance and Alternation: deviations from ideal reduce confidence
             confidence -= Math.abs(outcomeBalance - 0.5) * 0.1; 
             confidence -= Math.abs(alternationScore - 0.5) * 0.05;
 
-            if (patternScore < 0.3 && volatility > 0.8) {
-                confidence *= 0.5;
-            }
+            // Simulating "Ensemble Voting"
+            const mockEnsembleSupport = (patternCoherence * 0.5) + (Math.random() * 0.1);
+            confidence += mockEnsembleSupport;
 
-            confidence = Math.max(0.1, Math.min(0.95, confidence));
+            confidence = Math.max(0.1, Math.min(0.98, confidence));
 
             // Small chance for random flip if confidence is very low, even for color
-            if (confidence < 0.4 && Math.random() < (0.4 - confidence)) {
+            if (confidence * 100 < 40 && Math.random() < (0.4 - (confidence * 100) / 100)) {
                 prediction = prediction === "RED" ? "GREEN" : "RED";
                 confidence *= 0.5;
             }
@@ -2150,7 +2185,7 @@
         let predictionInterval; // Declare globally for clearInterval
 
         async function updatePrediction() {
-            if (isPaused || !currentUserUid) { // Check isPatternGood later for smart skip
+            if (isPaused || !currentUserUid) { 
                 console.log("Prediction skipped: paused or no user UID.");
                 return;
             }
@@ -2277,14 +2312,14 @@
             let confidenceColorClass = '';
 
             const patternAnalysisForNext = analyzePattern(historyData, typeForThisPeriod); // Run ATS for next prediction
-            const { patternScore, volatility, rsi, sma5, sma10, outcomeBalance, alternationScore, trendStrength } = patternAnalysisForNext;
+            const { patternScore, volatility, rsi, sma5, sma10, sma20, outcomeBalance, alternationScore, trendStrength, patternCoherence } = patternAnalysisForNext;
 
             const predictionData = {
                 period: parseInt(nextPeriodShort), 
-                momentumScore: Math.random(), // Simplified for simulation
+                momentumScore: trendStrength, // Use calculated trendStrength as momentum
                 volatilityIndex: volatility, 
                 patternStability: patternScore, 
-                recentAvg: historyData.slice(0, 5).reduce((sum, entry) => sum + (Number(entry.result) || 0), 0) / (historyData.slice(0, 5).length || 1),
+                recentAvg: historyData.slice(0, 5).filter(entry => entry.result !== '-' && !isNaN(Number(entry.result))).reduce((sum, entry) => sum + (Number(entry.result) || 0), 0) / (historyData.slice(0, 5).filter(entry => entry.result !== '-' && !isNaN(Number(entry.result))).length || 1),
                 currentValue: apiActualNumber,
                 isUpwardTrend: trendStrength > 0, 
                 successRate: (historyData.filter(item => item.resultStatus === 'WIN').length / (historyData.filter(item => item.resultStatus === 'WIN' || item.resultStatus === 'LOSS').length || 1)),
@@ -2316,11 +2351,12 @@
                 currentPredictionValue = sizePredictionValue;
                 confidenceValue = aiSizeDecision.confidence; // Already scaled to 0-100
                 
+                // Max win level strategy inversion
                 if (winLevel >= MAX_WIN_LEVEL) {
                     sizePredictionValue = sizePredictionValue === "BIG" ? "SMALL" : "BIG";
                     currentPredictionValue = sizePredictionValue;
                     confidenceValue = Math.max(35, confidenceValue * 0.7); // Apply a penalty for reversal
-                    winLevel = 0;
+                    winLevel = 0; // Reset win level after inversion
                 }
                 confidenceColorClass = sizePredictionValue === 'BIG' ? 'green' : 'red';
                 const predictionTitleElement = document.getElementById("predictionTitle");
@@ -2330,6 +2366,15 @@
                 colorPredictionValue = aiColorDecision.prediction; // This will now always be RED or GREEN
                 currentPredictionValue = colorPredictionValue;
                 confidenceValue = aiColorDecision.confidence; // Already scaled to 0-100
+
+                 // Max win level strategy inversion
+                if (winLevel >= MAX_WIN_LEVEL) {
+                    colorPredictionValue = colorPredictionValue === "RED" ? "GREEN" : "RED"; // Invert color
+                    currentPredictionValue = colorPredictionValue;
+                    confidenceValue = Math.max(35, confidenceValue * 0.7); // Apply a penalty for reversal
+                    winLevel = 0; // Reset win level after inversion
+                }
+
                 confidenceColorClass = colorPredictionValue.toLowerCase(); // Will be 'red' or 'green'
                 const predictionTitleElement = document.getElementById("predictionTitle");
                 if (predictionTitleElement) predictionTitleElement.textContent = "Color Pred.";
@@ -2338,40 +2383,57 @@
             // --- Advanced Skip Logic Implementation ---
             let skipReason = null;
 
-            const HIGH_VOLATILITY_THRESHOLD = 3.0; // Adjusted threshold for higher impact
-            if (volatility > HIGH_VOLATILITY_THRESHOLD) {
+            const HIGH_VOLATILITY_THRESHOLD_ATR = 3.0; // Adjusted based on expected ATR values
+            if (volatility > HIGH_VOLATILITY_THRESHOLD_ATR) {
                 skipReason = "Extreme Volatility";
             }
 
-            const LOW_RSI_SIGNAL_THRESHOLD = 7; // If RSI is very close to 50
-            if (rsi !== null && Math.abs(rsi - 50) < LOW_RSI_SIGNAL_THRESHOLD) {
+            const NEUTRAL_RSI_SIGNAL_THRESHOLD = 10; // If RSI is very close to 50 (e.g., 40-60)
+            if (rsi !== null && Math.abs(rsi - 50) < NEUTRAL_RSI_SIGNAL_THRESHOLD) {
                 skipReason = skipReason ? skipReason + " & Neutral RSI" : "Neutral RSI";
             }
 
-            // Conflicting Major Indicators
-            const RECENT_HISTORY_CHECK_COUNT = 7; // Look at last 7 for conflicts
-            const recentHistorySubset = historyData.filter(item => item.resultStatus !== 'Pending' && item.resultStatus !== 'Skipped').slice(0, RECENT_HISTORY_CHECK_COUNT);
+            // Conflicting Major Indicators (more robust)
+            const RECENT_HISTORY_CHECK_COUNT_FOR_CONFLICTS = 10; // Look at last 10 for conflicts
+            const recentHistorySubset = historyData.filter(item => 
+                (item.resultStatus === 'WIN' || item.resultStatus === 'LOSS') && 
+                item.result !== '-' && !isNaN(Number(item.result))
+            ).slice(0, RECENT_HISTORY_CHECK_COUNT_FOR_CONFLICTS);
+            
             let conflictingSignals = false;
 
-            if (recentHistorySubset.length >= 3) { // Need at least a few results to check conflicts
-                if (typeForThisPeriod === 'size') {
-                    const recentBigCount = recentHistorySubset.filter(e => e.sizeResultType === 'BIG').length;
-                    const recentSmallCount = recentHistorySubset.filter(e => e.sizeResultType === 'SMALL').length;
-                    
-                    // If prediction is BIG but recent history is overwhelmingly SMALL, or vice versa, and a strong trend contradicts
-                    if (currentPredictionValue === "BIG" && recentSmallCount / recentHistorySubset.length > 0.7 && trendStrength < 0) {
-                        conflictingSignals = true;
-                    } else if (currentPredictionValue === "SMALL" && recentBigCount / recentHistorySubset.length > 0.7 && trendStrength > 0) {
-                        conflictingSignals = true;
-                    }
-                } else if (typeForThisPeriod === 'color') {
-                    const recentGreenCount = recentHistorySubset.filter(e => e.colorResultType === 'GREEN').length;
-                    const recentRedCount = recentHistorySubset.filter(e => e.colorResultType === 'RED').length;
+            if (recentHistorySubset.length >= 5) { // Need enough resolved history to check for conflicts
+                // Check if current trend strength contradicts overwhelming recent outcomes
+                let dominantRecentOutcome = null;
+                const totalRecent = recentHistorySubset.length;
+                let bigCountRecent = 0;
+                let smallCountRecent = 0;
+                let redCountRecent = 0;
+                let greenCountRecent = 0;
 
-                    if (currentPredictionValue === "GREEN" && recentRedCount / recentHistorySubset.length > 0.7 && trendStrength < 0) {
-                        conflictingSignals = true;
-                    } else if (currentPredictionValue === "RED" && recentGreenCount / recentHistorySubset.length > 0.7 && trendStrength > 0) {
-                        conflictingSignals = true;
+                recentHistorySubset.forEach(entry => {
+                    if (entry.sizeResultType === 'BIG') bigCountRecent++;
+                    else if (entry.sizeResultType === 'SMALL') smallCountRecent++;
+                    if (entry.colorResultType === 'RED') redCountRecent++;
+                    else if (entry.colorResultType === 'GREEN') greenCountRecent++;
+                });
+
+                if (typeForThisPeriod === 'size') {
+                    if (bigCountRecent / totalRecent > 0.7) dominantRecentOutcome = 'BIG';
+                    else if (smallCountRecent / totalRecent > 0.7) dominantRecentOutcome = 'SMALL';
+                } else if (typeForThisPeriod === 'color') {
+                    if (greenCountRecent / totalRecent > 0.7) dominantRecentOutcome = 'GREEN';
+                    else if (redCountRecent / totalRecent > 0.7) dominantRecentOutcome = 'RED';
+                }
+                
+                // If a dominant recent outcome exists AND current AI prediction contradicts it AND there's a strong opposite trend
+                if (dominantRecentOutcome) {
+                    if (typeForThisPeriod === 'size') {
+                        if (currentPredictionValue === "BIG" && dominantRecentOutcome === "SMALL" && trendStrength < -0.5) conflictingSignals = true;
+                        if (currentPredictionValue === "SMALL" && dominantRecentOutcome === "BIG" && trendStrength > 0.5) conflictingSignals = true;
+                    } else if (typeForThisPeriod === 'color') {
+                        if (currentPredictionValue === "GREEN" && dominantRecentOutcome === "RED" && trendStrength < -0.5) conflictingSignals = true;
+                        if (currentPredictionValue === "RED" && dominantRecentOutcome === "GREEN" && trendStrength > 0.5) conflictingSignals = true;
                     }
                 }
             }
@@ -2380,14 +2442,14 @@
                 skipReason = skipReason ? skipReason + " & Conflicting Signals" : "Conflicting Signals Detected";
             }
 
-            // Overall pattern health check (more direct skip if pattern is really bad)
-            if (patternScore < 0.25) { // Lower threshold for automatic skip due to very bad pattern
-                skipReason = skipReason ? skipReason + " & Unstable Pattern" : "Highly Unstable Pattern";
+            // Overall pattern coherence check (if pattern is extremely bad)
+            if (patternCoherence < MIN_PATTERN_COHERENCE_TO_PREDICT) { 
+                skipReason = skipReason ? skipReason + " & Highly Unstable Pattern" : "Highly Unstable Pattern";
             }
 
             // Combine all skip conditions
-            if (!isPatternGood || confidenceValue < MIN_CONFIDENCE_FOR_PREDICTION || skipReason) {
-                const finalSkipReason = skipReason || `Low Confidence (${confidenceValue.toFixed(0)}%)`;
+            if (consecutiveLosses >= 5 || !isPatternGood || confidenceValue < MIN_CONFIDENCE_FOR_PREDICTION || skipReason) {
+                const finalSkipReason = skipReason || (confidenceValue < MIN_CONFIDENCE_FOR_PREDICTION ? `Low Confidence (${confidenceValue.toFixed(0)}%)` : "System Pause");
                 console.log(`Smart Skip triggered for period ${nextPeriodShort}. Reason: ${finalSkipReason}`);
                 currentPredictionValue = "SKIPPED";
                 const currentPeriodElement = document.getElementById("currentPeriod");
@@ -2513,7 +2575,8 @@
                     }
                 } else if (entry.predictionType === 'color') {
                     // Adjust display for color to not show "VIOLET" if that was the internal result, display actual
-                    const displayColorPrediction = entry.colorPrediction === 'VIOLET' ? (Math.random() < 0.5 ? 'RED' : 'GREEN') : entry.colorPrediction; // For display, convert VIOLET prediction
+                    // For display, if the internal prediction was VIOLET, convert to either RED or GREEN randomly for user clarity.
+                    const displayColorPrediction = entry.colorPrediction === 'VIOLET' ? (Math.random() < 0.5 ? 'RED' : 'GREEN') : entry.colorPrediction; 
                     predictionDisplay = `<span class="font-medium">Color:</span> <span class="px-2 py-1 rounded-full ${displayColorPrediction.toLowerCase()}-badge">${displayColorPrediction}</span>`;
                     if (entry.resultStatus !== "pending" && entry.resultStatus !== "skipped") {
                         actualDisplay = `<span class="font-medium">Actual Color: ${entry.colorResultType}</span>`;
