@@ -1497,7 +1497,10 @@
                         moduleSupportingCount++;
                     }
                 });
-                const moduleAgreement = (moduleSupportingCount / module.logics.length * 100).toFixed(0);
+                // Define agreementPercentage within the loop before using it
+                // This line calculates the agreement percentage for the current module.
+                // It ensures that `agreementPercentage` is declared and assigned within this scope.
+                const agreementPercentage = (moduleSupportingCount / module.logics.length * 100).toFixed(0); 
                 moduleSummary.push(`${moduleName}: ${agreementPercentage}%`);
             }
             
