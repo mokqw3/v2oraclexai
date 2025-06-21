@@ -1,0 +1,3016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORACLE X AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <style>
+        /* Base styles for both login and app */
+        body {
+            font-family: 'El Messiri', sans-serif;
+            /* Dark, sleek gradient background */
+            background: linear-gradient(135deg, #1A202C, #2D3748, #1A202C);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            color: #E2E8F0; /* Light text for dark background */
+        }
+        :root {
+            --dark-bg-primary: #1A202C;
+            --dark-bg-secondary: #2D3748;
+            --dark-bg-card: rgba(30, 41, 59, 0.95); /* Dark translucent for cards */
+            --dark-border: rgba(255, 255, 255, 0.1);
+            --dark-text-light: #E2E8F0;
+            --dark-text-medium: #CBD5E0;
+            --dark-text-dark: #A0AEC0; /* For less important text */
+            --dark-shadow: rgba(0, 0, 0, 0.4); /* Deeper shadow for dark theme */
+            
+            /* Accent colors - adjusted for dark theme vibrancy */
+            --purple-accent: #9747FF; /* Main vibrant purple */
+            --purple-light-accent: #C7AEFF; /* Lighter purple */
+            --green-accent: #10B981; /* Teal green */
+            --red-accent: #EF4444; /* Bright red */
+            --orange-accent: #F97316; /* Orange */
+            --blue-accent: #3B82F6; /* Blue */
+            --yellow-accent: #F59E0B; /* Yellow */
+            --pink-accent: #EC4899; /* Pink */
+            --teal-accent: #14B8A6; /* Teal */
+            --violet-accent: #8A2BE2; /* Violet */
+
+            /* Login specific colors, harmonized with app colors */
+            --login-primary: var(--purple-accent);
+            --login-primary-light: rgba(151, 71, 255, 0.2); /* Lighter translucent for bg */
+            --login-primary-dark: #7B3EED;
+            --login-secondary: var(--violet-accent);
+            --login-white: #FFFFFF;
+            --login-light-bg: #F8FAFA; /* Not used much in dark theme */
+            --login-text-dark: #E2E8F0; /* Light text for dark login inputs */
+            --login-text-light: #A0AEC0; /* Medium gray for hints */
+        }
+        * {
+            color: var(--dark-text-light); /* Default text color for everything */
+        }
+        
+        /* Overrides for specific elements that need dark text on light backgrounds (if any remain) */
+        .input-field {
+            color: var(--dark-text-light) !important; /* Ensure input text is light */
+        }
+        .submit-btn, .copy-btn {
+             color: var(--login-white) !important; /* Ensure button text is white */
+        }
+
+
+        /* Login Screen Specific Styles */
+        #loginScreen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            width: 100%; /* Ensure it takes full width */
+            transition: opacity 0.5s ease;
+        }
+        .login-container {
+            background: var(--dark-bg-card); /* Dark translucent background */
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            box-shadow: 0 10px 20px var(--dark-shadow); /* Darker shadow */
+            /* Reduced padding */
+            padding: 1.75rem; /* Changed from 2rem */
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            z-index: 2;
+            border: 1px solid var(--dark-border); /* Subtle border */
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+        }
+        .login-container.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .login-container:hover {
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5); /* Even darker shadow on hover */
+            transform: translateY(-3px);
+        }
+        .logo-container {
+            text-align: center;
+            /* Reduced margin-bottom */
+            margin-bottom: 1rem; /* Changed from 1.5rem */
+            transform: scale(0.9);
+            opacity: 0;
+        }
+        .logo-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--purple-accent); /* Vibrant border */
+            box-shadow: 0 8px 15px rgba(151, 71, 255, 0.2); /* Shadow with accent color */
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+        .logo-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(151, 71, 255, 0.3);
+        }
+        .title {
+            color: var(--purple-light-accent); /* Lighter accent color for title */
+            font-weight: 700;
+            font-size: 1.7rem;
+            margin-top: 0.8rem;
+            background: linear-gradient(to right, var(--purple-accent), var(--violet-accent)); /* Gradient text */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .last-key {
+            color: var(--dark-text-dark); /* Darker gray for subtle text */
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+        .error-message {
+            color: var(--red-accent);
+            text-align: center;
+            margin-top: 0.8rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transform: scale(0.95);
+            opacity: 0;
+            padding: 8px;
+            border-radius: 6px;
+            background-color: rgba(239, 68, 68, 0.1); /* Subtle red background */
+            border-left: 3px solid var(--red-accent);
+        }
+        .success-message {
+            color: var(--green-accent);
+            text-align: center;
+            margin-top: 0.8rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transform: scale(0.95);
+            opacity: 0;
+            padding: 8px;
+            border-radius: 6px;
+            background-color: rgba(16, 185, 129, 0.1); /* Subtle green background */
+            border-left: 3px solid var(--green-accent);
+        }
+        .input-group {
+            position: relative;
+            /* Reduced margin-bottom */
+            margin-bottom: 0.8rem; /* Changed from 1.2rem */
+            transform: translateX(-20px);
+            opacity: 0;
+        }
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--dark-text-dark); /* Subtle icon color */
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .input-field {
+            width: 100%;
+            padding: 12px 18px 12px 45px;
+            border-radius: 10px;
+            border: 1px solid var(--dark-border); /* Subtle border */
+            background-color: var(--dark-bg-secondary); /* Darker input field background */
+            font-size: 0.95rem;
+            color: var(--dark-text-light); /* Light text for input */
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: var(--purple-accent); /* Accent color on focus */
+            box-shadow: 0 0 0 3px rgba(151, 71, 255, 0.15); /* Accent shadow */
+        }
+        .input-field:focus + .input-icon {
+            transform: translateY(-50%) scale(1.1);
+            color: var(--purple-accent); /* Accent color for icon on focus */
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            background: linear-gradient(to right, var(--purple-accent), var(--violet-accent)); /* Gradient button */
+            color: var(--login-white); /* White text */
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateY(20px);
+            opacity: 0;
+            box-shadow: 0 5px 15px rgba(151, 71, 255, 0.25); /* Accent shadow */
+            position: relative;
+            overflow: hidden;
+        }
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent); /* Light shimmer effect */
+            transition: all 0.5s ease;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(151, 71, 255, 0.35); /* Deeper accent shadow on hover */
+        }
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+        .copy-btn {
+            width: 100%; /* Ensure full width for consistent spacing */
+            padding: 10px 18px;
+            border-radius: 8px;
+            background: var(--dark-bg-secondary); /* Dark background for copy button */
+            border: 1px solid var(--dark-border);
+            color: var(--dark-text-light); /* Light text */
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            /* Reduced margin-top */
+            margin-top: 0.6rem; /* Changed from 0.8rem */
+            transform: translateY(20px);
+            opacity: 0;
+            box-shadow: 0 3px 10px var(--dark-shadow); /* Dark shadow */
+            position: relative;
+            overflow: hidden;
+            display: flex; /* Use flex to center content if needed */
+            justify-content: center;
+            align-items: center;
+        }
+        .copy-btn:hover {
+            background: var(--dark-bg-primary); /* Even darker background on hover */
+            color: var(--purple-light-accent); /* Accent color on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+        .copy-animation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1); /* Subtle white overlay for copy animation */
+            left: -100%;
+            top: 0;
+            transition: all 0.3s ease;
+        }
+        .copy-btn.copied .copy-animation {
+            left: 0;
+        }
+        .loading-message {
+            color: var(--purple-accent);
+            text-align: center;
+            /* Reduced margin-top */
+            margin-top: 0.6rem; /* Changed from 0.8rem */
+            font-weight: 500;
+            display: none;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            /* Reduced margin-top */
+            margin-top: 1rem; /* Changed from 1.5rem */
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--login-white);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: linear-gradient(to bottom right, var(--purple-accent), var(--violet-accent)); /* Gradient social link */
+            box-shadow: 0 3px 10px rgba(151, 71, 255, 0.2);
+        }
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(151, 71, 255, 0.3);
+        }
+        .floating-element {
+            position: absolute;
+            background-color: var(--login-primary-light); /* Lighter translucent accent */
+            border-radius: 50%;
+            z-index: 1;
+            filter: blur(1px);
+            opacity: 0.2; /* More subtle floating elements */
+        }
+        .star {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.7); /* Lighter stars */
+            border-radius: 50%;
+            z-index: 1;
+            animation: twinkle var(--duration) infinite ease-in-out;
+            opacity: 0;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: var(--purple-accent); /* Accent color for confetti */
+            opacity: 0;
+            z-index: 10;
+        }
+        @media (max-width: 480px) {
+            .login-container { padding: 1.5rem; }
+            .logo-img { width: 70px; height: 70px; }
+            .title { font-size: 1.4rem; }
+            .last-key, .error-message, .success-message { font-size: 0.8rem; }
+            .input-field { padding: 10px 15px 10px 40px; font-size: 0.9rem; }
+            .submit-btn, .copy-btn { padding: 12px; font-size: 0.9rem; }
+        }
+
+        /* Main App Specific Styles (inherited and overridden) */
+        #mainAppScreen {
+            display: none; /* Hidden by default, shown after login */
+            width: 100%;
+            min-height: 100vh;
+            flex-direction: column; /* Ensure it behaves like the original app body */
+        }
+
+        /* --- From oracle-x-ai-app.html --- */
+        .popup, .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--dark-bg-card); /* Dark translucent background */
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 6px 16px var(--dark-shadow);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            width: 90%;
+            max-width: 400px;
+            border: 2px solid var(--dark-border); /* Subtle border */
+        }
+        .popup.active, .modal.active { display: block; }
+        .win-popup, .loss-popup, .pattern-warning, .history-deleted-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--dark-bg-card); /* Dark translucent background */
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 6px 16px var(--dark-shadow);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            width: 90%;
+            max-width: 400px;
+            border: 2px solid var(--green-accent); /* Accent border for win */
+            text-align: center;
+        }
+        .loss-popup, .pattern-warning { border: 2px solid var(--red-accent); } /* Accent border for loss/warning */
+        .history-deleted-popup { border: 2px solid var(--purple-accent); } /* Accent border for history */
+        .win-popup.active, .loss-popup.active, .pattern-warning.active, .history-deleted-popup.active { display: block; }
+        .confetti-icon { font-size: 2rem; margin-bottom: 1rem; color: var(--purple-accent); } /* Accent color for icon */
+        .play-resume {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--dark-bg-card); /* Dark translucent background */
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 6px 16px var(--dark-shadow);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            width: 90%;
+            max-width: 400px;
+            border: 2px solid var(--green-accent); /* Accent border */
+            text-align: center;
+        }
+        .play-resume.active { display: block; }
+        .play-icon { font-size: 2rem; margin-bottom: 1rem; color: var(--green-accent); }
+        .card {
+            transition: all 0.3s ease;
+            background: var(--dark-bg-card); /* Dark translucent background */
+            border-radius: 1.5rem;
+            box-shadow: 0 6px 12px var(--dark-shadow);
+            backdrop-filter: blur(8px);
+            position: relative;
+            margin: 0.75rem;
+            overflow: hidden;
+            border: 1px solid var(--dark-border); /* Subtle border */
+        }
+        .card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Deeper shadow on hover */
+        }
+        .gradient-bg { background: linear-gradient(135deg, var(--green-accent), var(--teal-accent)); } /* Accent gradient */
+        svg {
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+        svg text {
+            text-anchor: middle;
+            dominant-baseline: middle;
+            text-transform: uppercase;
+            animation: stroke 5s infinite alternate;
+            stroke-width: 1.2;
+            stroke: var(--purple-light-accent); /* Lighter accent for stroke */
+            font-size: 10vw; /* Adjusted for responsiveness */
+            fill: rgba(255, 255, 255, 0);
+        }
+        @media (min-width: 768px) {
+            svg text { font-size: 130px; } /* Larger font for desktop */
+        }
+        @keyframes stroke {
+            0% { fill: rgba(255, 255, 255, 0); stroke: var(--purple-accent); stroke-dashoffset: 25%; stroke-dasharray: 0 50%; stroke-width: 1.2; }
+            70% { fill: rgba(255, 255, 255, 0); stroke: var(--blue-accent); }
+            80% { fill: rgba(255, 255, 255, 0); stroke: var(--teal-accent); stroke-width: 2.5; }
+            100% { fill: var(--dark-text-light); stroke: rgba(0, 0, 0, 0); stroke-dashoffset: -25%; stroke-dasharray: 50% 0; stroke-width: 0; }
+        }
+        .history-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: none;
+            overflow: visible;
+            position: relative;
+        }
+        .history-item {
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            border-radius: 1.2rem;
+            background: var(--dark-bg-secondary); /* Slightly lighter dark background for history items */
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 14px var(--dark-shadow);
+            position: relative;
+            overflow: hidden;
+            padding: 1.2rem;
+            border-left: 4px solid transparent; 
+        }
+        .history-item.win { border-left-color: var(--green-accent); background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), var(--dark-bg-secondary)); }
+        .history-item.loss { border-left-color: var(--red-accent); background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), var(--dark-bg-secondary)); }
+        .history-item.pending { border-left-color: var(--yellow-accent); background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), var(--dark-bg-secondary)); }
+        .history-item.skipped { border-left-color: var(--dark-text-dark); background: linear-gradient(135deg, rgba(160, 174, 192, 0.15), var(--dark-bg-secondary)); }
+        .history-item:hover { transform: scale(1.02); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5); }
+        .history-item.fade-out { animation: fadeOut 0.5s ease forwards; }
+        @keyframes fadeOut {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.95); height: 0; padding: 0; margin: 0; }
+        }
+        .history-item .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.05); /* Very subtle white watermark */
+            pointer-events: none;
+            z-index: 0;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .small-dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--teal-accent);
+            border-radius: 50%;
+            animation: float 4s infinite;
+            z-index: 1;
+        }
+        @keyframes float {
+            0% { transform: translate(0, 0); opacity: 0.9; }
+            50% { transform: translate(12px, -12px); opacity: 0.5; }
+            100% { transform: translate(0, 0); opacity: 0.9; }
+        }
+        .delete-btn { color: var(--dark-text-medium); } /* Default button color */
+        .delete-btn:hover { color: var(--purple-accent); transform: scale(1.3); }
+        .win-badge { background: rgba(16, 185, 129, 0.2); color: var(--green-accent); }
+        .loss-badge { background: rgba(239, 68, 68, 0.2); color: var(--red-accent); }
+        .pending-badge { background: rgba(245, 158, 11, 0.2); color: var(--yellow-accent); }
+        .skipped-badge { background: rgba(160, 174, 192, 0.2); color: var(--dark-text-dark); }
+        .status-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+        .status-icon::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            opacity: 0.2;
+            background: radial-gradient(circle, currentColor 0%, transparent 70%);
+        }
+        .win-icon { color: var(--green-accent); animation: pulseWin 1.5s infinite; }
+        .loss-icon { color: var(--red-accent); animation: pulseLoss 1s infinite; }
+        .pending-icon { color: var(--yellow-accent); animation: rotate 2s infinite linear; }
+        .skipped-icon { color: var(--dark-text-dark); animation: pulseSkip 1.5s infinite; }
+        @keyframes pulseWin {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        @keyframes pulseLoss {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes pulseSkip {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .dashboard-card {
+            background: var(--dark-bg-card); /* Dark translucent background */
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            box-shadow: 0 4px 10px var(--dark-shadow);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            border: 1px solid var(--dark-border); /* Subtle border */
+        }
+        .dashboard-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5); /* Deeper shadow on hover */
+        }
+        .confidence-meter {
+            height: 10px;
+            background: var(--dark-border); /* Dark background for meter track */
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+            display: none; /* Always hidden */
+        }
+        .confidence-fill {
+            height: 100%;
+            background: var(--green-accent); /* Green for confidence fill */
+            transition: width 0.5s ease;
+        }
+        .confidence-fill.red { background: var(--red-accent); }
+        .confidence-fill.violet { background: var(--violet-accent); }
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 350px;
+            height: 70px;
+            background: var(--dark-bg-card); /* Dark translucent background */
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 1.5rem;
+            box-shadow: 0 6px 12px var(--dark-shadow);
+            z-index: 1000;
+            border: 1px solid var(--dark-border); /* Subtle border */
+        }
+        .navigation ul { display: flex; width: 300px; }
+        .navigation ul li {
+            position: relative;
+            list-style: none;
+            width: 75px;
+            height: 70px;
+            z-index: 1;
+        }
+        .navigation ul li a {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            text-align: center;
+            font-weight: 500;
+            color: var(--dark-text-medium); /* Medium text for inactive nav items */
+        }
+        .navigation ul li a .icon {
+            position: relative;
+            display: block;
+            line-height: 75px;
+            font-size: 1.5em;
+            text-align: center;
+            transition: 0.5s;
+            color: var(--dark-text-medium);
+        }
+        .navigation ul li.active a .icon { transform: translateY(-32px); color: var(--purple-accent); }
+        .navigation ul li a .text {
+            position: absolute;
+            font-weight: 400;
+            font-size: 0.75em;
+            letter-spacing: 0.05em;
+            transition: 0.5s;
+            opacity: 0;
+            transform: translateY(20px);
+            color: var(--dark-text-medium);
+        }
+        .navigation ul li.active a .text { opacity: 1; transform: translateY(10px); color: var(--purple-accent); }
+        .indicator {
+            position: absolute;
+            top: -50%;
+            width: 70px;
+            height: 70px;
+            background: var(--purple-accent);
+            border-radius: 50%;
+            border: 6px solid var(--dark-bg-secondary); /* Border color matching cards */
+            transition: 0.5s;
+        }
+        .indicator::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -22px;
+            width: 20px;
+            height: 20px;
+            background: transparent;
+            border-top-right-radius: 20px;
+            box-shadow: 1px -10px 0 0 var(--dark-bg-secondary);
+        }
+        .indicator::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -22px;
+            width: 20px;
+            height: 20px;
+            background: transparent;
+            border-top-left-radius: 20px;
+            box-shadow: -1px -10px 0 0 var(--dark-bg-secondary);
+        }
+        .navigation ul li:nth-child(1).active ~ .indicator { transform: translateX(calc(75px * 0)); }
+        .navigation ul li:nth-child(2).active ~ .indicator { transform: translateX(calc(75px * 1)); }
+        .navigation ul li:nth-child(3).active ~ .indicator { transform: translateX(calc(75px * 2)); }
+        .navigation ul li:nth-child(4).active ~ .indicator { transform: translateX(calc(75px * 3)); }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
+        .mode-toggle {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+        .mode-toggle input { opacity: 0; width: 0; height: 0; }
+        .mode-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--dark-text-dark); /* Dark gray for off state */
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .mode-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: #ffffff; /* White circle */
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .mode-slider { background-color: var(--green-accent); } /* Green for on state */
+        input:checked + .mode-slider:before { transform: translateX(30px); }
+        .mode-icons {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 8px;
+            pointer-events: none;
+        }
+        .mode-icons i, .mode-icons span {
+            font-size: 14px;
+            color: var(--dark-text-light); /* Light icon text */
+        }
+        .contact-links {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+        .contact-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            font-size: 12px;
+            color: var(--dark-text-light); /* Light text for contact links */
+        }
+        .contact-link i {
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: var(--purple-accent); /* Accent color for contact icons */
+        }
+        .period-id {
+            font-family: monospace;
+            letter-spacing: 2px;
+            font-size: 1.2rem;
+            background: var(--dark-bg-primary) !important; /* Darker background for period/prediction */
+            border: 1px solid var(--dark-border); /* Subtle border */
+        }
+        #currentPeriod, #currentResult { border: none !important; }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            display: none; /* Hidden as per request */
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        button, .btn {
+            border-radius: 1rem;
+            background: linear-gradient(135deg, var(--green-accent), var(--teal-accent)); /* Gradient button */
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            color: #ffffff; /* White text for buttons */
+        }
+        button:hover, .btn:hover {
+            background: linear-gradient(135deg, var(--teal-accent), var(--green-accent)); /* Reversed gradient on hover */
+            transform: scale(1.05);
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark-bg-card); /* Dark translucent toast */
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px var(--dark-shadow);
+            z-index: 2000;
+            color: var(--dark-text-light); /* Light text */
+            border: 1px solid var(--dark-border);
+        }
+
+        /* Advanced Status Bar Styles (Hidden from UI) */
+        .advanced-status-bar {
+            display: none; /* Hidden as per request */
+        }
+
+        /* New styles for Red/Green/Violet badges and text */
+        .red-badge { background: rgba(239, 68, 68, 0.25); color: var(--red-accent); }
+        .green-badge { background: rgba(16, 185, 129, 0.25); color: var(--green-accent); }
+        .violet-badge { background: rgba(138, 43, 226, 0.25); color: var(--violet-accent); } /* Adjusted violet for badge */
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .card { padding: 0.75rem; margin: 0.5rem; border-radius: 1rem; }
+            .grid-cols-2 { grid-template-columns: 1fr; }
+            .md\\:grid-cols-3 { grid-template-columns: 1fr 1fr; }
+            .text-3xl { font-size: 1.5rem; }
+            .text-2xl { font-size: 1.25rem; }
+            .text-xl { font-size: 1rem; }
+            .text-lg { font-size: 0.875rem; }
+            .text-sm { font-size: 0.75rem; }
+            .p-6 { padding: 0.75rem; }
+            .p-5 { padding: 0.5rem; }
+            .w-12 { width: 2.5rem; height: 2.5rem; }
+            .history-item { padding: 1rem; border-radius: 1rem; }
+            .history-item .watermark { font-size: 1rem; }
+            .rounded-xl { border-radius: 0.75rem; }
+            .gap-4 { gap: 0.75rem; }
+            .mb-4 { margin-bottom: 0.75rem; }
+            .mb-2 { margin-bottom: 0.5rem; }
+            .mb-1 { margin-bottom: 0.3rem; }
+            .px-4 { padding-left: 0.75rem; padding-right: 0.75rem; }
+            .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+            .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+            .space-x-2 > * + * { margin-left: 0.5rem; }
+            .space-x-1 > * + * { margin-left: 0.3rem; }
+            .navigation { width: 300px; border-radius: 1rem; }
+            .navigation ul { width: 250px; }
+            .navigation ul li { width: 62.5px; }
+            .indicator { width: 60px; height: 60px; }
+            .navigation ul li:nth-child(1).active ~ .indicator { transform: translateX(calc(62.5px * 0)); }
+            .navigation ul li:nth-child(2).active ~ .indicator { transform: translateX(calc(62.5px * 1)); }
+            .navigation ul li:nth-child(3).active ~ .indicator { transform: translateX(calc(62.5px * 2)); }
+            .navigation ul li:nth-child(4).active ~ .indicator { transform: translateX(calc(62.5px * 3)); }
+            .popup, .modal, .win-popup, .loss-popup, .play-resume, .history-deleted-popup { max-width: 320px; padding: 1rem; border-radius: 1rem; }
+            .advanced-status-bar {
+                font-size: 0.7rem; /* Smaller font for mobile */
+                padding: 0.5rem 0.75rem;
+            }
+            .advanced-status-bar span {
+                margin-right: 0.5rem;
+                padding: 0.15rem 0.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="min-h-screen w-full flex items-center justify-center">
+        <div class="floating-element" style="width: 150px; height: 150px; top: 15%; left: 10%; background: radial-gradient(circle, var(--login-primary-light), transparent 70%);"></div>
+        <div class="floating-element" style="width: 100px; height: 100px; bottom: 20%; right: 12%; background: radial-gradient(circle, var(--login-primary-light), transparent 70%);"></div>
+        <div class="floating-element" style="width: 80px; height: 80px; top: 35%; right: 18%; background: radial-gradient(circle, var(--login-primary-light), transparent 70%);"></div>
+        <div class="floating-element" style="width: 120px; height: 120px; bottom: 30%; left: 15%; background: radial-gradient(circle, var(--login-primary-light), transparent 70%);"></div>
+
+        <div id="stars-container-login"></div>
+        <div id="confetti-container-login"></div>
+
+        <div class="login-container" id="loginContainer">
+            <div class="logo-container">
+                <!-- Custom Logo URL -->
+                <img src="https://placehold.co/90x90/9747FF/FFFFFF?text=ORACLE+X+AI" alt="ORACLE X AI Logo" class="logo-img">
+                <h1 class="title">ORACLE X AI</h1>
+                <div class="last-key" id="lastKey"></div>
+                <div class="error-message" id="error"></div>
+                <div class="success-message" id="success"></div>
+            </div>
+
+            <div class="input-group" id="inputGroup">
+                <i class="fas fa-key input-icon"></i>
+                <input type="text" id="accessKey" placeholder="Enter License Key" required class="input-field">
+            </div>
+
+            <div class="loading-message" id="loading">Loading...</div>
+
+            <button class="submit-btn" id="submitBtn" onclick="handleLogin()">
+                <i class="fas fa-sign-in-alt mr-2"></i> Login
+            </button>
+
+            <div class="text-center mt-4">
+                <button class="copy-btn" id="copyDeviceIdButton" onclick="copyDeviceId()">
+                    <span class="copy-animation"></span>
+                    <i class="fas fa-copy mr-2"></i> 
+                    <span id="copyText">Copy Device ID</span>
+                </button>
+            </div>
+
+            <div class="text-center mt-4">
+                <button class="copy-btn" onclick="getKey()">
+                    <i class="fas fa-key mr-2"></i> Get Access Key
+                </button>
+            </div>
+
+            <div class="social-links" id="socialLinks">
+                <a href="https://t.me/ORACLEXAIADMIN" target="_blank" class="social-link" title="Telegram">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Predictor Application Screen -->
+    <div id="mainAppScreen" class="w-full relative pb-20" style="display: none;">
+        <header class="text-center mt-0 mb-2 animate__animated animate__fadeInDown">
+            <svg viewBox="0 0 800 120">
+                <text x="50%" y="50%">ORACLE X AI</text>
+            </svg>
+            <div id="advancedStatusBar" class="advanced-status-bar animate__animated animate__fadeIn">
+                <!-- Content will be dynamically updated by JavaScript -->
+            </div>
+        </header>
+
+        <div class="max-w-full mx-auto p-2 w-full">
+            <div class="max-w-4xl mx-auto p-2 w-full">
+                <!-- Home Section -->
+                <div id="homeSection" class="content-section active">
+                    <div class="card mb-4 overflow-hidden gradient-bg animate__animated animate__zoomIn relative">
+                        <div class="bg-white bg-opacity-95 p-6 rounded-lg pulse-animation" style="background: var(--dark-bg-card) !important; color: var(--dark-text-light) !important;">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="relative">
+                                    <div class="pl-2">
+                                        <div class="flex items-center space-x-2 mb-2">
+                                            <i class="fas fa-calendar-alt text-2xl animate__animated animate__bounce" style="color: var(--purple-accent);"></i>
+                                            <h2 class="text-2xl font-bold" style="color: var(--dark-text-light);">Period</h2>
+                                        </div>
+                                        <p id="currentPeriod" class="text-2xl font-semibold p-3 rounded-lg shadow-inner period-id">-</p>
+                                    </div>
+                                </div>
+                                <div class="relative text-right">
+                                    <div class="pr-2">
+                                        <div class="flex items-center justify-end space-x-2 mb-2">
+                                            <h2 id="predictionTitle" class="text-2xl font-bold" style="color: var(--dark-text-light);">Prediction</h2>
+                                            <i class="fas fa-poll text-2xl animate__animated animate__bounce" style="color: var(--purple-accent);"></i>
+                                        </div>
+                                        <p id="currentPredictionResult" class="text-2xl font-semibold p-3 rounded-lg shadow-inner period-id">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="confidence-meter">
+                                <div id="confidenceFill" class="confidence-fill" style="width: 0%"></div>
+                            </div>
+                            <p id="confidenceText" class="text-sm mt-1" style="color: var(--dark-text-medium);"></p>
+                        </div>
+                        <div class="small-dot" style="top: 15%; left: 15%; animation-delay: 0.2s;"></div>
+                        <div class="small-dot" style="top: 85%; left: 85%; animation-delay: 0.8s;"></div>
+                        <div class="small-dot" style="top: 50%; left: 25%; animation-delay: 1.2s;"></div>
+                        <div class="small-dot" style="top: 20%; left: 80%; animation-delay: 1.6s;"></div>
+                    </div>
+
+                    <div class="card mb-4 p-6 animate__animated animate__fadeInUp relative">
+                        <h2 class="text-3xl font-bold text-center mb-4 relative" style="color: var(--dark-text-light);">
+                            <span class="relative z-10 pulse-animation">Analysis Dashboard</span>
+                            <span class="absolute top-1/2 left-0 w-full h-2 rounded-full" style="background: var(--dark-bg-primary);"></span>
+                        </h2>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                            <div class="dashboard-card animate__animated animate__fadeIn" style="animation-delay: 0s;">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-star text-lg" style="color: var(--purple-accent);"></i>
+                                    <div>
+                                        <p class="text-sm" style="color: var(--dark-text-medium);">Most Frequent</p>
+                                        <p id="mostFrequent" class="text-xl font-bold" style="color: var(--dark-text-light);">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-card animate__animated animate__fadeIn" style="animation-delay: 0.1s;">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-arrow-down text-lg" style="color: var(--purple-accent);"></i>
+                                    <div>
+                                        <p class="text-sm" style="color: var(--dark-text-medium);">Least Frequent</p>
+                                        <p id="leastFrequent" class="text-xl font-bold" style="color: var(--dark-text-light);">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-card animate__animated animate__fadeIn" style="animation-delay: 0.2s;">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-percentage text-lg" style="color: var(--purple-accent);"></i>
+                                    <div>
+                                        <p class="text-sm" style="color: var(--dark-text-medium);">Win Rate</p>
+                                        <p id="homeWinRate" class="text-xl font-bold" style="color: var(--dark-text-light);">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-card animate__animated animate__fadeIn" style="animation-delay: 0.3s;">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-trophy text-lg" style="color: var(--green-accent);"></i>
+                                    <div>
+                                        <p class="text-sm" style="color: var(--dark-text-medium);">Wins</p>
+                                        <p id="totalWinBets" class="text-xl font-bold" style="color: var(--dark-text-light);">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-card animate__animated animate__fadeIn" style="animation-delay: 0.4s;">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-skull text-lg" style="color: var(--red-accent);"></i>
+                                    <div>
+                                        <p class="text-sm" style="color: var(--dark-text-medium);">Losses</p>
+                                        <p id="totalLossBets" class="text-xl font-bold" style="color: var(--dark-text-light);">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-card flex items-center justify-between animate__animated animate__fadeIn" style="animation-delay: 0.5s;">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-server text-lg" style="color: var(--purple-accent);"></i>
+                                    <div>
+                                        <p class="text-sm" style="color: var(--dark-text-medium);">Server Status</p>
+                                        <p id="serverStatus" class="font-semibold" style="color: var(--green-accent);">Connected</p>
+                                    </div>
+                                </div>
+                                <div id="serverStatusIndicator" class="w-3 h-3 rounded-full animate-ping" style="background-color: var(--green-accent);"></div>
+                            </div>
+                        </div>
+                        <div class="small-dot" style="top: 10%; left: 10%; animation-delay: 0.3s;"></div>
+                        <div class="small-dot" style="top: 90%; left: 90%; animation-delay: 0.9s;"></div>
+                        <div class="small-dot" style="top: 30%; left: 70%; animation-delay: 1.5s;"></div>
+                    </div>
+                </div>
+
+                <!-- History Section -->
+                <div id="historySection" class="content-section">
+                    <div class="card p-6 animate__animated animate__fadeInUp relative">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-3xl font-bold text-center relative" style="color: var(--dark-text-light);">
+                                <span class="relative z-10 pulse-animation">History</span>
+                                <span class="absolute top-1/2 left-0 w-full h-2 rounded-full" style="background: var(--dark-bg-primary);"></span>
+                            </h2>
+                            <button id="deleteAllHistoryBtn" class="px-4 py-2 rounded-lg hover:opacity-80 transition flex items-center" style="background: var(--red-accent); color: white;">
+                                <i class="fas fa-trash-alt mr-2"></i><span>Delete</span>
+                            </button>
+                        </div>
+                        <div id="history" class="history-container"></div>
+                        <div class="small-dot" style="top: 20%; left: 30%; animation-delay: 0.4s;"></div>
+                        <div class="small-dot" style="top: 80%; left: 70%; animation-delay: 0.9s;"></div>
+                        <div class="small-dot" style="top: 40%; left: 50%; animation-delay: 1.3s;"></div>
+                    </div>
+                </div>
+
+                <!-- Stats Section -->
+                <div id="statsSection" class="content-section">
+                    <div class="card p-6 animate__animated animate__fadeInUp relative">
+                        <h2 class="text-3xl font-bold text-center mb-4 relative" style="color: var(--dark-text-light);">
+                            <span class="relative z-10 pulse-animation">Statistics</span>
+                            <span class="absolute top-1/2 left-0 w-full h-2 rounded-full" style="background: var(--dark-bg-primary);"></span>
+                        </h2>
+                        <div class="stats-grid">
+                            <div class="dashboard-card">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-trophy text-lg" style="color: var(--green-accent);"></i>
+                                    <div>
+                                        <p class="text-sm" style="color: var(--dark-text-medium);">Total Wins</p>
+                                        <p id="statsTotalWins" class="text-xl font-bold" style="color: var(--dark-text-light);">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-card">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-skull text-lg" style="color: var(--red-accent);"></i>
+                                    <div>
+                                        <p class="text-sm" style="color: var(--dark-text-medium);">Total Losses</p>
+                                        <p id="statsTotalLosses" class="text-xl font-bold" style="color: var(--dark-text-light);">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-card">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-percentage text-lg" style="color: var(--yellow-accent);"></i>
+                                    <div>
+                                        <p class="text-sm" style="color: var(--dark-text-medium);">Win Rate</p>
+                                        <p id="statsWinRate" class="text-xl font-bold" style="color: var(--dark-text-light);">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-card">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-fire text-lg" style="color: var(--orange-accent);"></i>
+                                    <div>
+                                        <p class="text-sm" style="color: var(--dark-text-medium);">Current Streak</p>
+                                        <p id="currentStreak" class="text-xl font-bold" style="color: var(--dark-text-light);">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-card">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-history text-lg" style="color: var(--blue-accent);"></i>
+                                    <div>
+                                        <p class="text-sm" style="color: var(--dark-text-medium);">Last 5 Results</p>
+                                        <p id="lastFiveResults" class="text-xl font-bold" style="color: var(--dark-text-light);">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="small-dot" style="top: 15%; left: 20%; animation-delay: 0.5s;"></div>
+                        <div class="small-dot" style="top: 85%; left: 80%; animation-delay: 1s;"></div>
+                    </div>
+                </div>
+
+                <!-- Settings Section -->
+                <div id="settingsSection" class="content-section">
+                    <div class="card p-6 animate__animated animate__fadeInUp relative">
+                        <h2 class="text-3xl font-bold text-center mb-4 relative" style="color: var(--dark-text-light);">
+                            <span class="relative z-10 pulse-animation">Settings</span>
+                            <span class="absolute top-1/2 left-0 w-full h-2 rounded-full" style="background: var(--dark-bg-primary);"></span>
+                        </h2>
+                        <div class="flex flex-col gap-4">
+                            <div class="dashboard-card">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-chart-line text-lg" style="color: var(--purple-accent);"></i>
+                                        <div>
+                                            <p class="text-sm" style="color: var(--dark-text-medium);">Status</p>
+                                            <p id="settingsTotalWins" class="text-sm" style="color: var(--dark-text-light);">Total Wins: 0</p>
+                                            <p id="settingsTotalLosses" class="text-sm" style="color: var(--dark-text-light);">Total Losses: 0</p>
+                                        </div>
+                                    </div>
+                                    <p id="eligibilityStatus" class="text-sm font-semibold" style="color: var(--yellow-accent);">Pending</p>
+                                </div>
+                            </div>
+                            <div class="dashboard-card">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-bell text-lg" style="color: var(--purple-accent);"></i>
+                                        <p class="text-sm" style="color: var(--dark-text-light);">Notifications</p>
+                                    </div>
+                                    <label class="mode-toggle">
+                                        <input type="checkbox" id="notificationToggle">
+                                        <span class="mode-slider"></span>
+                                        <div class="mode-icons">
+                                            <i class="fas fa-bell-slash" style="color: var(--dark-text-light);"></i>
+                                            <i class="fas fa-bell" style="color: var(--dark-text-light);"></i>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="dashboard-card">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-volume-up text-lg" style="color: var(--purple-accent);"></i>
+                                        <p class="text-sm" style="color: var(--dark-text-light);">Sound</p>
+                                    </div>
+                                    <label class="mode-toggle">
+                                        <input type="checkbox" id="soundToggle" checked>
+                                        <span class="mode-slider"></span>
+                                        <div class="mode-icons">
+                                            <i class="fas fa-volume-mute" style="color: var(--dark-text-light);"></i>
+                                            <i class="fas fa-volume-up" style="color: var(--dark-text-light);"></i>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="dashboard-card cursor-pointer transition" onclick="resetSettings()" style="background: var(--dark-bg-secondary); border: 1px solid var(--dark-border);">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-undo text-lg" style="color: var(--purple-accent);"></i>
+                                        <p class="text-sm" style="color: var(--dark-text-light);">Reset Settings</p>
+                                    </div>
+                                    <span class="text-sm" style="color: var(--dark-text-light);">Reset</span>
+                                </div>
+                            </div>
+                            <div class="dashboard-card">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-cog text-lg" style="color: var(--purple-accent);"></i>
+                                        <p class="text-sm" style="color: var(--dark-text-light);">Prediction Mode</p>
+                                    </div>
+                                    <label class="mode-toggle">
+                                        <input type="checkbox" id="predictionModeToggle">
+                                        <span class="mode-slider"></span>
+                                        <div class="mode-icons">
+                                            <i class="fas fa-moon" style="color: var(--dark-text-light);"></i>
+                                            <i class="fas fa-bolt" style="color: var(--dark-text-light);"></i>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div onclick="window.open('https://t.me/ORACLEXAIADMIN', '_blank')" class="dashboard-card cursor-pointer transition" style="background: var(--dark-bg-secondary); border: 1px solid var(--dark-border);">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fab fa-telegram text-lg" style="color: var(--purple-accent);"></i>
+                                        <p class="text-sm" style="color: var(--dark-text-light);">Contact Admin</p>
+                                    </div>
+                                    <span class="text-sm" style="color: var(--dark-text-light);">Message</span>
+                                </div>
+                            </div>
+                            <div class="contact-links">
+                                <a href="https://t.me/ORACLEXAIADMIN" target="_blank" class="contact-link">
+                                    <i class="fab fa-telegram" style="color: var(--purple-accent);"></i>
+                                    <span style="color: var(--dark-text-light);">Telegram</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="small-dot" style="top: 10%; left: 15%; animation-delay: 0.6s;"></div>
+                        <div class="small-dot" style="top: 90%; left: 85%; animation-delay: 1.1s;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation">
+            <ul>
+                <li class="active">
+                    <a href="#" data-section="homeSection">
+                        <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                        <span class="text">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="historySection">
+                        <span class="icon"><ion-icon name="time-outline"></ion-icon></span>
+                        <span class="text">History</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="statsSection">
+                        <span class="icon"><ion-icon name="bar-chart-outline"></ion-icon></span>
+                        <span class="text">Stats</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="settingsSection">
+                        <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
+                        <span class="text">Settings</span>
+                    </a>
+                </li>
+                <div class="indicator"></div>
+            </ul>
+        </div>
+
+        <!-- Video Popup (still exists but no button to open it) -->
+        <div id="videoPopup" class="popup">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold">How To Use ORACLE X AI</h3>
+                <button onclick="closeVideoPopup()" class="hover:opacity-80 transition" style="color: var(--dark-text-medium);">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- Win Popup -->
+        <div id="winPopup" class="win-popup">
+            <div class="confetti-icon">🎉</div>
+            <h3 class="text-lg font-semibold mb-4">CONGRATULATIONS!</h3>
+            <p class="mb-4">You won this prediction!</p>
+            <p id="winDetails" class="mb-4"></p>
+        </div>
+
+        <!-- Loss Popup -->
+        <div id="lossPopup" class="loss-popup">
+            <div class="confetti-icon">❌</div>
+            <h3 class="text-lg font-semibold mb-4">LOSS!</h3>
+            <p class="mb-4">Unfortunately, you lost this prediction.</p>
+            <p id="lossDetails" class="mb-4"></p>
+        </div>
+
+        <!-- Pattern Warning Popup -->
+        <div id="patternWarningPopup" class="pattern-warning">
+            <div class="confetti-icon">⚠️</div>
+            <h3 class="text-lg font-semibold mb-4">PATTERN WARNING!</h3>
+            <p class="mb-4">5 consecutive losses detected. Pattern not good. Please wait 15 minutes before playing again.</p>
+            <button onclick="pausePredictions()" class="px-4 py-2 rounded-lg hover:opacity-80 transition" style="background: var(--red-accent); color: white;">CLOSE</button>
+        </div>
+
+        <!-- History Deleted Popup -->
+        <div id="historyDeletedPopup" class="history-deleted-popup">
+            <div class="confetti-icon"></div>
+            <h3 class="text-lg font-semibold mb-4">HISTORY DELETED!</h3>
+            <p class="mb-4">History has been successfully deleted.</p>
+            <p id="historyDeleteDetails" class="mb-4"></p>
+        </div>
+
+        <!-- Play Resume Modal -->
+        <div id="playResumeModal" class="play-resume">
+            <div class="play-icon"><i class="fas fa-play"></i></div>
+            <h3 class="text-lg font-semibold mb-4">Resume Playing</h3>
+            <p class="mb-4">You can now resume predictions.</p>
+            <button onclick="resumePlaying()" class="px-4 py-2 rounded-lg hover:opacity-80 transition" style="background: var(--green-accent); color: white;">Resume</button>
+        </div>
+
+        <!-- Confirmation Modal -->
+        <div id="confirmModal" class="modal">
+            <h3 class="text-lg font-semibold mb-4">Confirm Action</h3>
+            <p id="modalMessage" class="mb-4"></p>
+            <div class="flex justify-end space-x-2">
+                <button id="cancelModalBtn" class="px-4 py-2 rounded-lg hover:opacity-80 transition" style="background: var(--dark-bg-secondary); color: var(--dark-text-light);">Cancel</button>
+                <button id="confirmModalBtn" class="px-4 py-2 rounded-lg hover:opacity-80 transition" style="background: var(--purple-accent); color: white;">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import Firebase modules for Realtime Database and Authentication
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
+        import { getDatabase, ref, get, child, set, update, remove, onValue } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js'; // Import onAuthStateChanged
+
+        // Placeholder for Firebase Config (Canvas will inject this)
+        // IMPORTANT: Replace 'YOUR_ACTUAL_...' with your real Firebase project configuration.
+        // You can find this in your Firebase project console -> Project settings -> Your apps -> Web app.
+        const firebaseConfig = typeof __firebase_config !== 'undefined'
+            ? JSON.parse(__firebase_config)
+            : {
+                  apiKey: "AIzaSyBS8SJNrWcrnNhxzgSnMhmLWslSnxJ3vXM",
+                  authDomain: "newq-7386b.firebaseapp.com",
+                  projectId: "newq-7386b",
+                  storageBucket: "newq-7386b.firebase-storage.app", 
+                  messagingSenderId: "939070208594",
+                  appId: "1:939070208594:web:b7b952fb7ca541ab32fd8b",
+                  // Added databaseURL for Realtime Database
+                  databaseURL: "https://newq-7386b-default-rtdb.firebaseio.com/" 
+                };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth(app);
+        
+        // References to Firebase database nodes
+        // This path is for access keys. You might want to secure this more in production.
+        const accessKeysRef = ref(db, 'accessKeys'); 
+        let userHistoryRef; // Will be set after user authentication
+        let userSettingsRef; // Will be set after user authentication
+
+        let currentUserUid = null; // Stores the Firebase Authentication UID
+        let isAuthReady = false; // Flag to indicate if initial Firebase auth check is complete
+
+        // Dynamically get app ID from Canvas environment or default
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        // --- Firebase Authentication for Main App ---
+        // This function attempts to sign in the user (anonymously or with custom token)
+        async function initiateAuthentication() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined') {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                console.log("Firebase authentication initiated.");
+            } catch (error) {
+                console.error("Firebase Authentication initiation failed:", error);
+                showToast("Authentication failed. Please try again.");
+                // Ensure login screen is visible if auth fails
+                document.getElementById('mainAppScreen').style.display = 'none';
+                document.getElementById('loginScreen').style.display = 'flex';
+            }
+        }
+
+        // Use onAuthStateChanged to react to authentication state changes
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // User is signed in.
+                currentUserUid = user.uid;
+                // Use correct path for user-specific data in Realtime Database
+                userHistoryRef = ref(db, `users/${currentUserUid}/predictionHistory`);
+                userSettingsRef = ref(db, `users/${currentUserUid}/userSettings`);
+                console.log("Firebase authentication successful. User UID:", currentUserUid);
+
+                // Load user data and initialize app data (but don't transition UI yet)
+                await loadUserDataFromFirebase(); 
+            } else {
+                // User is signed out.
+                console.log("User is signed out or authentication failed.");
+                currentUserUid = null; // Clear UID
+                // Ensure the login screen is active if auth state changes to signed out.
+                document.getElementById('mainAppScreen').style.display = 'none';
+                document.getElementById('loginScreen').style.display = 'flex';
+                if (predictionInterval) {
+                    clearInterval(predictionInterval);
+                    predictionInterval = null;
+                }
+            }
+            isAuthReady = true; // Mark auth as ready after the initial check
+        });
+
+        // Call initiateAuthentication on DOMContentLoaded to ensure anonymous auth starts early
+        document.addEventListener('DOMContentLoaded', initiateAuthentication);
+
+
+        // Dynamic color scheme for overall app theme
+        function getDailyColorScheme() {
+            // Colors are now handled by CSS variables within :root
+            // This function is kept for structural consistency but doesn't modify colors directly anymore
+        }
+        getDailyColorScheme();
+
+        // --- Global variables for application state ---
+        let historyData = []; // Stores historical prediction data
+        let currentPredictionType = 'size'; // 'size' or 'color' - determines which type of prediction is active
+        let predictionSwitchCounter = 0; // Counts predictions of the current type before switching
+        const PREDICTION_SWITCH_THRESHOLD = 3; // Number of predictions before switching type
+
+        let streak = 0; // Current win streak
+        let winLevel = 0; // Win level for strategy adjustment
+        let lossStreak = 0; // Current loss streak
+        let consecutiveLosses = 0; // Consecutive losses for pattern warning
+        let isPaused = false; // Flag to pause predictions
+        let isPatternGood = true; // Flag indicating if the pattern is stable enough to predict
+        const MAX_WIN_LEVEL = 3; // Maximum win level before strategy inversion
+
+        // User settings (now synchronized with Firebase)
+        let isSoundEnabled = true; 
+        let isNotificationsEnabled = false;
+        let isAdvancedMode = false;
+
+        // --- Prediction Accuracy Controls (New) ---
+        const MIN_CONFIDENCE_FOR_PREDICTION = 60; // Minimum confidence percentage to make a prediction
+        const MIN_PATTERN_STABILITY_FOR_PREDICTION = 0.4; // Minimum pattern score (0-1) to make a prediction
+
+        // --- Analytical Modules and Logics (Conceptual Simulation) ---
+        const analyticalModules = {};
+
+        // Generate 10000 analytical modules with 1000 logics each
+        for (let i = 1; i <= 10000; i++) { // 10000 modules
+            const moduleName = `Module${String(i).padStart(5, '0')}`; // Pad with 5 zeros for 10000 modules
+            const logics = [];
+            for (let j = 0; j < 1000; j++) { // 1000 logics per module
+                // More complex and varied logic patterns for "Logical AI Models"
+                logics.push((data, history) => { // Added history to logic for more context
+                    const randomFactor1 = (Math.sin(data.period / (50 + i) + j) * 0.1) + (Math.random() * 0.03);
+                    const randomFactor2 = (Math.cos(data.period * (j + 1) / (70 + i)) * 0.08) + (Math.random() * 0.02);
+                    const specificLogicType = j % 10; // More variations in logic types
+
+                    // Simulated "Quantum" entanglement:
+                    // Logic outcome depends on non-linear combinations of data attributes
+                    const combinedEntropy = (data.momentumScore + data.volatilityIndex) / 2;
+                    const patternInfluence = data.patternStability * (1 - combinedEntropy); // Lower entropy means more pattern influence
+
+                    // ATS - Advanced Trend Sensing: Using recent history
+                    const recentEntry = history.length > 0 ? history[0] : null;
+                    const prevEntry = history.length > 1 ? history[1] : null;
+
+                    switch (specificLogicType) {
+                        case 0: // Trend following with a probabilistic twist
+                            return (data.isUpwardTrend && Math.random() > 0.3) || (!data.isUpwardTrend && Math.random() < 0.2);
+                        case 1: // Volatility-aware prediction
+                            return data.volatilityIndex < (0.5 + randomFactor2) && patternInfluence > 0.4;
+                        case 2: // Momentum-based decision with pattern stability override
+                            return data.momentumScore > (0.6 - randomFactor1) && data.patternStability > 0.5;
+                        case 3: // Period cycle detection
+                            return (data.period % (i % 10 + 2) === 0) && (Math.random() * patternInfluence > 0.2);
+                        case 4: // Mean reversion (simulated)
+                            const avgDiff = Math.abs(data.recentAvg - data.currentValue);
+                            return avgDiff > (data.volatilityIndex * 5) && Math.random() > 0.6;
+                        case 5: // Success rate validation (meta-logic)
+                            return data.successRate > (0.65 - i * 0.000005 - j * 0.0000005);
+                        case 6: // Alternating pattern recognition (simplified)
+                            if (recentEntry && prevEntry && recentEntry.predictionType === data.currentPredictionType) {
+                                if (data.currentPredictionType === 'size') {
+                                    return (recentEntry.sizeResultType !== prevEntry.sizeResultType) && Math.random() > (0.4 - patternInfluence);
+                                } else if (data.currentPredictionType === 'color') {
+                                    return (recentEntry.colorResultType !== prevEntry.colorResultType) && Math.random() > (0.4 - patternInfluence);
+                                }
+                            }
+                            return Math.random() > 0.5;
+                        case 7: // Stability check with a random component
+                            return data.patternStability > (0.7 - randomFactor1) || Math.random() < 0.1;
+                        case 8: // Quantum-inspired superposition: 2 outcomes are considered with probabilities
+                            const probOutcome1 = patternInfluence;
+                            const probOutcome2 = 1 - patternInfluence;
+                            return Math.random() < probOutcome1;
+                        case 9: // Predictive filtering based on past errors
+                            const recentLosses = history.filter(h => h.resultStatus === 'LOSS').length;
+                            return (recentLosses / (history.length || 1) < 0.3) && Math.random() > 0.4;
+                        default:
+                            return Math.random() > 0.5; // Catch-all or more generic logic
+                    }
+                });
+            }
+            analyticalModules[moduleName] = { logics: logics };
+        }
+
+
+        // This function simulates running all analytical modules and their logics
+        function runAnalyticalModules(predictionData, history) {
+            let totalLogics = 0;
+            let supportingLogics = 0;
+            let moduleSummary = []; // For potential internal logging/debugging
+
+            for (const moduleName in analyticalModules) {
+                const module = analyticalModules[moduleName];
+                let moduleSupportingCount = 0;
+                
+                module.logics.forEach(logic => {
+                    totalLogics++;
+                    if (logic(predictionData, history)) { // Pass history to individual logics
+                        supportingLogics++;
+                        moduleSupportingCount++;
+                    }
+                });
+                const moduleAgreement = (moduleSupportingCount / module.logics.length * 100).toFixed(0);
+                moduleSummary.push(`${moduleName}: ${agreementPercentage}%`);
+            }
+            
+            const overallSupportRate = totalLogics > 0 ? (supportingLogics / totalLogics) : 0;
+            return { overallSupportRate, moduleSummary };
+        }
+
+        // Apply saved user settings on load
+        // These will be updated by loadUserDataFromFirebase
+        document.getElementById('notificationToggle').checked = isNotificationsEnabled;
+        document.getElementById('soundToggle').checked = isSoundEnabled;
+        document.getElementById('predictionModeToggle').checked = isAdvancedMode;
+
+        // --- Firebase Data Loading and Saving ---
+
+        async function loadUserDataFromFirebase() {
+            if (!currentUserUid) {
+                console.warn("loadUserDataFromFirebase called without currentUserUid. Skipping data load.");
+                return;
+            }
+
+            try {
+                // Load History Data
+                const historySnapshot = await get(userHistoryRef);
+                if (historySnapshot.exists()) {
+                    historyData = historySnapshot.val();
+                    // Ensure historyData is an array. If it was stored as an object with Firebase keys, convert it.
+                    if (typeof historyData === 'object' && !Array.isArray(historyData)) {
+                        historyData = Object.values(historyData); // Convert object values to array
+                    }
+                    historyData.sort((a, b) => b.period - a.period); // Ensure descending order by period
+                } else {
+                    historyData = [];
+                }
+
+                // Load User Settings
+                const settingsSnapshot = await get(userSettingsRef);
+                if (settingsSnapshot.exists()) {
+                    const settings = settingsSnapshot.val();
+                    isSoundEnabled = settings.isSoundEnabled !== undefined ? settings.isSoundEnabled : true;
+                    isNotificationsEnabled = settings.isNotificationsEnabled !== undefined ? settings.isNotificationsEnabled : false;
+                    isAdvancedMode = settings.isAdvancedMode !== undefined ? settings.isAdvancedMode : false;
+
+                    // Update UI toggles
+                    document.getElementById('notificationToggle').checked = isNotificationsEnabled;
+                    document.getElementById('soundToggle').checked = isSoundEnabled;
+                    document.getElementById('predictionModeToggle').checked = isAdvancedMode;
+                } else {
+                    // Save default settings to Firebase if none exist
+                    await saveUserSettingsToFirebase();
+                }
+
+                // Initialize stats and history display after loading
+                updateHistory();
+                updateStats();
+
+            } catch (error) {
+                console.error("Error loading user data from Firebase:", error);
+                showToast("Failed to load your personal data. Please refresh.");
+            }
+        }
+
+        async function saveHistoryToFirebase() {
+            if (!currentUserUid) {
+                console.warn("saveHistoryToFirebase called without currentUserUid. Skipping data save.");
+                return;
+            }
+            try {
+                // Firebase Realtime Database prefers flat data or objects for direct keys.
+                // Storing an array directly might result in Firebase automatically converting it to an object with integer keys.
+                // For simplicity here, we'll save the array as is. When fetched, we'll convert back if needed.
+                await set(userHistoryRef, historyData);
+                console.log("History saved to Firebase.");
+            } catch (error) {
+                console.error("Error saving history to Firebase:", error);
+            }
+        }
+
+        async function saveUserSettingsToFirebase() {
+            if (!currentUserUid) {
+                console.warn("saveUserSettingsToFirebase called without currentUserUid. Skipping settings save.");
+                return;
+            }
+            const settings = {
+                isSoundEnabled: isSoundEnabled,
+                isNotificationsEnabled: isNotificationsEnabled,
+                isAdvancedMode: isAdvancedMode
+            };
+            try {
+                await set(userSettingsRef, settings);
+                console.log("User settings saved to Firebase.");
+            } catch (error) {
+                console.error("Error saving user settings to Firebase:", error);
+            }
+        }
+
+        // --- Navigation Logic for Main App ---
+        const navItems = document.querySelectorAll('.navigation ul li');
+        const sections = document.querySelectorAll('.content-section');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                navItems.forEach(nav => nav.classList.remove('active'));
+                sections.forEach(section => section.classList.remove('active'));
+                
+                item.classList.add('active');
+                const sectionId = item.querySelector('a').getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active');
+            });
+        });
+
+        // --- Popup and Modal Functions ---
+        function openVideoPopup() {
+            document.getElementById('videoPopup').classList.add('active');
+        }
+
+        function closeVideoPopup() {
+            document.getElementById('videoPopup').classList.remove('active');
+        }
+
+        function showWinPopup(period, predicted, actual, predictionType) {
+            document.getElementById('winDetails').textContent = `Period: ${period} | Predicted ${predictionType === 'size' ? 'Size' : 'Color'}: ${predicted} | Actual ${predictionType === 'size' ? 'Size' : 'Color'}: ${actual}`;
+            document.getElementById('winPopup').classList.add('active');
+            if (isSoundEnabled) {
+                speak("congratulations You Win power by ORACLE X AI");
+            }
+            setTimeout(() => {
+                document.getElementById('winPopup').classList.remove('active');
+            }, 5000);
+        }
+
+        function showLossPopup(period, predicted, actual, predictionType) {
+            document.getElementById('lossDetails').textContent = `Period: ${period} | Predicted ${predictionType === 'size' ? 'Size' : 'Color'}: ${predicted} | Actual ${predictionType === 'size' ? 'Size' : 'Color'}: ${actual}`;
+            document.getElementById('lossPopup').classList.add('active');
+            if (isSoundEnabled) {
+                speak("Sorry you Loss pattern not stables or my mistake");
+            }
+            setTimeout(() => {
+                document.getElementById('lossPopup').classList.remove('active');
+            }, 5000);
+        }
+
+        function showPatternWarningPopup() {
+            document.getElementById('patternWarningPopup').classList.add('active');
+        }
+
+        function showHistoryDeletedPopup(message) {
+            document.getElementById('historyDeleteDetails').textContent = message;
+            document.getElementById('historyDeletedPopup').classList.add('active');
+            if (isSoundEnabled) {
+                speak("History has been deleted successfully");
+            }
+            setTimeout(() => {
+                document.getElementById('historyDeletedPopup').classList.remove('active');
+            }, 3000);
+        }
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.volume = 1;
+                utterance.rate = 1;
+                utterance.pitch = 1;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        function showConfirmModal(message, onConfirm) {
+            document.getElementById('modalMessage').textContent = message;
+            document.getElementById('confirmModal').classList.add('active');
+            const confirmBtn = document.getElementById('confirmModalBtn');
+            const cancelBtn = document.getElementById('cancelModalBtn');
+
+            const confirmHandler = () => {
+                onConfirm();
+                document.getElementById('confirmModal').classList.remove('active');
+                confirmBtn.removeEventListener('click', confirmHandler); // Prevent multiple listeners
+                cancelBtn.removeEventListener('click', cancelHandler); // Prevent multiple listeners
+            };
+
+            const cancelHandler = () => {
+                document.getElementById('confirmModal').classList.remove('active');
+                confirmBtn.removeEventListener('click', confirmHandler); // Prevent multiple listeners
+                cancelBtn.removeEventListener('click', cancelHandler); // Prevent multiple listeners
+            };
+
+            confirmBtn.addEventListener('click', confirmHandler);
+            cancelBtn.addEventListener('click', cancelHandler);
+        }
+
+        function showPlayResumeModal() {
+            document.getElementById('playResumeModal').classList.add('active');
+        }
+
+        function pausePredictions() {
+            document.getElementById('patternWarningPopup').classList.remove('active');
+            clearInterval(predictionInterval);
+            predictionInterval = null; // Clear the interval ID
+            isPaused = true;
+            isPatternGood = false; // Mark pattern as not good, implying a forced pause
+            document.getElementById("currentPredictionResult").textContent = "PAUSED";
+            document.getElementById("predictionTitle").textContent = "Prediction";
+            setTimeout(() => {
+                showPlayResumeModal();
+            }, 15 * 60 * 1000);
+            showToast("Predictions paused for 15 minutes due to unstable pattern.");
+        }
+
+        function resumePlaying() {
+            document.getElementById('playResumeModal').classList.remove('active');
+            isPaused = false;
+            isPatternGood = true; // Assume pattern is good after manual resume/time-out
+            if (!predictionInterval) { // Only set if not already running
+                predictionInterval = setInterval(updatePrediction, 5000);
+            }
+            updatePrediction();
+        }
+
+        // --- Settings Handlers ---
+        document.getElementById('notificationToggle').addEventListener('change', async (e) => {
+            isNotificationsEnabled = e.target.checked;
+            await saveUserSettingsToFirebase(); // Save to Firebase
+            if (isNotificationsEnabled && Notification.permission !== 'granted') {
+                Notification.requestPermission();
+            }
+        });
+
+        document.getElementById('soundToggle').addEventListener('change', async (e) => {
+            isSoundEnabled = e.target.checked;
+            await saveUserSettingsToFirebase(); // Save to Firebase
+        });
+
+        document.getElementById('predictionModeToggle').addEventListener('change', async (e) => {
+            isAdvancedMode = e.target.checked;
+            await saveUserSettingsToFirebase(); // Save to Firebase
+        });
+
+        function resetSettings() {
+            showConfirmModal("Are you sure you want to reset all settings to default?", async () => {
+                isSoundEnabled = true;
+                isNotificationsEnabled = false;
+                isAdvancedMode = false;
+                await saveUserSettingsToFirebase(); // Save default to Firebase
+                document.getElementById('notificationToggle').checked = false;
+                document.getElementById('soundToggle').checked = true;
+                document.getElementById('predictionModeToggle').checked = false;
+                updatePrediction();
+            });
+        }
+        
+        /**
+         * Calculates the Relative Strength Index (RSI) for a given history of results.
+         * @param {Array<Object>} history - The history data, containing objects with 'result' (number).
+         * @param {number} period - The RSI period (default 14).
+         * @returns {number | null} The RSI value, or null if not enough data.
+         */
+        function calculateRSI(history, period = 14) {
+            const relevantResults = history
+                .filter(entry => entry.result !== '-' && typeof entry.result === 'number')
+                .map(entry => entry.result)
+                .reverse(); // Reverse to have oldest first for calculation
+            
+            if (relevantResults.length < period + 1) { // Need at least period + 1 data points for initial averages
+                return null;
+            }
+
+            let gains = [];
+            let losses = [];
+
+            // Calculate initial gains and losses
+            for (let i = 1; i < relevantResults.length; i++) {
+                const change = relevantResults[i] - relevantResults[i - 1];
+                if (change > 0) {
+                    gains.push(change);
+                    losses.push(0);
+                } else {
+                    gains.push(0);
+                    losses.push(Math.abs(change));
+                }
+            }
+
+            if (gains.length < period) return null; // Not enough data for period
+
+            let initialAvgGain = gains.slice(0, period).reduce((sum, val) => sum + val, 0) / period;
+            let initialAvgLoss = losses.slice(0, period).reduce((sum, val) => sum + val, 0) / period;
+
+            let avgGain = initialAvgGain;
+            let avgLoss = initialAvgLoss;
+
+            // Calculate smoothed averages
+            for (let i = period; i < gains.length; i++) {
+                avgGain = ((avgGain * (period - 1)) + gains[i]) / period;
+                avgLoss = ((avgLoss * (period - 1)) + losses[i]) / period;
+            }
+            
+            let rs = avgLoss === 0 ? (avgGain > 0 ? 100 : 0) : avgGain / avgLoss; // Handle division by zero for RS
+            if (avgGain === 0 && avgLoss === 0) return 50; // Neutral if no movement
+            if (avgLoss === 0 && avgGain > 0) return 100; // If only gains, RSI approaches 100
+            if (avgGain === 0 && avgLoss > 0) return 0; // If only losses, RSI approaches 0
+
+
+            return 100 - (100 / (1 + rs));
+        }
+
+        // --- Prediction AI Logic ---
+        function analyzePattern(history, type) {
+            if (history.length < 5) return { isStable: true, patternScore: 1, trendStrength: 0, volatility: 0, rsi: null };
+            const recent = history.slice(0, 10); // Look at last 10 for more robust pattern analysis
+
+            let countType1 = 0;
+            let countType2 = 0;
+            let streakCount = 1;
+            let currentStreak = 1;
+            let lastResultType;
+            let alternations = 0;
+            let totalRelevantEntries = 0;
+
+            let prevValue = null;
+            let numChanges = 0;
+            let sumAbsDiff = 0;
+
+            const relevantEntries = type === 'size'
+                ? recent.filter(entry => entry.predictionType === 'size' && entry.sizeResultType !== '-')
+                : recent.filter(entry => entry.predictionType === 'color' && entry.colorResultType !== '-');
+
+            if (relevantEntries.length === 0) return { isStable: true, patternScore: 1, trendStrength: 0, volatility: 0, rsi: null };
+
+            lastResultType = type === 'size' ? relevantEntries[0].sizeResultType : relevantEntries[0].colorResultType;
+
+            for (let i = 0; i < relevantEntries.length; i++) {
+                const currentEntry = relevantEntries[i];
+                const currentType = type === 'size' ? currentEntry.sizeResultType : currentEntry.colorResultType;
+                const actualNumber = currentEntry.result !== '-' ? Number(currentEntry.result) : null;
+
+                if (type === 'size') {
+                    if (currentType === "BIG") countType1++;
+                    else if (currentType === "SMALL") countType2++;
+                } else if (type === 'color') {
+                    if (currentType === "GREEN") countType1++;
+                    else if (currentType === "RED") countType2++;
+                }
+
+                if (i > 0) {
+                    if (currentType === lastResultType) {
+                        currentStreak++;
+                        streakCount = Math.max(streakCount, currentStreak);
+                    } else {
+                        alternations++;
+                        currentStreak = 1;
+                    }
+                    if (actualNumber !== null && prevValue !== null) {
+                        sumAbsDiff += Math.abs(actualNumber - prevValue);
+                        if (actualNumber !== prevValue) numChanges++;
+                    }
+                }
+                lastResultType = currentType;
+                prevValue = actualNumber;
+            }
+
+            totalRelevantEntries = countType1 + countType2;
+            if (totalRelevantEntries === 0) return { isStable: true, patternScore: 1, trendStrength: 0, volatility: 0, rsi: null };
+
+            // Balance Score: How balanced are the occurrences of the two types (BIG/SMALL or RED/GREEN)
+            const balanceScore = Math.abs(countType1 - countType2) / totalRelevantEntries;
+
+            // Streak Score: Penalize very long streaks, favor moderate ones
+            const streakFactor = Math.min(streakCount / relevantEntries.length, 0.8); // Cap streak impact
+            
+            // Alternation Score: How frequently does it alternate?
+            const alternationFactor = alternations / (relevantEntries.length - 1 || 1);
+
+            // Pattern Score (ATS refined): Combines balance, streak, and alternation
+            // A higher pattern score indicates more predictability (less random/extreme)
+            const patternScore = 1 - (balanceScore * 0.4 + streakFactor * 0.3 + (1 - alternationFactor) * 0.3);
+
+            // Trend Strength (ATS): Simple linear trend over recent results (simplified for simulation)
+            let trendStrength = 0;
+            if (relevantEntries.length >= 2) {
+                const first = relevantEntries[0].result !== '-' ? Number(relevantEntries[0].result) : null;
+                const last = relevantEntries[relevantEntries.length - 1].result !== '-' ? Number(relevantEntries[relevantEntries.length - 1].result) : null;
+                if (first !== null && last !== null) {
+                    trendStrength = (first - last) / (relevantEntries.length - 1); // Positive for downward trend, negative for upward numbers
+                }
+            }
+
+            // Volatility (ATS): Average absolute change between consecutive results
+            const volatility = relevantEntries.length > 1 ? (sumAbsDiff / (relevantEntries.length - 1)) : 0;
+
+            // Calculate RSI using the helper function
+            const rsiValue = calculateRSI(historyData); // Use full history for RSI for more accurate calc
+
+            return { 
+                isStable: patternScore > MIN_PATTERN_STABILITY_FOR_PREDICTION, // Link to skip logic threshold
+                patternScore: Math.max(0, Math.min(1, patternScore)), // Ensure 0-1 range
+                trendStrength: trendStrength,
+                volatility: volatility,
+                rsi: rsiValue // Include RSI in the return
+            };
+        }
+
+        function weightedSizePrediction(periodNumber, patternScore, trendStrength, volatility) {
+            // ATS and Quantum influence:
+            // High patternScore and low volatility increase base weight
+            // Trend strength biases prediction
+            const baseWeight = 0.5 + (patternScore * 0.3) - (volatility * 0.1); // More stable, less volatile = higher base confidence
+            const trendAdjust = Math.tanh(trendStrength * 0.2); // Smoothly apply trend bias (-1 to 1)
+
+            const predictionA = (periodNumber * 7) % 10;
+            const predictionB = (periodNumber * 3) % 10;
+            
+            let combinedPredictionValue = (baseWeight * predictionA) + ((1 - baseWeight) * predictionB);
+
+            // Apply trend adjustment to the combined value
+            combinedPredictionValue += (trendAdjust * 2); // Small adjustment based on trend
+
+            return combinedPredictionValue >= 5 ? "BIG" : "SMALL";
+        }
+
+        async function ultraAIPredictSize(history, periodNumber) {
+            let prediction;
+            const patternAnalysis = analyzePattern(history, 'size');
+            const patternScore = patternAnalysis.patternScore;
+            const trendStrength = patternAnalysis.trendStrength;
+            const volatility = patternAnalysis.volatility;
+            const rsi = patternAnalysis.rsi; // Get RSI
+
+            const weightedPred = weightedSizePrediction(Number(periodNumber), patternScore, trendStrength, volatility);
+
+            // Quantum-inspired confidence: Multiple factors "superimposed"
+            let confidence = 0.5; // Base confidence
+
+            // Influence of pattern stability (stronger patterns = higher base confidence)
+            confidence += (patternScore - 0.5) * 0.6; // Adjust confidence based on how stable the pattern is
+
+            // Influence of volatility (higher volatility = lower confidence)
+            confidence -= (volatility * 0.1);
+
+            // Influence of recent accuracy (if history has enough win/loss data)
+            const wins = history.filter(h => h.resultStatus === 'WIN' && h.predictionType === 'size').length;
+            const losses = history.filter(h => h.resultStatus === 'LOSS' && h.predictionType === 'size').length;
+            const totalBets = wins + losses;
+            if (totalBets > 0) {
+                const recentAccuracy = wins / totalBets;
+                confidence += (recentAccuracy - 0.5) * 0.2; // Small boost if recent accuracy is good
+            }
+
+            // Integrate RSI into confidence
+            if (rsi !== null) {
+                if (rsi > 70) { // Overbought: indicates potential reversal downwards (towards SMALL)
+                    if (weightedPred === "BIG") {
+                        confidence -= 0.1; // Reduce confidence for BIG if overbought
+                    } else if (weightedPred === "SMALL") {
+                        confidence += 0.05; // Slightly increase confidence for SMALL if overbought
+                    }
+                } else if (rsi < 30) { // Oversold: indicates potential reversal upwards (towards BIG)
+                    if (weightedPred === "SMALL") {
+                        confidence -= 0.1; // Reduce confidence for SMALL if oversold
+                    } else if (weightedPred === "BIG") {
+                        confidence += 0.05; // Slightly increase confidence for BIG if oversold
+                    }
+                }
+            }
+
+
+            // Entanglement simulation: If pattern is very unstable AND volatility is high, severely reduce confidence
+            if (patternScore < 0.3 && volatility > 0.8) {
+                confidence *= 0.6; // Significant penalty
+            }
+
+            // Final check to ensure confidence is within bounds
+            confidence = Math.max(0.1, Math.min(0.95, confidence)); // Min confidence of 10% for non-skipped, Max 95%
+            
+            prediction = weightedPred; // Default to weighted prediction
+
+            // A final probabilistic "quantum jump" based on a very low confidence threshold
+            if (confidence < 0.4 && Math.random() < (0.4 - confidence)) { // Higher chance to "flip" if confidence is low
+                 prediction = prediction === "BIG" ? "SMALL" : "BIG"; // Simulate a random "flip" for low confidence
+                 confidence *= 0.5; // Further reduce confidence for such a flip
+            }
+
+            return { prediction, confidence: confidence * 100 }; // Return as percentage
+        }
+
+        async function ultraAIPredictColor(history, periodNumber) {
+            let prediction;
+            const patternAnalysis = analyzePattern(history, 'color');
+            const patternScore = patternAnalysis.patternScore;
+            const trendStrength = patternAnalysis.trendStrength; // Re-use for color (e.g., trend in green/red wins)
+            const volatility = patternAnalysis.volatility;
+            const rsi = patternAnalysis.rsi; // Get RSI
+
+            let recentColors = history.filter(h => h.predictionType === 'color' && h.colorResultType !== "-").slice(0, 10); // More history for color trends
+            let redCount = 0;
+            let greenCount = 0;
+            let violetCount = 0; // Still track for internal analysis, but won't be predicted
+            let weight = 1;
+
+            for (let i = recentColors.length - 1; i >= 0; i--) {
+                let color = recentColors[i].colorResultType;
+                if (color === "RED") redCount += weight;
+                else if (color === "GREEN") greenCount += weight;
+                else if (color === "VIOLET") violetCount += weight;
+                weight *= 1.2;
+            }
+
+            // ATS: Adjust bias based on recent dominance and trend
+            let rawPrediction;
+            if (greenCount > redCount * 1.1) { // Green has significant lead
+                rawPrediction = "GREEN";
+            } else if (redCount > greenCount * 1.1) { // Red has significant lead
+                rawPrediction = "RED";
+            } else {
+                // If counts are balanced, or small lead, apply more probabilistic approach
+                rawPrediction = Math.random() < 0.5 ? "RED" : "GREEN";
+            }
+
+            // Incorporate trend strength from pattern analysis (e.g., recent increase in GREEN numbers)
+            if (trendStrength > 0.1 && rawPrediction === "GREEN") { // Positive trend (higher numbers) might lean green
+                rawPrediction = "GREEN";
+            } else if (trendStrength < -0.1 && rawPrediction === "RED") { // Negative trend (lower numbers) might lean red
+                rawPrediction = "RED";
+            }
+            
+            prediction = rawPrediction; // Final prediction (always RED or GREEN)
+
+            // Quantum-inspired confidence for color:
+            let confidence = 0.5;
+            confidence += (patternScore - 0.5) * 0.6;
+            confidence -= (volatility * 0.1);
+
+            const wins = history.filter(h => h.resultStatus === 'WIN' && h.predictionType === 'color').length;
+            const losses = history.filter(h => h.resultStatus === 'LOSS' && h.predictionType === 'color').length;
+            const totalBets = wins + losses;
+            if (totalBets > 0) {
+                const recentAccuracy = wins / totalBets;
+                confidence += (recentAccuracy - 0.5) * 0.2;
+            }
+
+            // Integrate RSI into confidence for color predictions
+            if (rsi !== null) {
+                if (rsi > 70) { // Overbought: potential for lower numbers (more RED)
+                    if (rawPrediction === "GREEN") {
+                        confidence -= 0.1; // Reduce confidence for GREEN
+                    } else if (rawPrediction === "RED") {
+                        confidence += 0.05; // Slightly increase confidence for RED
+                    }
+                } else if (rsi < 30) { // Oversold: potential for higher numbers (more GREEN)
+                    if (rawPrediction === "RED") {
+                        confidence -= 0.1; // Reduce confidence for RED
+                    } else if (rawPrediction === "GREEN") {
+                        confidence += 0.05; // Slightly increase confidence for GREEN
+                    }
+                }
+            }
+
+
+            if (patternScore < 0.3 && volatility > 0.8) {
+                confidence *= 0.6;
+            }
+
+            confidence = Math.max(0.1, Math.min(0.95, confidence));
+
+            // Small chance for random flip if confidence is very low, even for color
+            if (confidence < 0.4 && Math.random() < (0.4 - confidence)) {
+                prediction = prediction === "RED" ? "GREEN" : "RED";
+                confidence *= 0.5;
+            }
+
+            return { prediction, confidence: confidence * 100 };
+        }
+
+
+        function determineColor(number) {
+            if (number === 0 || number === 5) return 'VIOLET';
+            if ([1, 3, 7, 9].includes(number)) return 'GREEN';
+            if ([2, 4, 6, 8].includes(number)) return 'RED';
+            return 'UNKNOWN';
+        }
+
+        async function fetchGameResult() {
+            try {
+                let response = await fetch("https://api.bdg88zf.com/api/webapi/GetNoaverageEmerdList", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        pageSize: 10,
+                        pageNo: 1,
+                        typeId: 1,
+                        language: 0,
+                        random: "4a0522c6ecd8410496260e686be2a57c",
+                        signature: "334B5E70A0C9B8918B0B15E517E2069C",
+                        timestamp: Math.floor(Date.now() / 1000)
+                    })
+                });
+                let data = await response.json();
+                return data?.data?.list?.[0] || null;
+            } catch (e) {
+                console.error("API Error fetching game result:", e);
+                updateServerStatus(false);
+                return null;
+            }
+        }
+
+        function updateServerStatus(isConnected) {
+            const statusElement = document.getElementById('serverStatus');
+            const indicator = document.getElementById('serverStatusIndicator');
+            if (statusElement && indicator) { // Check if elements exist
+                if (isConnected) {
+                    statusElement.textContent = "Connected";
+                    indicator.classList.add('animate-ping');
+                    indicator.style.backgroundColor = 'var(--green-accent)';
+                    indicator.classList.remove('bg-gray-500');
+                } else {
+                    statusElement.textContent = "Disconnected";
+                    indicator.classList.remove('animate-ping');
+                    indicator.style.backgroundColor = 'var(--red-accent)'; // Red for disconnected
+                    indicator.classList.add('bg-gray-500');
+                }
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.createElement("div");
+            toast.className = "toast";
+            toast.innerText = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        let predictionInterval; // Declare globally for clearInterval
+
+        async function updatePrediction() {
+            if (isPaused || !currentUserUid) { // Check isPatternGood later for smart skip
+                console.log("Prediction skipped: paused or no user UID.");
+                return;
+            }
+
+            const latestApiResult = await fetchGameResult();
+            if (!latestApiResult) {
+                console.warn("No API result or API error. Skipping prediction cycle.");
+                return;
+            }
+
+            updateServerStatus(true); // Assuming successful API fetch means connected
+
+            const apiIssueNumber = String(latestApiResult.issueNumber);
+            const apiActualNumber = Number(latestApiResult.number);
+            const currentApiPeriodShort = apiIssueNumber.slice(-4);
+
+            // 1. Update any *pending* history entries with the *current* API result
+            // Check if the latest API result's period matches the period of our most recent pending prediction
+            let mostRecentPendingEntry = historyData.length > 0 ? historyData.find(entry => entry.resultStatus === "Pending") : null;
+            
+            if (mostRecentPendingEntry && mostRecentPendingEntry.period === currentApiPeriodShort) {
+                console.log(`Updating pending prediction for period ${currentApiPeriodShort}`);
+                const actualSizeType = apiActualNumber >= 5 ? 'BIG' : 'SMALL';
+                const actualColorType = determineColor(apiActualNumber);
+
+                mostRecentPendingEntry.result = apiActualNumber;
+                mostRecentPendingEntry.sizeResultType = actualSizeType;
+                mostRecentPendingEntry.colorResultType = actualColorType;
+
+                let match = false;
+                let predictedValue, actualValue;
+
+                if (mostRecentPendingEntry.predictionType === 'size') {
+                    match = (actualSizeType === mostRecentPendingEntry.sizePrediction);
+                    predictedValue = mostRecentPendingEntry.sizePrediction;
+                    actualValue = actualSizeType;
+                } else if (mostRecentPendingEntry.predictionType === 'color') {
+                    match = (actualColorType === mostRecentPendingEntry.colorPrediction);
+                    predictedValue = mostRecentPendingEntry.colorPrediction;
+                    actualValue = actualColorType;
+                }
+
+                mostRecentPendingEntry.resultStatus = match ? 'WIN' : 'LOSS';
+
+                // Update streaks, levels, and show popups based on this result
+                if (match) {
+                    winLevel = Math.min(winLevel + 1, MAX_WIN_LEVEL);
+                    streak++;
+                    lossStreak = 0;
+                    consecutiveLosses = 0;
+                    showWinPopup(mostRecentPendingEntry.period, predictedValue, actualValue, mostRecentPendingEntry.predictionType);
+                } else {
+                    winLevel = 0;
+                    streak = 0;
+                    lossStreak++;
+                    consecutiveLosses++;
+                    showLossPopup(mostRecentPendingEntry.period, predictedValue, actualValue, mostRecentPendingEntry.predictionType);
+                    if (consecutiveLosses >= 5) {
+                        showPatternWarningPopup(); // Still retain forced pause for severe consecutive losses
+                        isPatternGood = false; // Mark as not good to stop further predictions
+                    }
+                }
+
+                // Sort history after updating a result to ensure newest completed results are at the top
+                historyData.sort((a, b) => b.period - a.period);
+
+                await saveHistoryToFirebase(); // Save the updated history entry
+                updateHistory(); // Re-render history and stats
+                updateStats();
+            }
+
+            // 2. Decide if we need to make a NEW prediction for the *next* period
+            const nextPeriodFull = (BigInt(apiIssueNumber) + 1n).toString();
+            const nextPeriodShort = nextPeriodFull.slice(-4);
+
+            // Check if we already have a pending OR SKIPPED prediction for `nextPeriodShort`
+            const alreadyPredictedForNextPeriod = historyData.some(entry => 
+                entry.period === nextPeriodShort && 
+                (entry.resultStatus === "Pending" || entry.resultStatus === "Skipped")
+            );
+
+            if (alreadyPredictedForNextPeriod) {
+                console.log(`Prediction for period ${nextPeriodShort} already pending or skipped. Skipping new prediction generation.`);
+                // Update UI to show the correct *next* period, even if we don't generate a new prediction
+                document.getElementById("currentPeriod").textContent = nextPeriodShort;
+                // If there's an existing pending prediction, display its value
+                const existingPrediction = historyData.find(entry => entry.period === nextPeriodShort && entry.resultStatus === "Pending");
+                if (existingPrediction) {
+                    document.getElementById("currentPredictionResult").textContent = existingPrediction.predictionType === 'size' ? existingPrediction.sizePrediction : existingPrediction.colorPrediction;
+                    document.getElementById("predictionTitle").textContent = existingPrediction.predictionType === 'size' ? "Size Pred." : "Color Pred.";
+                    const confidenceFillElement = document.getElementById("confidenceFill");
+                    if (confidenceFillElement) {
+                        confidenceFillElement.classList.remove('red', 'green', 'violet');
+                        if (existingPrediction.predictionType === 'size') {
+                            confidenceFillElement.classList.add(existingPrediction.sizePrediction === 'BIG' ? 'green' : 'red');
+                        } else {
+                             // Use RED or GREEN for color confidence fill, as VIOLET is no longer predicted
+                             confidenceFillElement.classList.add(existingPrediction.colorPrediction.toLowerCase() === 'violet' ? (Math.random() < 0.5 ? 'red' : 'green') : existingPrediction.colorPrediction.toLowerCase());
+                        }
+                    }
+                } else { // If it was skipped, display SKIPPED
+                     document.getElementById("currentPredictionResult").textContent = "SKIPPED";
+                     document.getElementById("predictionTitle").textContent = "Prediction";
+                     const confidenceFillElement = document.getElementById("confidenceFill");
+                     if (confidenceFillElement) {
+                         confidenceFillElement.style.width = `0%`;
+                         confidenceFillElement.classList.remove('red', 'green', 'violet');
+                     }
+                     document.getElementById("confidenceText").textContent = `Smart Skip (Previously Skipped)`;
+                }
+                return; 
+            }
+
+            // If we reach here, it means no pending or skipped prediction for the *next* period, so generate one.
+            const typeForThisPeriod = currentPredictionType;
+            let currentPredictionValue = "N/A";
+            let sizePredictionValue = "N/A";
+            let colorPredictionValue = "N/A";
+            let confidenceValue = 0;
+            let confidenceColorClass = '';
+
+            const patternAnalysisForNext = analyzePattern(historyData, typeForThisPeriod); // Run ATS for next prediction
+            const patternStabilityScore = patternAnalysisForNext.patternScore;
+            const rsiValueForNext = patternAnalysisForNext.rsi; // Get RSI for this period's prediction
+
+            const predictionData = {
+                period: parseInt(nextPeriodShort), // Use nextPeriodShort here
+                momentumScore: Math.random(), // Simplified for simulation
+                volatilityIndex: patternAnalysisForNext.volatility, // Use ATS volatility
+                patternStability: patternStabilityScore, // Use ATS pattern score
+                recentAvg: historyData.slice(0, 5).reduce((sum, entry) => sum + (Number(entry.result) || 0), 0) / (historyData.slice(0, 5).length || 1),
+                currentValue: apiActualNumber,
+                isUpwardTrend: patternAnalysisForNext.trendStrength > 0, // Simplified trend
+                successRate: (historyData.filter(item => item.resultStatus === 'WIN').length / (historyData.length || 1)),
+                currentPredictionType: typeForThisPeriod, // Pass current prediction type to logics
+                rsi: rsiValueForNext // Pass RSI to modules for potential use
+            };
+
+            const { overallSupportRate, moduleSummary } = runAnalyticalModules(predictionData, historyData); // Pass history to modules
+
+            // Update hidden advanced status bar
+            const advancedStatusBarElement = document.getElementById('advancedStatusBar');
+            if (advancedStatusBarElement) {
+                let advancedStatusBarContent = `<div class="flex items-center space-x-2">`;
+                moduleSummary.forEach(summary => {
+                    let statusClass = 'info';
+                    const agreementPercentage = parseFloat(summary.split(': ')[1]);
+                    if (agreementPercentage > 75) statusClass = 'good';
+                    else if (agreementPercentage < 25) statusClass = 'danger';
+                    else if (agreementPercentage >= 25 && agreementPercentage <= 75) statusClass = 'warning';
+                    advancedStatusBarContent += `<span class="${statusClass}"><strong>${summary.split(':')[0]}:</strong> ${summary.split(':')[1]}</span>`;
+                });
+                advancedStatusBarContent += `</div>`;
+                advancedStatusBarElement.innerHTML = advancedStatusBarContent;
+            }
+
+            if (typeForThisPeriod === 'size') {
+                const aiSizeDecision = await ultraAIPredictSize(historyData, nextPeriodShort);
+                sizePredictionValue = aiSizeDecision.prediction;
+                currentPredictionValue = sizePredictionValue;
+                confidenceValue = aiSizeDecision.confidence; // Already scaled to 0-100
+                
+                if (winLevel >= MAX_WIN_LEVEL) {
+                    sizePredictionValue = sizePredictionValue === "BIG" ? "SMALL" : "BIG";
+                    currentPredictionValue = sizePredictionValue;
+                    confidenceValue = Math.max(35, confidenceValue * 0.7); // Apply a penalty for reversal
+                    winLevel = 0;
+                }
+                confidenceColorClass = sizePredictionValue === 'BIG' ? 'green' : 'red';
+                const predictionTitleElement = document.getElementById("predictionTitle");
+                if (predictionTitleElement) predictionTitleElement.textContent = "Size Pred.";
+            } else {
+                const aiColorDecision = await ultraAIPredictColor(historyData, nextPeriodShort);
+                colorPredictionValue = aiColorDecision.prediction; // This will now always be RED or GREEN
+                currentPredictionValue = colorPredictionValue;
+                confidenceValue = aiColorDecision.confidence; // Already scaled to 0-100
+                confidenceColorClass = colorPredictionValue.toLowerCase(); // Will be 'red' or 'green'
+                const predictionTitleElement = document.getElementById("predictionTitle");
+                if (predictionTitleElement) predictionTitleElement.textContent = "Color Pred.";
+            }
+
+            // --- Smart Skip Logic Implementation ---
+            // If the pattern is not stable OR confidence is too low, then skip
+            if (!isPatternGood || confidenceValue < MIN_CONFIDENCE_FOR_PREDICTION || patternStabilityScore < MIN_PATTERN_STABILITY_FOR_PREDICTION) {
+                console.log(`Smart Skip triggered for period ${nextPeriodShort}. Confidence: ${confidenceValue}%, Pattern Stability: ${patternStabilityScore}`);
+                currentPredictionValue = "SKIPPED";
+                const currentPeriodElement = document.getElementById("currentPeriod");
+                if (currentPeriodElement) currentPeriodElement.textContent = nextPeriodShort;
+                const currentPredictionResultElement = document.getElementById("currentPredictionResult");
+                if (currentPredictionResultElement) currentPredictionResultElement.textContent = currentPredictionValue;
+                const confidenceFillElement = document.getElementById("confidenceFill");
+                if (confidenceFillElement) {
+                    confidenceFillElement.style.width = `0%`; // No fill for skipped
+                    confidenceFillElement.classList.remove('red', 'green', 'violet');
+                }
+                const confidenceTextElement = document.getElementById("confidenceText");
+                if (confidenceTextElement) confidenceTextElement.textContent = `Smart Skip (Low Confidence/Unstable Pattern)`;
+
+                // Record as "Skipped" in history
+                historyData.unshift({
+                    period: nextPeriodShort,
+                    predictionType: typeForThisPeriod,
+                    sizePrediction: sizePredictionValue, // Still record what it *would* have predicted
+                    colorPrediction: colorPredictionValue,
+                    result: "-", 
+                    sizeResultType: "-",
+                    colorResultType: "-",
+                    resultStatus: "Skipped", // Mark as Skipped
+                    confidence: confidenceValue
+                });
+                
+                // Don't update streaks/wins/losses for skipped entries
+                
+                // Keep history length manageable for display and Firebase storage
+                if (historyData.length > 20) { historyData.pop(); }
+                await saveHistoryToFirebase(); // Save new history entry
+                updateHistory();
+                updateStats();
+                showToast(`Prediction for period ${nextPeriodShort} skipped due to low confidence.`);
+                return; // Exit the function after skipping
+            }
+            // End of Smart Skip Logic
+
+            // If not skipped, then proceed with normal prediction display and history update
+            const currentPeriodElement = document.getElementById("currentPeriod");
+            if (currentPeriodElement) currentPeriodElement.textContent = nextPeriodShort;
+            const currentPredictionResultElement = document.getElementById("currentPredictionResult");
+            if (currentPredictionResultElement) currentPredictionResultElement.textContent = currentPredictionValue;
+            
+            const confidenceFillElement = document.getElementById("confidenceFill");
+            if (confidenceFillElement) {
+                confidenceFillElement.style.width = `${confidenceValue}%`;
+                confidenceFillElement.classList.remove('red', 'green', 'violet'); 
+                if (confidenceColorClass) {
+                    confidenceFillElement.classList.add(confidenceColorClass);
+                }
+            }
+            const confidenceTextElement = document.getElementById("confidenceText");
+            if (confidenceTextElement) confidenceTextElement.textContent = `Confidence: ${confidenceValue}%`;
+
+            historyData.unshift({
+                period: nextPeriodShort,
+                predictionType: typeForThisPeriod,
+                sizePrediction: sizePredictionValue,
+                colorPrediction: colorPredictionValue,
+                result: "-", // This will be filled in the *next* cycle when `apiIssueNumber` matches `nextPeriodShort`
+                sizeResultType: "-",
+                colorResultType: "-",
+                resultStatus: "Pending", // Mark as pending
+                confidence: confidenceValue
+            });
+
+            // Keep history length manageable for display and Firebase storage
+            if (historyData.length > 20) { historyData.pop(); }
+            await saveHistoryToFirebase(); // Save new history entry
+
+            predictionSwitchCounter++;
+            if (predictionSwitchCounter >= PREDICTION_SWITCH_THRESHOLD) {
+                currentPredictionType = (currentPredictionType === 'size' ? 'color' : 'size');
+                predictionSwitchCounter = 0;
+            }
+
+            updateHistory();
+            updateStats();
+
+            if (isNotificationsEnabled && Notification.permission === 'granted') {
+                if (typeForThisPeriod === 'size') {
+                    new Notification(`New Size Prediction: ${sizePredictionValue}`, {
+                        body: `Period: ${nextPeriodShort}\nConfidence: ${confidenceValue}%`,
+                        icon: 'https://via.placeholder.com/32'
+                    });
+                } else if (typeForThisPeriod === 'color') {
+                    new Notification(`New Color Prediction: ${colorPredictionValue}`, {
+                        body: `Period: ${nextPeriodShort}\nConfidence: ${confidenceValue}%`,
+                        icon: 'https://via.placeholder.com/32'
+                    });
+                }
+            }
+        }
+
+        function updateHistory() {
+            const historyContainer = document.getElementById('history');
+            if (!historyContainer) return; // Ensure element exists
+            historyContainer.innerHTML = '';
+
+            historyData.forEach((entry, index) => {
+                const status = entry.resultStatus.toLowerCase();
+                const iconClass = {
+                    win: 'fas fa-check-circle win-icon',
+                    loss: 'fas fa-times-circle loss-icon',
+                    pending: 'fas fa-hourglass-half pending-icon',
+                    skipped: 'fas fa-ban skipped-icon'
+                }[status] || 'fas fa-question-circle';
+                const badgeClass = {
+                    win: 'win-badge',
+                    loss: 'loss-badge',
+                    pending: 'pending-badge',
+                    skipped: 'skipped-badge'
+                }[status] || '';
+
+                let predictionDisplay = '';
+                let actualDisplay = '';
+                
+                if (entry.predictionType === 'size') {
+                    predictionDisplay = `<span class="font-medium">Size:</span> <span class="px-2 py-1 rounded-full ${entry.sizePrediction.toLowerCase()}-badge">${entry.sizePrediction}</span>`;
+                    if (entry.resultStatus !== "pending" && entry.resultStatus !== "skipped") {
+                        actualDisplay = `<span class="font-medium">Actual Size: ${entry.sizeResultType}</span>`;
+                    }
+                } else if (entry.predictionType === 'color') {
+                    // Adjust display for color to not show "VIOLET" if that was the internal result, display actual
+                    const displayColorPrediction = entry.colorPrediction === 'VIOLET' ? (Math.random() < 0.5 ? 'RED' : 'GREEN') : entry.colorPrediction;
+                    predictionDisplay = `<span class="font-medium">Color:</span> <span class="px-2 py-1 rounded-full ${displayColorPrediction.toLowerCase()}-badge">${displayColorPrediction}</span>`;
+                    if (entry.resultStatus !== "pending" && entry.resultStatus !== "skipped") {
+                        actualDisplay = `<span class="font-medium">Actual Color: ${entry.colorResultType}</span>`;
+                    }
+                }
+
+                const historyItem = document.createElement('div');
+                historyItem.className = `history-item ${status} flex items-center justify-between p-4 rounded-xl`;
+                historyItem.innerHTML = `
+                    <div class="watermark">ORACLE X AI</div>
+                    <div class="flex items-center space-x-3 w-full">
+                        <div class="status-icon ${badgeClass}">
+                            <i class="${iconClass}"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <p class="text-lg font-semibold" style="color: var(--dark-text-light);">${entry.period}</p>
+                            <div class="flex items-center text-sm space-x-2" style="color: var(--dark-text-medium);">
+                                ${predictionDisplay}
+                                ${entry.resultStatus !== "skipped" ? actualDisplay : ''}
+                            </div>
+                            ${entry.result !== "-" && entry.resultStatus !== "skipped" ? `<p class="text-sm mt-1" style="color: var(--dark-text-medium);">Resulting Number: ${entry.result}</p>` : ''}
+                            ${entry.confidence && entry.resultStatus !== "skipped" ? `<p class="text-sm mt-1" style="color: var(--dark-text-medium);">Confidence: ${entry.confidence}%</p>` : ''}
+                            <p class="text-sm capitalize mt-1" style="color: var(--dark-text-medium);">Status: ${status}</p>
+                        </div>
+                    </div>
+                    <button class="delete-btn hover:opacity-80 transition" data-index="${index}" style="color: var(--dark-text-medium);">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                `;
+                historyContainer.appendChild(historyItem);
+
+                historyItem.querySelector('.delete-btn').addEventListener('click', () => {
+                    showConfirmModal("Are you sure you want to delete this history item?", async () => {
+                        const deletedPeriod = historyData[index].period;
+                        historyData.splice(index, 1);
+                        updateHistory();
+                        updateStats();
+                        await saveHistoryToFirebase(); // Save updated history
+                        showHistoryDeletedPopup(`Period ${deletedPeriod} deleted successfully`);
+                    });
+                });
+            });
+
+            let mostFrequent = '-';
+            let leastFrequent = '-';
+            const numberCounts = {};
+            historyData.forEach(entry => {
+                if (entry.result !== '-' && entry.resultStatus !== 'Skipped') { // Only count actual results
+                    numberCounts[entry.result] = (numberCounts[entry.result] || 0) + 1;
+                }
+            });
+            const sortedCounts = Object.entries(numberCounts).sort((a, b) => b[1] - a[1]);
+            if (sortedCounts.length > 0) {
+                mostFrequent = sortedCounts[0][0];
+                leastFrequent = sortedCounts[sortedCounts.length - 1][0];
+            }
+            const mostFrequentElement = document.getElementById('mostFrequent');
+            if (mostFrequentElement) mostFrequentElement.textContent = mostFrequent;
+            const leastFrequentElement = document.getElementById('leastFrequent');
+            if (leastFrequentElement) leastFrequentElement.textContent = leastFrequent;
+        }
+
+        function updateStats() {
+            const wins = historyData.filter(item => item.resultStatus === "WIN").length;
+            const losses = historyData.filter(item => item.resultStatus === "LOSS").length;
+            const total = wins + losses; // Only count resolved predictions for accuracy
+            const accuracy = total > 0 ? ((wins / total) * 100).toFixed(2) : 0;
+
+            const homeWinRateElement = document.getElementById("homeWinRate");
+            if (homeWinRateElement) homeWinRateElement.textContent = `${accuracy}%`;
+            const totalWinBetsElement = document.getElementById("totalWinBets");
+            if (totalWinBetsElement) totalWinBetsElement.textContent = wins;
+            const totalLossBetsElement = document.getElementById("totalLossBets");
+            if (totalLossBetsElement) totalLossBetsElement.textContent = losses;
+
+            const statsTotalWinsElement = document.getElementById("statsTotalWins");
+            if (statsTotalWinsElement) statsTotalWinsElement.textContent = wins;
+            const statsTotalLossesElement = document.getElementById("statsTotalLosses");
+            if (statsTotalLossesElement) statsTotalLossesElement.textContent = losses;
+            const statsWinRateElement = document.getElementById("statsWinRate");
+            if (statsWinRateElement) statsWinRateElement.textContent = `${accuracy}%`;
+            const currentStreakElement = document.getElementById("currentStreak");
+            if (currentStreakElement) currentStreakElement.textContent = streak;
+            
+            // Only show WIN/LOSS for last five, not skipped/pending
+            const lastFiveResolved = historyData.filter(item => item.resultStatus === 'WIN' || item.resultStatus === 'LOSS').slice(0, 5);
+            const lastFiveResultsElement = document.getElementById("lastFiveResults");
+            if (lastFiveResultsElement) lastFiveResultsElement.textContent = lastFiveResolved.map(item => item.resultStatus === 'WIN' ? 'W' : 'L').join(', ') || '-';
+
+            const settingsTotalWinsElement = document.getElementById("settingsTotalWins");
+            if (settingsTotalWinsElement) settingsTotalWinsElement.textContent = `Total Wins: ${wins}`;
+            const settingsTotalLossesElement = document.getElementById("settingsTotalLosses");
+            if (settingsTotalLossesElement) settingsTotalLossesElement.textContent = `Total Losses: ${losses}`;
+
+            // Update eligibility status based on consecutive losses
+            const eligibilityStatusElement = document.getElementById('eligibilityStatus');
+            if (eligibilityStatusElement) {
+                if (consecutiveLosses >= 5) {
+                    eligibilityStatusElement.textContent = "UNSTABLE (Wait 15m)";
+                    eligibilityStatusElement.style.color = 'var(--red-accent)';
+                } else {
+                    eligibilityStatusElement.textContent = "STABLE";
+                    eligibilityStatusElement.style.color = 'var(--green-accent)';
+                }
+            }
+        }
+
+        document.getElementById('deleteAllHistoryBtn').addEventListener('click', () => {
+            showConfirmModal("Are you sure you want to delete all history items?", async () => {
+                historyData = [];
+                streak = 0;
+                winLevel = 0;
+                lossStreak = 0;
+                consecutiveLosses = 0;
+                updateHistory();
+                updateStats();
+                await saveHistoryToFirebase(); // Save empty history
+                showHistoryDeletedPopup("All history deleted successfully");
+            });
+        });
+
+        // Request notification permission on load if not already granted and enabled
+        // This will be called after successful login and app display
+        function requestNotificationPermission() {
+             if (isNotificationsEnabled && Notification.permission !== 'granted') {
+                Notification.requestPermission();
+            }
+        }
+       
+        // --- Login Page JavaScript ---
+        function getDeviceId() {
+            let id = localStorage.getItem("device_id");
+            if (!id) {
+                if (crypto.randomUUID) {
+                    id = crypto.randomUUID();
+                } else {
+                    id = 'id-' + Math.random().toString(36).substr(2, 9) + '-' + Date.now();
+                }
+                localStorage.setItem("device_id", id);
+            }
+            return id;
+        }
+
+        function resetForm() {
+            const accessKeyInput = document.getElementById("accessKey");
+            const errorDiv = document.getElementById("error");
+            const successDiv = document.getElementById("success");
+            const loadingDiv = document.getElementById("loading");
+
+            if (accessKeyInput) accessKeyInput.value = "";
+            if (errorDiv) errorDiv.innerText = "";
+            if (successDiv) successDiv.innerText = "";
+            if (loadingDiv) loadingDiv.style.display = "none";
+            gsap.to('#error', { opacity: 0, duration: 0.3 });
+            gsap.to('#success', { opacity: 0, duration: 0.3 });
+        }
+
+        function displayLastKey() {
+            const lastKeyElement = document.getElementById("lastKey");
+            if (lastKeyElement) { 
+                const lastKey = localStorage.getItem("last_key");
+                lastKeyElement.innerText = lastKey ? `Last Key: ${lastKey}` : "Last Key: None";
+            } else {
+                console.error("Element with ID 'lastKey' not found.");
+            }
+        }
+
+        window.handleLogin = async function () {
+            const key = document.getElementById("accessKey").value.trim();
+            const errorDiv = document.getElementById("error");
+            const successDiv = document.getElementById("success");
+            const loadingDiv = document.getElementById("loading");
+            const userDeviceId = getDeviceId(); // Get the current device ID
+
+            if (errorDiv) errorDiv.innerText = "";
+            if (successDiv) successDiv.innerText = "";
+            if (loadingDiv) loadingDiv.style.display = "block";
+
+            if (!key) {
+                if (loadingDiv) loadingDiv.style.display = "none";
+                if (errorDiv) errorDiv.innerText = "PLEASE ENTER ACCESS KEY.";
+                gsap.to('#error', {
+                    scale: 1,
+                    opacity: 1,
+                    duration: 0.5,
+                    ease: 'elastic.out(1, 0.6)'
+                });
+                setTimeout(() => { resetForm(); }, 2000);
+                return;
+            }
+
+            // Wait for Firebase Authentication to be ready before proceeding
+            // This ensures currentUserUid is set for loadUserDataFromFirebase
+            while (!isAuthReady || currentUserUid === null) {
+                await new Promise(resolve => setTimeout(resolve, 100)); // Wait 100ms
+            }
+
+            try {
+                console.log("handleLogin: Current Firebase User UID before fetching key:", auth.currentUser?.uid);
+
+                // Fetch key data from Firebase (read-only for client app)
+                const keySnapshot = await get(child(accessKeysRef, key));
+
+                if (!keySnapshot.exists()) {
+                    if (loadingDiv) loadingDiv.style.display = "none";
+                    if (errorDiv) errorDiv.innerText = "INVALID ACCESS KEY.";
+                    gsap.to('#error', { scale: 1, opacity: 1, duration: 0.5, ease: 'elastic.out(1, 0.6)' });
+                    setTimeout(() => { resetForm(); }, 2000);
+                    return;
+                }
+
+                const keyData = keySnapshot.val();
+                const now = Date.now();
+
+                if (!keyData.active) {
+                    if (loadingDiv) loadingDiv.style.display = "none";
+                    if (errorDiv) errorDiv.innerText = "KEY IS INACTIVE.";
+                    gsap.to('#error', { scale: 1, opacity: 1, duration: 0.5, ease: 'elastic.out(1, 0.6)' });
+                    setTimeout(() => { resetForm(); }, 2000);
+                    return;
+                }
+
+                if (keyData.expiry < now) {
+                    if (loadingDiv) loadingDiv.style.display = "none";
+                    if (errorDiv) errorDiv.innerText = "KEY HAS EXPIRED.";
+                    gsap.to('#error', { scale: 1, opacity: 1, duration: 0.5, ease: 'elastic.out(1, 0.6)' });
+                    setTimeout(() => { resetForm(); }, 2000);
+                    return;
+                }
+
+                // Device ID binding check
+                if (keyData.deviceId) { // If a deviceId is set for this key in Firebase
+                    if (keyData.deviceId !== userDeviceId) { // And it doesn't match current device
+                        if (loadingDiv) loadingDiv.style.display = "none";
+                        if (errorDiv) errorDiv.innerText = `KEY BOUND TO ANOTHER DEVICE. YOUR ID: ${userDeviceId}`;
+                        gsap.to('#error', { scale: 1, opacity: 1, duration: 0.5, ease: 'elastic.out(1, 0.6)' });
+                        setTimeout(() => { resetForm(); }, 3000); // Give more time for device ID error
+                        return;
+                    }
+                }
+                // Important: With the current Firebase rules (accessKeys read-only),
+                // we *cannot* set keyData.deviceId here if it's null.
+                // It must be set by an admin in the Firebase console beforehand
+                // if you want strong "one device only" enforcement for new keys.
+
+                // If all checks pass
+                if (successDiv) successDiv.innerText = "LOGIN SUCCESSFUL!";
+                gsap.to('#success', {
+                    scale: 1,
+                    opacity: 1,
+                    duration: 0.5,
+                    ease: 'elastic.out(1, 0.6)'
+                });
+                localStorage.setItem('last_key', key);
+                displayLastKey();
+                
+                // Now, perform the UI transition to the main app
+                const loginScreen = document.getElementById('loginScreen');
+                const mainAppScreen = document.getElementById('mainAppScreen');
+                if (loginScreen && mainAppScreen) {
+                    gsap.to(loginScreen, {
+                        opacity: 0,
+                        duration: 0.8,
+                        ease: 'power2.out',
+                        onComplete: () => {
+                            loginScreen.style.display = 'none';
+                            mainAppScreen.style.display = 'block';
+                            gsap.fromTo(mainAppScreen, 
+                                { opacity: 0, y: 50 }, 
+                                { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
+                            );
+                            if (!predictionInterval) { // Start prediction only if not already running
+                                predictionInterval = setInterval(updatePrediction, 5000);
+                                updatePrediction(); // Initial call
+                            }
+                            requestNotificationPermission(); // Request notifications after app loads
+                        }
+                    });
+                }
+
+
+            } catch (error) {
+                console.error("Firebase Login Error:", error);
+                if (loadingDiv) loadingDiv.style.display = "none";
+                if (errorDiv) errorDiv.innerText = "LOGIN FAILED: " + error.message;
+                gsap.to('#error', { scale: 1, opacity: 1, duration: 0.5, ease: 'elastic.out(1, 0.6)' });
+                setTimeout(() => { resetForm(); }, 2000);
+            }
+        };
+
+        window.getKey = function () {
+            const message = encodeURIComponent("HELLO @ORACLEXAIADMIN, I NEED AN ACCESS KEY.");
+            window.open(`https://t.me/ORACLEXAIADMIN?text=${message}`, '_blank');
+        };
+
+        function populateLicenseInput() {
+            const licenseInput = document.getElementById('accessKey');
+            const storedKey = localStorage.getItem('last_key');
+            if (licenseInput && storedKey) {
+                licenseInput.value = storedKey;
+            }
+        }
+
+        function createStarsLogin() {
+            const container = document.getElementById('stars-container-login');
+            if (!container) return; // Ensure container exists
+            const starCount = 40;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                const size = Math.random() * 2 + 1;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const duration = Math.random() * 4 + 2 + 's';
+                const delay = Math.random() * 4 + 's';
+                
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${posX}%`;
+                star.style.top = `${posY}%`;
+                star.style.setProperty('--duration', duration);
+                star.style.animationDelay = delay;
+                
+                container.appendChild(star);
+            }
+        }
+
+        function createConfettiLogin() {
+            const container = document.getElementById('confetti-container-login');
+            if (!container) return; // Ensure container exists
+            const confettiCount = 80;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                
+                const size = Math.random() * 8 + 4;
+                const posX = Math.random() * window.innerWidth;
+                const posY = -20;
+                const color = `hsl(${Math.random() * 180 + 180}, 80%, 70%)`;
+                const rotation = Math.random() * 360;
+                const shape = Math.random() > 0.5 ? '50%' : '0';
+                
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                confetti.style.left = `${posX}px`;
+                confetti.style.top = `${posY}px`;
+                confetti.style.backgroundColor = color;
+                confetti.style.borderRadius = shape;
+                confetti.style.transform = `rotate(${rotation}deg)`;
+                
+                container.appendChild(confetti);
+            }
+        }
+
+        function animateConfettiLogin() {
+            const confetti = document.querySelectorAll('#confetti-container-login .confetti');
+            
+            confetti.forEach((piece, index) => {
+                const duration = Math.random() * 2.5 + 1.5;
+                const delay = index * 0.015;
+                
+                gsap.to(piece, {
+                    y: window.innerHeight + 80,
+                    x: `+=${Math.random() * 150 - 75}`,
+                    rotation: Math.random() * 360,
+                    opacity: 1,
+                    duration: duration,
+                    delay: delay,
+                    ease: 'power1.out',
+                    onComplete: () => {
+                        piece.remove();
+                    }
+                });
+            });
+        }
+
+        window.copyDeviceId = function () {
+            const deviceId = getDeviceId();
+            // Create a temporary textarea element
+            const tempInput = document.createElement('textarea');
+            tempInput.value = deviceId;
+            tempInput.style.position = 'absolute'; // Hide it visually
+            tempInput.style.left = '-9999px';
+            tempInput.style.top = '0';
+            document.body.appendChild(tempInput);
+            
+            // Select the text and copy
+            tempInput.select();
+            
+            let successful = false;
+            try {
+                successful = document.execCommand('copy');
+                if (successful) {
+                    const copyBtn = document.getElementById('copyDeviceIdButton');
+                    const copyText = document.getElementById('copyText');
+                    
+                    if (copyBtn && copyText) {
+                        createConfettiLogin(); // Use login confetti
+                        animateConfettiLogin(); // Animate login confetti
+                        
+                        copyBtn.classList.add('copied');
+                        copyText.innerHTML = 'Copied!';
+                        
+                        gsap.to(copyBtn, {
+                            scale: 1.08,
+                            duration: 0.15,
+                            yoyo: true,
+                            repeat: 1,
+                            ease: 'power2.inOut',
+                            onComplete: () => {
+                                setTimeout(() => {
+                                    copyBtn.classList.remove('copied');
+                                    copyText.innerHTML = 'Copy Device ID';
+                                }, 1200);
+                            }
+                        });
+                    }
+                } else {
+                    console.error('Failed to copy using execCommand. Fallback to manual.');
+                    // Fallback to showing a message for manual copy
+                    const messageBox = document.createElement('div');
+                    messageBox.style.cssText = `
+                        position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                        background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;
+                        padding: 15px; border-radius: 5px; z-index: 1000;
+                        text-align: center; font-size: 0.9em;
+                    `;
+                    messageBox.innerHTML = `Copy failed.<br>Please copy Device ID manually: <br><strong>${deviceId}</strong>`;
+                    document.body.appendChild(messageBox);
+                    setTimeout(() => messageBox.remove(), 5000); // Give more time for user to read/copy
+                }
+            } catch (err) {
+                console.error('Error attempting to copy: ', err);
+                // Fallback to showing a message for manual copy
+                const messageBox = document.createElement('div');
+                messageBox.style.cssText = `
+                    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                    background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;
+                    padding: 15px; border-radius: 5px; z-index: 1000;
+                    text-align: center; font-size: 0.9em;
+                `;
+                messageBox.innerHTML = `Copy failed.<br>Please copy Device ID manually: <br><strong>${deviceId}</strong>`;
+                document.body.appendChild(messageBox);
+                setTimeout(() => messageBox.remove(), 5000); // Give more time for user to read/copy
+            } finally {
+                document.body.removeChild(tempInput); // Always remove the temporary element
+            }
+        };
+
+
+        const loginAccessKeyInput = document.getElementById('accessKey');
+        if (loginAccessKeyInput) {
+            loginAccessKeyInput.addEventListener('focus', () => {
+                gsap.to('.input-icon', {
+                    scale: 1.1,
+                    duration: 0.25,
+                    ease: 'back.out'
+                });
+            });
+            
+            loginAccessKeyInput.addEventListener('blur', () => {
+                gsap.to('.input-icon', {
+                    scale: 1,
+                    duration: 0.25,
+                    ease: 'back.out'
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            populateLicenseInput();
+            displayLastKey();
+            createStarsLogin(); // Call for login stars
+
+            gsap.to('#loginContainer', {
+                opacity: 1,
+                visibility: 'visible',
+                y: 0,
+                duration: 0.7,
+                ease: 'power3.out',
+                onComplete: () => {
+                    const loginContainer = document.getElementById('loginContainer');
+                    if (loginContainer) loginContainer.classList.add('visible');
+                }
+            });
+
+            gsap.to('.logo-container', {
+                scale: 1,
+                opacity: 1,
+                duration: 0.6,
+                delay: 0.15,
+                ease: 'elastic.out(1, 0.6)'
+            });
+
+            gsap.to('#inputGroup', {
+                x: 0,
+                opacity: 1,
+                duration: 0.5,
+                delay: 0.3,
+                ease: 'power2.out'
+            });
+
+            const submitBtnElement = document.getElementById('submitBtn');
+            if (submitBtnElement) {
+                gsap.to(submitBtnElement, {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.5,
+                    delay: 0.6,
+                    ease: 'power2.out'
+                });
+            }
+
+            const copyDeviceIdButtonElement = document.getElementById('copyDeviceIdButton');
+            if (copyDeviceIdButtonElement) { 
+                gsap.to(copyDeviceIdButtonElement, {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.5,
+                    delay: 0.75,
+                    ease: 'power2.out'
+                });
+            }
+
+            const socialLinksElement = document.getElementById('socialLinks');
+            if (socialLinksElement) { 
+                gsap.to(socialLinksElement, {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.5,
+                    delay: 0.9,
+                    ease: 'power2.out',
+                    onComplete: () => {
+                        gsap.to('.social-link', {
+                            y: -8,
+                            duration: 0.4,
+                            stagger: 0.08,
+                            repeat: -1,
+                            yoyo: true,
+                            ease: 'sine.inOut'
+                        });
+                    }
+                });
+            }
+
+            gsap.to('.floating-element', {
+                y: 15,
+                rotation: 3,
+                duration: 4,
+                repeat: -1,
+                yoyo: true,
+                ease: 'sine.inOut',
+                stagger: 0.2
+            });
+
+            if (submitBtnElement) {
+                submitBtnElement.addEventListener('mouseenter', () => {
+                    gsap.to(submitBtnElement, { y: -2, duration: 0.25, ease: 'power2.out' });
+                });
+                submitBtnElement.addEventListener('mouseleave', () => {
+                    gsap.to(submitBtnElement, { y: 0, duration: 0.25, ease: 'power2.out' });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
