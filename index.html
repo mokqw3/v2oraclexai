@@ -22,6 +22,9 @@
             margin: 0;
             padding: 0;
             color: #1f2937;
+            /* Added for main app layout flexbox */
+            display: flex;
+            flex-direction: column;
         }
         :root {
             /* Updated to Light Red and Pink Palette */
@@ -42,6 +45,8 @@
             --warning-text: #F39C12; /* Orange for warning text */
             --info-color: #B2D7F6; /* Light Blue for info */
             --info-text: #3498DB;
+            --server-status-connected: #A3D9B1; /* Soft Green for server connected */
+
 
             /* Login specific colors, harmonized with app colors */
             --login-primary: var(--primary-pink);
@@ -222,14 +227,15 @@
             left: 100%;
         }
         .copy-btn {
+            width: 100%; /* Make copy button full width for consistency */
+            padding: 10px 18px;
+            border-radius: 8px;
             background: var(--login-primary-light);
             border: none;
             color: var(--login-primary-dark);
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            padding: 10px 18px;
-            border-radius: 8px;
             margin-top: 0.8rem;
             transform: translateY(20px);
             opacity: 0;
@@ -330,10 +336,11 @@
 
         /* Main App Specific Styles (inherited and overridden) */
         #mainAppScreen {
+            flex-grow: 1; /* Allow main app content to take available space */
             display: none; /* Hidden by default, shown after login */
             width: 100%;
-            min-height: 100vh;
-            flex-direction: column; /* Ensure it behaves like the original app body */
+            /* min-height: 100vh; */ /* Managed by body flex-col */
+            /* Removed flex-direction: column; as body now handles it */
         }
 
         /* --- From oracle-x-ai-app.html --- */
@@ -763,7 +770,7 @@
             padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
-            display: none; /* Hidden as per request */
+            /* display: none; */ /* Keep display controlled by JS for popup */
         }
         .video-container iframe {
             position: absolute;
@@ -868,7 +875,7 @@
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col">
     <!-- Login Screen -->
     <div id="loginScreen" class="min-h-screen w-full flex items-center justify-center">
         <div class="floating-element" style="width: 150px; height: 150px; top: 15%; left: 10%; background: radial-gradient(circle, var(--login-primary-light), transparent 70%);"></div>
@@ -943,16 +950,16 @@
                                     <div class="pl-2">
                                         <div class="flex items-center space-x-2 mb-2">
                                             <i class="fas fa-calendar-alt text-2xl animate__animated animate__bounce"></i>
-                                            <h2 class="text-2xl font-bold">Period</h2>
+                                            <h2 class="text-2xl font-bold" data-lang-key="period">Period</h2>
                                         </div>
-                                        <p id="currentPeriod" class="text-2xl font-semibold bg-D1F2EB p-3 rounded-lg shadow-inner period-id">-</p>
+                                        <p id="currentPeriod" class="text-2xl font-semibold bg-white p-3 rounded-lg shadow-inner period-id">-</p>
                                     </div>
                                 </div>
                                 <div class="relative text-right">
                                     <div class="pr-2">
                                         <div class="flex items-center justify-end space-x-2 mb-2">
-                                            <h2 id="predictionTitle" class="text-2xl font-bold">Prediction</h2>
-                                            <p id="currentPredictionResult" class="text-2xl font-semibold bg-D1F2EB p-3 rounded-lg shadow-inner flex items-center justify-end">
+                                            <h2 id="predictionTitle" class="text-2xl font-bold" data-lang-key="prediction">Prediction</h2>
+                                            <p id="currentPredictionResult" class="text-2xl font-semibold bg-white p-3 rounded-lg shadow-inner flex items-center justify-end">
                                                 <span>-</span>
                                                 <span id="predictionLevelDisplay" class="level-badge"></span>
                                             </p>
@@ -963,7 +970,7 @@
                             <div class="confidence-meter">
                                 <div id="confidenceFill" class="confidence-fill" style="width: 0%"></div>
                             </div>
-                            <p id="confidenceText" class="text-sm mt-1"></p>
+                            <p id="confidenceText" class="text-sm mt-1" data-lang-key="confidence_text">Confidence: 0%</p>
                         </div>
                         <div class="small-dot" style="top: 15%; left: 15%; animation-delay: 0.2s;"></div>
                         <div class="small-dot" style="top: 85%; left: 85%; animation-delay: 0.8s;"></div>
@@ -973,15 +980,15 @@
 
                     <div class="card mb-4 p-6 animate__animated animate__fadeInUp relative">
                         <h2 class="text-3xl font-bold text-center mb-4 relative">
-                            <span class="relative z-10 pulse-animation">Analysis Dashboard</span>
-                            <span class="absolute top-1/2 left-0 w-full h-2 bg-D1F2EB -translate-y-1/2 rounded-full"></span>
+                            <span class="relative z-10 pulse-animation" data-lang-key="analysis_dashboard">Analysis Dashboard</span>
+                            <span class="absolute top-1/2 left-0 w-full h-2 bg-secondary-pink -translate-y-1/2 rounded-full"></span>
                         </h2>
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                             <div class="dashboard-card animate__animated animate__fadeIn" style="animation-delay: 0s;">
                                 <div class="flex items-center space-x-2">
                                     <i class="fas fa-star text-lg"></i>
                                     <div>
-                                        <p class="text-sm">Most Frequent</p>
+                                        <p class="text-sm" data-lang-key="most_frequent">Most Frequent</p>
                                         <p id="mostFrequent" class="text-xl font-bold">-</p>
                                     </div>
                                 </div>
@@ -990,7 +997,7 @@
                                 <div class="flex items-center space-x-2">
                                     <i class="fas fa-arrow-down text-lg"></i>
                                     <div>
-                                        <p class="text-sm">Least Frequent</p>
+                                        <p class="text-sm" data-lang-key="least_frequent">Least Frequent</p>
                                         <p id="leastFrequent" class="text-xl font-bold">-</p>
                                     </div>
                                 </div>
@@ -999,7 +1006,7 @@
                                 <div class="flex items-center space-x-2">
                                     <i class="fas fa-percentage text-lg"></i>
                                     <div>
-                                        <p class="text-sm">Win Rate</p>
+                                        <p class="text-sm" data-lang-key="win_rate">Win Rate</p>
                                         <p id="homeWinRate" class="text-xl font-bold">-</p>
                                     </div>
                                 </div>
@@ -1008,7 +1015,7 @@
                                 <div class="flex items-center space-x-2">
                                     <i class="fas fa-trophy text-lg"></i>
                                     <div>
-                                        <p class="text-sm">Wins</p>
+                                        <p class="text-sm" data-lang-key="wins">Wins</p>
                                         <p id="totalWinBets" class="text-xl font-bold">-</p>
                                     </div>
                                 </div>
@@ -1017,7 +1024,7 @@
                                 <div class="flex items-center space-x-2">
                                     <i class="fas fa-skull text-lg"></i>
                                     <div>
-                                        <p class="text-sm">Losses</p>
+                                        <p class="text-sm" data-lang-key="losses">Losses</p>
                                         <p id="totalLossBets" class="text-xl font-bold">-</p>
                                     </div>
                                 </div>
@@ -1026,11 +1033,11 @@
                                 <div class="flex items-center space-x-2">
                                     <i class="fas fa-server text-lg"></i>
                                     <div>
-                                        <p class="text-sm">Server Status</p>
-                                        <p id="serverStatus" class="font-semibold">Connected</p>
+                                        <p class="text-sm" data-lang-key="server_status">Server Status</p>
+                                        <p id="serverStatus" class="font-semibold" data-lang-key="connected">Connected</p>
                                     </div>
                                 </div>
-                                <div id="serverStatusIndicator" class="w-3 h-3 bg-90EE90 rounded-full animate-ping"></div>
+                                <div id="serverStatusIndicator" class="w-3 h-3 bg-server-status-connected rounded-full animate-ping"></div>
                             </div>
                         </div>
                         <div class="small-dot" style="top: 10%; left: 10%; animation-delay: 0.3s;"></div>
@@ -1044,11 +1051,11 @@
                     <div class="card p-6 animate__animated animate__fadeInUp relative">
                         <div class="flex justify-between items-center mb-4">
                             <h2 class="text-3xl font-bold text-center relative">
-                                <span class="relative z-10 pulse-animation">History</span>
-                                <span class="absolute top-1/2 left-0 w-full h-2 bg-D1F2EB -translate-y-1/2 rounded-full"></span>
+                                <span class="relative z-10 pulse-animation" data-lang-key="history">History</span>
+                                <span class="absolute top-1/2 left-0 w-full h-2 bg-secondary-pink -translate-y-1/2 rounded-full"></span>
                             </h2>
-                            <button id="deleteAllHistoryBtn" class="px-4 py-2 rounded-lg hover:bg-D1F2EB transition flex items-center">
-                                <i class="fas fa-trash-alt mr-2"></i><span>Delete</span>
+                            <button id="deleteAllHistoryBtn" class="px-4 py-2 rounded-lg hover:bg-secondary-pink transition flex items-center">
+                                <i class="fas fa-trash-alt mr-2"></i><span data-lang-key="delete">Delete</span>
                             </button>
                         </div>
                         <div id="history" class="history-container"></div>
@@ -1062,51 +1069,51 @@
                 <div id="statsSection" class="content-section">
                     <div class="card p-6 animate__animated animate__fadeInUp relative">
                         <h2 class="text-3xl font-bold text-center mb-4 relative">
-                            <span class="relative z-10 pulse-animation">Statistics</span>
-                            <span class="absolute top-1/2 left-0 w-full h-2 bg-D1F2EB -translate-y-1/2 rounded-full"></span>
+                            <span class="relative z-10 pulse-animation" data-lang-key="statistics">Statistics</span>
+                            <span class="absolute top-1/2 left-0 w-full h-2 bg-secondary-pink -translate-y-1/2 rounded-full"></span>
                         </h2>
                         <div class="stats-grid">
                             <div class="dashboard-card">
                                 <div class="flex items-center space-x-2">
-                                    <i class="fas fa-trophy text-green-500 text-lg"></i>
+                                    <i class="fas fa-trophy text-success-text text-lg"></i>
                                     <div>
-                                        <p class="text-sm">Total Wins</p>
+                                        <p class="text-sm" data-lang-key="total_wins">Total Wins</p>
                                         <p id="statsTotalWins" class="text-xl font-bold">-</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="dashboard-card">
                                 <div class="flex items-center space-x-2">
-                                    <i class="fas fa-skull text-red-500 text-lg"></i>
+                                    <i class="fas fa-skull text-danger-text text-lg"></i>
                                     <div>
-                                        <p class="text-sm">Total Losses</p>
+                                        <p class="text-sm" data-lang-key="total_losses">Total Losses</p>
                                         <p id="statsTotalLosses" class="text-xl font-bold">-</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="dashboard-card">
                                 <div class="flex items-center space-x-2">
-                                    <i class="fas fa-percentage text-yellow-500 text-lg"></i>
+                                    <i class="fas fa-percentage text-warning-text text-lg"></i>
                                     <div>
-                                        <p class="text-sm">Win Rate</p>
+                                        <p class="text-sm" data-lang-key="win_rate">Win Rate</p>
                                         <p id="statsWinRate" class="text-xl font-bold">-</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="dashboard-card">
                                 <div class="flex items-center space-x-2">
-                                    <i class="fas fa-fire text-orange-500 text-lg"></i>
+                                    <i class="fas fa-fire text-primary-pink text-lg"></i>
                                     <div>
-                                        <p class="text-sm">Current Streak</p>
+                                        <p class="text-sm" data-lang-key="current_streak">Current Streak</p>
                                         <p id="currentStreak" class="text-xl font-bold">-</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="dashboard-card">
                                 <div class="flex items-center space-x-2">
-                                    <i class="fas fa-history text-blue-500 text-lg"></i>
+                                    <i class="fas fa-history text-info-text text-lg"></i>
                                     <div>
-                                        <p class="text-sm">Last 5 Results</p>
+                                        <p class="text-sm" data-lang-key="last_five_results">Last 5 Results</p>
                                         <p id="lastFiveResults" class="text-xl font-bold">-</p>
                                     </div>
                                 </div>
@@ -1121,28 +1128,49 @@
                 <div id="settingsSection" class="content-section">
                     <div class="card p-6 animate__animated animate__fadeInUp relative">
                         <h2 class="text-3xl font-bold text-center mb-4 relative">
-                            <span class="relative z-10 pulse-animation">Settings</span>
-                            <span class="absolute top-1/2 left-0 w-full h-2 bg-D1F2EB -translate-y-1/2 rounded-full"></span>
+                            <span class="relative z-10 pulse-animation" data-lang-key="settings">Settings</span>
+                            <span class="absolute top-1/2 left-0 w-full h-2 bg-secondary-pink -translate-y-1/2 rounded-full"></span>
                         </h2>
                         <div class="flex flex-col gap-4">
+                            <!-- Status Card -->
                             <div class="dashboard-card">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-chart-line text-lg"></i>
                                         <div>
-                                            <p class="text-sm">Status</p>
-                                            <p id="settingsTotalWins" class="text-sm">Total Wins: 0</p>
-                                            <p id="settingsTotalLosses" class="text-sm">Total Losses: 0</p>
+                                            <p class="text-sm" data-lang-key="status">Status</p>
+                                            <p id="settingsTotalWins" class="text-sm" data-lang-key="total_wins_display">Total Wins: 0</p>
+                                            <p id="settingsTotalLosses" class="text-sm" data-lang-key="total_losses_display">Total Losses: 0</p>
+                                        </div>
                                     </div>
-                                </div>
-                                    <p id="eligibilityStatus" class="text-sm font-semibold text-yellow-600">Pending</p>
+                                    <p id="eligibilityStatus" class="text-sm font-semibold text-warning-text" data-lang-key="pending">Pending</p>
                                 </div>
                             </div>
+
+                            <!-- Language Toggle (New) -->
+                            <div class="dashboard-card">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-globe text-lg"></i>
+                                        <p class="text-sm" data-lang-key="language">Language</p>
+                                    </div>
+                                    <label class="mode-toggle">
+                                        <input type="checkbox" id="languageToggle">
+                                        <span class="mode-slider"></span>
+                                        <div class="mode-icons">
+                                            <span class="text-sm">EN</span>
+                                            <span class="text-sm">HI</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Notification Toggle -->
                             <div class="dashboard-card">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-bell text-lg"></i>
-                                        <p class="text-sm">Notifications</p>
+                                        <p class="text-sm" data-lang-key="notifications">Notifications</p>
                                     </div>
                                     <label class="mode-toggle">
                                         <input type="checkbox" id="notificationToggle">
@@ -1158,7 +1186,7 @@
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-volume-up text-lg"></i>
-                                        <p class="text-sm">Sound</p>
+                                        <p class="text-sm" data-lang-key="sound">Sound</p>
                                     </div>
                                     <label class="mode-toggle">
                                         <input type="checkbox" id="soundToggle" checked>
@@ -1170,20 +1198,20 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="dashboard-card cursor-pointer hover:bg-D1F2EB transition" onclick="resetSettings()">
+                            <div class="dashboard-card cursor-pointer hover:bg-secondary-pink transition" onclick="resetSettings()">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-undo text-lg"></i>
-                                        <p class="text-sm">Reset Settings</p>
+                                        <p class="text-sm" data-lang-key="reset_settings">Reset Settings</p>
                                     </div>
-                                    <span class="text-sm">Reset</span>
+                                    <span class="text-sm" data-lang-key="reset">Reset</span>
                                 </div>
                             </div>
                             <div class="dashboard-card">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-cog text-lg"></i>
-                                        <p class="text-sm">Prediction Mode</p>
+                                        <p class="text-sm" data-lang-key="prediction_mode">Prediction Mode</p>
                                     </div>
                                     <label class="mode-toggle">
                                         <input type="checkbox" id="predictionModeToggle">
@@ -1195,19 +1223,59 @@
                                     </label>
                                 </div>
                             </div>
-                            <div onclick="window.open('https://t.me/ORACLEXAIADMIN', '_blank')" class="dashboard-card cursor-pointer hover:bg-D1F2EB transition">
+
+                            <!-- YouTube Video Card (New) -->
+                            <div onclick="openVideoPopup()" class="dashboard-card cursor-pointer hover:bg-secondary-pink transition">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fab fa-youtube text-lg"></i>
+                                        <p class="text-sm" data-lang-key="how_to_use">How To Use</p>
+                                    </div>
+                                    <span class="text-sm" data-lang-key="watch_video">Watch Video</span>
+                                </div>
+                            </div>
+
+                            <!-- Telegram Card (New) -->
+                            <div onclick="window.open('https://t.me/ORACLEXAIADMIN', '_blank')" class="dashboard-card cursor-pointer hover:bg-secondary-pink transition">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center space-x-2">
                                         <i class="fab fa-telegram text-lg"></i>
-                                        <p class="text-sm">Contact Admin</p>
+                                        <p class="text-sm" data-lang-key="telegram">Telegram</p>
                                     </div>
-                                    <span class="text-sm">Message</span>
+                                    <span class="text-sm" data-lang-key="join_channel">Join Channel</span>
                                 </div>
                             </div>
+
+                            <!-- Instagram Card (New) -->
+                            <div onclick="window.open('https://instagram.com/oracle.x.ai', '_blank')" class="dashboard-card cursor-pointer hover:bg-secondary-pink transition">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fab fa-instagram text-lg"></i>
+                                        <p class="text-sm" data-lang-key="instagram">Instagram</p>
+                                    </div>
+                                    <span class="text-sm" data-lang-key="follow_us">Follow Us</span>
+                                </div>
+                            </div>
+
+                            <!-- Privacy Policy Card (New) -->
+                            <div onclick="window.open('https://alwaystruexyz.blogspot.com/2025/04/alpha-mx-pricing-plans-custom-css.html', '_blank')" class="dashboard-card cursor-pointer hover:bg-secondary-pink transition">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-shield-alt text-lg"></i>
+                                        <p class="text-sm" data-lang-key="privacy_policy">Privacy Policy</p>
+                                    </div>
+                                    <span class="text-sm" data-lang-key="read_more">Read More</span>
+                                </div>
+                            </div>
+
                             <div class="contact-links">
                                 <a href="https://t.me/ORACLEXAIADMIN" target="_blank" class="contact-link">
                                     <i class="fab fa-telegram"></i>
-                                    <span>Telegram</span>
+                                    <span data-lang-key="telegram">Telegram</span>
+                                </a>
+                                <a href="https://instagram.com/oracle.x.ai" target="_blank" class="contact-link">
+                                    <i class="fab fa-instagram"></i>
+                                    <span data-lang-key="instagram">Instagram</span>
                                 </a>
                             </div>
                         </div>
@@ -1224,25 +1292,25 @@
                 <li class="active">
                     <a href="#" data-section="homeSection">
                         <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-                        <span class="text">Home</span>
+                        <span class="text" data-lang-key="home">Home</span>
                     </a>
                 </li>
                 <li>
                     <a href="#" data-section="historySection">
                         <span class="icon"><ion-icon name="time-outline"></ion-icon></span>
-                        <span class="text">History</span>
+                        <span class="text" data-lang-key="history">History</span>
                     </a>
                 </li>
                 <li>
                     <a href="#" data-section="statsSection">
                         <span class="icon"><ion-icon name="bar-chart-outline"></ion-icon></span>
-                        <span class="text">Stats</span>
+                        <span class="text" data-lang-key="stats">Stats</span>
                     </a>
                 </li>
                 <li>
                     <a href="#" data-section="settingsSection">
                         <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
-                        <span class="text">Settings</span>
+                        <span class="text" data-lang-key="settings">Settings</span>
                     </a>
                 </li>
                 <div class="indicator"></div>
@@ -1252,8 +1320,8 @@
         <!-- Video Popup (still exists but no button to open it) -->
         <div id="videoPopup" class="popup">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-semibold">How To Use ORACLE X AI</h3>
-                <button onclick="closeVideoPopup()" class="hover:text-90EE90">
+                <h3 class="text-lg font-semibold" data-lang-key="how_to_use_oracle_x_ai">How To Use ORACLE X AI</h3>
+                <button onclick="closeVideoPopup()" class="hover:text-primary-pink">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -1265,59 +1333,59 @@
         <!-- Win Popup -->
         <div id="winPopup" class="win-popup">
             <div class="confetti-icon">🎉</div>
-            <h3 class="text-lg font-semibold mb-4">CONGRATULATIONS!</h3>
-            <p class="mb-4">You won this prediction!</p>
+            <h3 class="text-lg font-semibold mb-4" data-lang-key="congratulations">CONGRATULATIONS!</h3>
+            <p class="mb-4" data-lang-key="win_message">You won this prediction!</p>
             <p id="winDetails" class="mb-4"></p>
         </div>
 
         <!-- Loss Popup -->
         <div id="lossPopup" class="loss-popup">
             <div class="confetti-icon">❌</div>
-            <h3 class="text-lg font-semibold mb-4">LOSS!</h3>
-            <p class="mb-4">Unfortunately, you lost this prediction.</p>
+            <h3 class="text-lg font-semibold mb-4" data-lang-key="loss_message_title">LOSS!</h3>
+            <p class="mb-4" data-lang-key="loss_message">Unfortunately, you lost this prediction.</p>
             <p id="lossDetails" class="mb-4"></p>
         </div>
 
         <!-- Pattern Warning Popup -->
         <div id="patternWarningPopup" class="pattern-warning">
             <div class="confetti-icon">⚠️</div>
-            <h3 class="text-lg font-semibold mb-4">PATTERN WARNING!</h3>
-            <p class="mb-4">5 consecutive losses detected. Pattern not good. Please wait 15 minutes before playing again.</p>
-            <button onclick="pausePredictions()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">CLOSE</button>
+            <h3 class="text-lg font-semibold mb-4" data-lang-key="pattern_warning_title">PATTERN WARNING!</h3>
+            <p class="mb-4" data-lang-key="pattern_warning_message">5 consecutive losses detected. Pattern not good. Please wait 15 minutes before playing again.</p>
+            <button onclick="pausePredictions()" class="bg-danger-color text-white px-4 py-2 rounded-lg hover:bg-danger-text transition" data-lang-key="close">CLOSE</button>
         </div>
 
         <!-- History Deleted Popup -->
         <div id="historyDeletedPopup" class="history-deleted-popup">
-            <div class="confetti-icon"></div>
-            <h3 class="text-lg font-semibold mb-4">HISTORY DELETED!</h3>
-            <p class="mb-4">History has been successfully deleted.</p>
+            <div class="confetti-icon">🗑️</div>
+            <h3 class="text-lg font-semibold mb-4" data-lang-key="history_deleted_title">HISTORY DELETED!</h3>
+            <p class="mb-4" data-lang-key="history_deleted_message">History has been successfully deleted.</p>
             <p id="historyDeleteDetails" class="mb-4"></p>
         </div>
 
         <!-- Unstable Trend Pause Popup (NEW) -->
         <div id="unstableTrendPopup" class="unstable-trend-popup">
             <div class="confetti-icon">⏳</div>
-            <h3 class="text-lg font-semibold mb-4">PREDICTION PAUSED: UNSTABLE TREND!</h3>
-            <p class="mb-4">Market trend is currently unstable. Predictions will resume automatically.</p>
+            <h3 class="text-lg font-semibold mb-4" data-lang-key="unstable_trend_title">PREDICTION PAUSED: UNSTABLE TREND!</h3>
+            <p class="mb-4" data-lang-key="unstable_trend_message">Market trend is currently unstable. Predictions will resume automatically.</p>
             <p class="text-2xl font-bold text-primary-pink mb-4" id="unstableTrendCountdown">20:00</p>
-            <button onclick="resumePlaying()" class="bg-primary-pink text-white px-4 py-2 rounded-lg hover:bg-accent-red transition">Resume Now</button>
+            <button onclick="resumePlaying()" class="bg-primary-pink text-white px-4 py-2 rounded-lg hover:bg-accent-red transition" data-lang-key="resume_now">Resume Now</button>
         </div>
 
         <!-- Play Resume Modal -->
         <div id="playResumeModal" class="play-resume">
             <div class="play-icon"><i class="fas fa-play"></i></div>
-            <h3 class="text-lg font-semibold mb-4">Resume Playing</h3>
-            <p class="mb-4">You can now resume predictions.</p>
-            <button onclick="resumePlaying()" class="bg-success-color text-white px-4 py-2 rounded-lg hover:bg-success-text transition">Resume</button>
+            <h3 class="text-lg font-semibold mb-4" data-lang-key="resume_playing_title">Resume Playing</h3>
+            <p class="mb-4" data-lang-key="resume_playing_message">You can now resume predictions.</p>
+            <button onclick="resumePlaying()" class="bg-success-color text-white px-4 py-2 rounded-lg hover:bg-success-text transition" data-lang-key="resume">Resume</button>
         </div>
 
         <!-- Confirmation Modal -->
         <div id="confirmModal" class="modal">
-            <h3 class="text-lg font-semibold mb-4">Confirm Action</h3>
+            <h3 class="text-lg font-semibold mb-4" data-lang-key="confirm_action">Confirm Action</h3>
             <p id="modalMessage" class="mb-4"></p>
             <div class="flex justify-end space-x-2">
-                <button id="cancelModalBtn" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 transition">Cancel</button>
-                <button id="confirmModalBtn" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 transition">Confirm</button>
+                <button id="cancelModalBtn" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 transition" data-lang-key="cancel">Cancel</button>
+                <button id="confirmModalBtn" class="bg-primary-pink text-white px-4 py-2 rounded-lg hover:bg-accent-red transition" data-lang-key="confirm">Confirm</button>
             </div>
         </div>
     </div>
@@ -1403,12 +1471,135 @@
 
         document.addEventListener('DOMContentLoaded', initiateAuthentication);
 
-        // Dynamic color scheme for overall app theme
-        function getDailyColorScheme() {
-            // Colors are now primarily defined in CSS :root, but this function can
-            // be used for dynamic theme changes if desired later.
-        }
-        getDailyColorScheme();
+        // --- Translation Object (from website_1746246515.html) ---
+        const translations = {
+            en: {
+                period: "Period",
+                prediction: "Prediction",
+                confidence_text: "Confidence:",
+                analysis_dashboard: "Analysis Dashboard",
+                most_frequent: "Most Frequent",
+                least_frequent: "Least Frequent",
+                win_rate: "Win Rate",
+                wins: "Wins",
+                losses: "Losses",
+                server_status: "Server Status",
+                connected: "Connected",
+                disconnected: "Disconnected",
+                history: "History",
+                delete: "Delete",
+                statistics: "Statistics",
+                total_wins: "Total Wins",
+                total_losses: "Total Losses",
+                current_streak: "Current Streak",
+                last_five_results: "Last 5 Results",
+                settings: "Settings",
+                status: "Status",
+                total_wins_display: "Total Wins:",
+                total_losses_display: "Total Losses:",
+                language: "Language",
+                notifications: "Notifications",
+                sound: "Sound",
+                reset_settings: "Reset Settings",
+                reset: "Reset",
+                prediction_mode: "Prediction Mode",
+                how_to_use: "How To Use",
+                watch_video: "Watch Video",
+                telegram: "Telegram",
+                join_channel: "Join Channel",
+                instagram: "Instagram",
+                follow_us: "Follow Us",
+                privacy_policy: "Privacy Policy",
+                read_more: "Read More",
+                home: "Home",
+                stats: "Stats",
+                how_to_use_oracle_x_ai: "How To Use ORACLE X AI",
+                congratulations: "CONGRATULATIONS!",
+                win_message: "You won this prediction!",
+                loss_message_title: "LOSS!",
+                loss_message: "Unfortunately, you lost this prediction.",
+                pattern_warning_title: "PATTERN WARNING!",
+                pattern_warning_message: "5 consecutive losses detected. Pattern not good. Please wait 15 minutes before playing again.",
+                history_deleted_title: "HISTORY DELETED!",
+                history_deleted_message: "History has been successfully deleted.",
+                unstable_trend_title: "PREDICTION PAUSED: UNSTABLE TREND!",
+                unstable_trend_message: "Market trend is currently unstable. Predictions will resume automatically.",
+                resume_now: "Resume Now",
+                resume_playing_title: "Resume Playing",
+                resume_playing_message: "You can now resume predictions.",
+                resume: "Resume",
+                confirm_action: "Confirm Action",
+                cancel: "Cancel",
+                confirm: "Confirm",
+                pending: "Pending",
+                delete_item_confirm: "Are you sure you want to delete this history item?",
+                delete_all_confirm: "Are you sure you want to delete all history items?",
+                reset_settings_confirm: "Are you sure you want to reset all settings to default?"
+            },
+            hi: {
+                period: "अवधि",
+                prediction: "भविष्यवाणी",
+                confidence_text: "आत्मविश्वास:",
+                analysis_dashboard: "विश्लेषण डैशबोर्ड",
+                most_frequent: "सबसे अधिक बार",
+                least_frequent: "सबसे कम बार",
+                win_rate: "जीत की दर",
+                wins: "जीत",
+                losses: "हानि",
+                server_status: "सर्वर स्थिति",
+                connected: "जुड़ा हुआ",
+                disconnected: "डिस्कनेक्ट किया गया",
+                history: "इतिहास",
+                delete: "हटाएं",
+                statistics: "आंकड़े",
+                total_wins: "कुल जीत",
+                total_losses: "कुल हानि",
+                current_streak: "वर्तमान लकीर",
+                last_five_results: "अंतिम 5 परिणाम",
+                settings: "सेटिंग्स",
+                status: "स्थिति",
+                total_wins_display: "कुल जीत:",
+                total_losses_display: "कुल हानि:",
+                language: "भाषा",
+                notifications: "सूचनाएं",
+                sound: "ध्वनि",
+                reset_settings: "सेटिंग्स रीसेट करें",
+                reset: "रीसेट",
+                prediction_mode: "भविष्यवाणी मोड",
+                how_to_use: "उपयोग कैसे करें",
+                watch_video: "वीडियो देखें",
+                telegram: "टेलीग्राम",
+                join_channel: "चैनल में शामिल हों",
+                instagram: "इंस्टाग्राम",
+                follow_us: "हमें फॉलो करें",
+                privacy_policy: "गोपनीयता नीति",
+                read_more: "और पढ़ें",
+                home: "होम",
+                stats: "सांख्यिकी",
+                how_to_use_oracle_x_ai: "ओरेकल एक्स एआई का उपयोग कैसे करें",
+                congratulations: "बधाई हो!",
+                win_message: "आपने यह भविष्यवाणी जीती!",
+                loss_message_title: "हानि!",
+                loss_message: "दुर्भाग्य से, आपने यह भविष्यवाणी हारी।",
+                pattern_warning_title: "पैटर्न चेतावनी!",
+                pattern_warning_message: "लगातार 5 हार का पता चला। पैटर्न अच्छा नहीं है। कृपया 15 मिनट प्रतीक्षा करें फिर से खेलने से पहले।",
+                history_deleted_title: "इतिहास हटा दिया गया!",
+                history_deleted_message: "इतिहास सफलतापूर्वक हटा दिया गया है।",
+                unstable_trend_title: "भविष्यवाणी रोकी गई: अस्थिर प्रवृत्ति!",
+                unstable_trend_message: "बाजार की प्रवृत्ति वर्तमान में अस्थिर है। भविष्यवाणियां स्वचालित रूप से फिर से शुरू होंगी।",
+                resume_now: "अब फिर से शुरू करें",
+                resume_playing_title: "खेलना फिर से शुरू करें",
+                resume_playing_message: "अब आप भविष्यवाणियां फिर से शुरू कर सकते हैं।",
+                resume: "फिर से शुरू करें",
+                confirm_action: "कार्रवाई की पुष्टि करें",
+                cancel: "रद्द करें",
+                confirm: "पुष्टि करें",
+                pending: "लंबित",
+                delete_item_confirm: "क्या आप इस इतिहास आइटम को हटाना चाहते हैं?",
+                delete_all_confirm: "क्या आप सभी इतिहास आइटम को हटाना चाहते हैं?",
+                reset_settings_confirm: "क्या आप सभी सेटिंग्स को डिफ़ॉल्ट पर रीसेट करना चाहते हैं?"
+            }
+        };
 
         // --- Global variables for application state ---
         let historyData = []; 
@@ -1432,14 +1623,20 @@
         const UNSTABLE_TREND_PAUSE_DURATION_SECONDS = 20 * 60; // 20 minutes
 
         // User settings (now synchronized with Firebase)
+        let currentLanguage = 'en'; // Default language
         let isSoundEnabled = true; 
         let isNotificationsEnabled = false;
         let isAdvancedMode = false;
 
-        // Apply saved user settings on load
-        document.getElementById('notificationToggle').checked = isNotificationsEnabled;
-        document.getElementById('soundToggle').checked = isSoundEnabled;
-        document.getElementById('predictionModeToggle').checked = isAdvancedMode;
+        // Apply saved user settings after Firebase loads
+        function applySettingsToUI() {
+            document.getElementById('languageToggle').checked = (currentLanguage === 'hi');
+            document.getElementById('notificationToggle').checked = isNotificationsEnabled;
+            document.getElementById('soundToggle').checked = isSoundEnabled;
+            document.getElementById('predictionModeToggle').checked = isAdvancedMode;
+            updateAdvancedStatusBarVisibility(); // Update visibility based on loaded setting
+            updateLanguage(); // Apply initial language
+        }
         
         // --- PREDICTION LOGIC START ---
         // Helper Functions (from predictionLogic.js)
@@ -1507,7 +1704,7 @@
 
             for (let i = period + 1; i < chronologicalData.length; i++) {
                 const change = chronologicalData[i] - chronologicalData[i - 1];
-                let currentGain = change > 0 ? currentGain : 0;
+                let currentGain = change > 0 ? change : 0;
                 let currentLoss = change < 0 ? Math.abs(change) : 0;
                 avgGain = (avgGain * (period - 1) + currentGain) / period;
                 avgLoss = (avgLoss * (period - 1) + currentLoss) / period;
@@ -1707,7 +1904,7 @@
                     else volatility = "VERY_LOW";
                 }
             }
-            return { strength, direction, volatility, details, macroRegime: "PENDING_REGIME_CLASSIFICATION", isTransitioning: false };
+            return { strength, direction, volatility, details, macroRegime: "UNKNOWN_REGIME", isTransitioning: false };
         }
 
         function analyzeTransitions(history, baseWeight) {
@@ -1864,13 +2061,13 @@
 
             if (logN.length < 2) return null;
 
-            const n = logN.length;
+            const n_fd = logN.length;
             const sumX = logN.reduce((a, b) => a + b, 0);
             const sumY = logRs.reduce((a, b) => a + b, 0);
             const sumXY = logN.reduce((sum, x, i) => sum + x * logRs[i], 0);
             const sumX2 = logN.reduce((sum, x) => sum + x * x, 0);
 
-            const hurst = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+            const hurst = (n_fd * sumXY - sumX * sumY) / (n_fd * sumX2 - sumX * sumX);
             if (isNaN(hurst)) return null;
 
             let prediction = null;
@@ -2236,7 +2433,7 @@
         function updateSignalPerformance(contributingSignals, actualOutcome, periodFull, currentVolatilityRegime, lastFinalConfidence, concentrationModeActive, marketEntropyState) {
             if (!actualOutcome || !contributingSignals || contributingSignals.length === 0) return;
             const isHighConfidencePrediction = lastFinalConfidence > 0.75;
-            const isOverallCorrect = getBigSmallFromNumber(actualOutcome) === (lastFinalConfidence > 0.5 ? "BIG" : "SMALL");
+            const isOverallCorrect = getBigSmallFromNumber(actualOutcome) === currentSharedStats.lastPredictedOutcome; // Corrected: Use lastPredictedOutcome
 
             contributingSignals.forEach(signal => {
                 if (!signal || !signal.source) return;
@@ -2259,7 +2456,7 @@
                     signalPerformance[source].total++;
                     signalPerformance[source].sessionTotal++;
                     signalPerformance[source].performanceByVolatility[currentVolatilityRegime].total++;
-                    let outcomeCorrect = (signal.prediction === actualOutcome) ? 1 : 0;
+                    let outcomeCorrect = (signal.prediction === getBigSmallFromNumber(actualOutcome)) ? 1 : 0; // Corrected: use getBigSmallFromNumber
                     if (outcomeCorrect) {
                         signalPerformance[source].correct++;
                         signalPerformance[source].sessionCorrect++;
@@ -2718,17 +2915,15 @@
                 const settingsSnapshot = await get(userSettingsRef);
                 if (settingsSnapshot.exists()) {
                     const settings = settingsSnapshot.val();
+                    currentLanguage = settings.language || 'en';
                     isSoundEnabled = settings.isSoundEnabled !== undefined ? settings.isSoundEnabled : true;
                     isNotificationsEnabled = settings.isNotificationsEnabled !== undefined ? settings.isNotificationsEnabled : false;
                     isAdvancedMode = settings.isAdvancedMode !== undefined ? settings.isAdvancedMode : false;
-
-                    document.getElementById('notificationToggle').checked = isNotificationsEnabled;
-                    document.getElementById('soundToggle').checked = isSoundEnabled;
-                    document.getElementById('predictionModeToggle').checked = isAdvancedMode;
-                    updateAdvancedStatusBarVisibility(); // Update visibility based on loaded setting
                 } else {
-                    await saveUserSettingsToFirebase();
+                    await saveUserSettingsToFirebase(); // Save defaults if no settings found
                 }
+                
+                applySettingsToUI(); // Apply loaded or default settings to UI
                 updateHistory();
                 updateStats();
 
@@ -2757,6 +2952,7 @@
                 return;
             }
             const settings = {
+                language: currentLanguage,
                 isSoundEnabled: isSoundEnabled,
                 isNotificationsEnabled: isNotificationsEnabled,
                 isAdvancedMode: isAdvancedMode
@@ -2766,6 +2962,34 @@
                 console.log("User settings saved to Firebase.");
             } catch (error) {
                 console.error("Error saving user settings to Firebase:", error);
+            }
+        }
+
+        // --- Language Update Function ---
+        function updateLanguage() {
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (element) { // Check if element exists
+                    element.textContent = translations[currentLanguage][key] || element.textContent;
+                }
+            });
+            // Update confidence text specifically since it has dynamic value
+            const confidenceTextElement = document.getElementById('confidenceText');
+            const confidenceFillElement = document.getElementById('confidenceFill');
+            if (confidenceTextElement && confidenceFillElement) {
+                confidenceTextElement.textContent = `${translations[currentLanguage]['confidence_text']} ${confidenceFillElement.style.width}`;
+            }
+            
+            const totalWinsDisplayElement = document.getElementById('settingsTotalWins');
+            const statsTotalWinsElement = document.getElementById('statsTotalWins');
+            if (totalWinsDisplayElement && statsTotalWinsElement) {
+                totalWinsDisplayElement.textContent = `${translations[currentLanguage]['total_wins_display']} ${statsTotalWinsElement.textContent}`;
+            }
+
+            const totalLossesDisplayElement = document.getElementById('settingsTotalLosses');
+            const statsTotalLossesElement = document.getElementById('statsTotalLosses');
+            if (totalLossesDisplayElement && statsTotalLossesElement) {
+                totalLossesDisplayElement.textContent = `${translations[currentLanguage]['total_losses_display']} ${statsTotalLossesElement.textContent}`;
             }
         }
 
@@ -2788,14 +3012,20 @@
         // --- Popup and Modal Functions ---
         function openVideoPopup() {
             document.getElementById('videoPopup').classList.add('active');
+            if (isSoundEnabled) {
+                // new Audio('https://www.soundjay.com/buttons/beep-01a.mp3').play();
+            }
         }
 
         function closeVideoPopup() {
             document.getElementById('videoPopup').classList.remove('active');
+            if (isSoundEnabled) {
+                // new Audio('https://www.soundjay.com/buttons/beep-02.mp3').play();
+            }
         }
 
         function showWinPopup(period, predicted, actual, predictionType) {
-            document.getElementById('winDetails').textContent = `Period: ${period} | Predicted ${predictionType === 'size' ? 'Size' : 'Color'}: ${predicted} | Actual ${predictionType === 'size' ? 'Size' : 'Color'}: ${actual}`;
+            document.getElementById('winDetails').textContent = `${translations[currentLanguage].period}: ${period} | ${translations[currentLanguage].prediction}: ${predicted} | ${translations[currentLanguage].actual}: ${actual}`;
             document.getElementById('winPopup').classList.add('active');
             if (isSoundEnabled) {
                 speak("congratulations You Win power by ORACLE X AI");
@@ -2806,7 +3036,7 @@
         }
 
         function showLossPopup(period, predicted, actual, predictionType) {
-            document.getElementById('lossDetails').textContent = `Period: ${period} | Predicted ${predictionType === 'size' ? 'Size' : 'Color'}: ${predicted} | Actual ${predictionType === 'size' ? 'Size' : 'Color'}: ${actual}`;
+            document.getElementById('lossDetails').textContent = `${translations[currentLanguage].period}: ${period} | ${translations[currentLanguage].prediction}: ${predicted} | ${translations[currentLanguage].actual}: ${actual}`;
             document.getElementById('lossPopup').classList.add('active');
             if (isSoundEnabled) {
                 speak("Sorry you Loss pattern not stables or my mistake");
@@ -2824,7 +3054,7 @@
             document.getElementById('historyDeleteDetails').textContent = message;
             document.getElementById('historyDeletedPopup').classList.add('active');
             if (isSoundEnabled) {
-                speak("History has been deleted successfully");
+                speak(translations[currentLanguage].history_deleted_message);
             }
             setTimeout(() => {
                 document.getElementById('historyDeletedPopup').classList.remove('active');
@@ -2834,7 +3064,7 @@
         function speak(text) {
             if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'en-US';
+                utterance.lang = 'en-US'; // Always speak English for consistency with AI voice
                 utterance.volume = 1;
                 utterance.rate = 1;
                 utterance.pitch = 1;
@@ -2852,11 +3082,17 @@
                 onConfirm();
                 document.getElementById('confirmModal').classList.remove('active');
                 confirmBtn.removeEventListener('click', confirmHandler);
+                if (isSoundEnabled) {
+                    // new Audio('https://www.soundjay.com/buttons/beep-01a.mp3').play();
+                }
             };
 
             confirmBtn.addEventListener('click', confirmHandler);
             cancelBtn.addEventListener('click', () => {
                 document.getElementById('confirmModal').classList.remove('active');
+                if (isSoundEnabled) {
+                    // new Audio('https://www.soundjay.com/buttons/beep-02.mp3').play();
+                }
             });
         }
 
@@ -2885,11 +3121,11 @@
                 }
             }, 1000);
 
-            document.getElementById("currentPredictionResult").firstChild.textContent = "PAUSED";
+            document.getElementById("currentPredictionResult").firstChild.textContent = translations[currentLanguage].pending; // Use pending/paused
             document.getElementById("predictionLevelDisplay").textContent = ""; // Clear level
             document.getElementById("predictionLevelDisplay").className = "level-badge"; // Reset class
-            document.getElementById("predictionTitle").textContent = "Prediction";
-            showToast("Predictions paused due to unstable trend.");
+            document.getElementById("predictionTitle").textContent = translations[currentLanguage].prediction;
+            showToast(translations[currentLanguage].unstable_trend_message);
         }
 
         function updateUnstableTrendCountdownDisplay() {
@@ -2909,15 +3145,15 @@
             predictionInterval = null; 
             isPaused = true;
             isPatternGood = false;
-            document.getElementById("currentPredictionResult").firstChild.textContent = "PAUSED";
+            document.getElementById("currentPredictionResult").firstChild.textContent = translations[currentLanguage].pending; // Use pending/paused
             document.getElementById("predictionLevelDisplay").textContent = ""; // Clear level
             document.getElementById("predictionLevelDisplay").className = "level-badge"; // Reset class
-            document.getElementById("predictionTitle").textContent = "Prediction";
+            document.getElementById("predictionTitle").textContent = translations[currentLanguage].prediction;
             // Set timeout for 15 minutes to show resume modal
             setTimeout(() => {
                 showPlayResumeModal();
             }, 15 * 60 * 1000); // 15 minutes
-            showToast("Predictions paused for 15 minutes due to unstable pattern.");
+            showToast(translations[currentLanguage].pattern_warning_message);
         }
 
         function resumePlaying() {
@@ -2938,10 +3174,16 @@
                 predictionInterval = setInterval(updatePrediction, 5000);
                 updatePrediction(); 
             }
-            showToast("Predictions resumed.");
+            showToast(translations[currentLanguage].resume_playing_message);
         }
 
         // --- Settings Handlers ---
+        document.getElementById('languageToggle').addEventListener('change', async (e) => {
+            currentLanguage = e.target.checked ? 'hi' : 'en';
+            await saveUserSettingsToFirebase(); 
+            updateLanguage();
+        });
+
         document.getElementById('notificationToggle').addEventListener('change', async (e) => {
             isNotificationsEnabled = e.target.checked;
             await saveUserSettingsToFirebase(); 
@@ -2973,15 +3215,13 @@
         }
 
         function resetSettings() {
-            showConfirmModal("Are you sure you want to reset all settings to default?", async () => {
+            showConfirmModal(translations[currentLanguage].reset_settings_confirm, async () => {
+                currentLanguage = 'en';
                 isSoundEnabled = true;
                 isNotificationsEnabled = false;
                 isAdvancedMode = false;
                 await saveUserSettingsToFirebase(); 
-                document.getElementById('notificationToggle').checked = false;
-                document.getElementById('soundToggle').checked = true;
-                document.getElementById('predictionModeToggle').checked = false;
-                updateAdvancedStatusBarVisibility();
+                applySettingsToUI(); // Re-apply settings to UI
             });
         }
 
@@ -3074,12 +3314,12 @@
             const indicator = document.getElementById('serverStatusIndicator');
             if (statusElement && indicator) { 
                 if (isConnected) {
-                    statusElement.textContent = "Connected";
-                    indicator.classList.add('animate-ping', 'bg-success-color'); /* Updated color */
+                    statusElement.textContent = translations[currentLanguage].connected;
+                    indicator.classList.add('animate-ping', 'bg-server-status-connected'); 
                     indicator.classList.remove('bg-gray-500');
                 } else {
-                    statusElement.textContent = "Disconnected";
-                    indicator.classList.remove('animate-ping', 'bg-success-color');
+                    statusElement.textContent = translations[currentLanguage].disconnected;
+                    indicator.classList.remove('animate-ping', 'bg-server-status-connected');
                     indicator.classList.add('bg-gray-500');
                 }
             }
@@ -3125,17 +3365,17 @@
             let predictionLevel = aiPredictionOutput.confidenceLevel; // Get the confidence level
 
             if (currentPredictionValue === "SKIP") {
-                currentPredictionValue = "SKIPPED";
+                currentPredictionValue = translations[currentLanguage].pending; // Use 'Pending' or a suitable term
                 confidenceValue = 0;
                 predictionLevel = 0; // Explicitly no level for skipped
                 confidenceColorClass = 'light-gray'; // Using a variable from :root
             } else {
                 if (currentPredictionType === 'size') {
                     confidenceColorClass = currentPredictionValue === 'BIG' ? 'green' : 'red'; // These resolve to specific color variables in CSS
-                    document.getElementById("predictionTitle").textContent = "Size Pred.";
+                    document.getElementById("predictionTitle").textContent = translations[currentLanguage].prediction; // Ensure predictionTitle is updated
                 } else { // color
                     confidenceColorClass = currentPredictionValue.toLowerCase(); // Will be 'green', 'red', 'violet'
-                    document.getElementById("predictionTitle").textContent = "Color Pred.";
+                    document.getElementById("predictionTitle").textContent = translations[currentLanguage].prediction; // Ensure predictionTitle is updated
                 }
             }
             
@@ -3153,7 +3393,7 @@
                 confidenceFillElement.style.width = `${confidenceValue}%`;
             }
             const confidenceTextElement = document.getElementById("confidenceText");
-            if (confidenceTextElement) confidenceTextElement.textContent = `Confidence: ${confidenceValue}%`;
+            if (confidenceTextElement) confidenceTextElement.textContent = `${translations[currentLanguage].confidence_text} ${confidenceValue}%`;
 
             const predictionLevelDisplayElement = document.getElementById("predictionLevelDisplay");
             if (predictionLevelDisplayElement) {
@@ -3215,13 +3455,13 @@
 
             if (isNotificationsEnabled && Notification.permission === 'granted') {
                 if (currentPredictionType === 'size') {
-                    new Notification(`New Size Prediction: ${currentPredictionValue} (Lvl ${predictionLevel})`, {
-                        body: `Period: ${nextPeriod}\nConfidence: ${confidenceValue}%`,
+                    new Notification(`${translations[currentLanguage].prediction}: ${currentPredictionValue} (Lvl ${predictionLevel})`, {
+                        body: `${translations[currentLanguage].period}: ${nextPeriod}\n${translations[currentLanguage].confidence_text} ${confidenceValue}%`,
                         icon: 'https://placehold.co/32x32/FF69B4/FFFFFF?text=AI' /* Updated icon color */
                     });
                 } else if (currentPredictionType === 'color') {
-                    new Notification(`New Color Prediction: ${currentPredictionValue} (Lvl ${predictionLevel})`, {
-                        body: `Period: ${nextPeriod}\nConfidence: ${confidenceValue}%`,
+                    new Notification(`${translations[currentLanguage].prediction}: ${currentPredictionValue} (Lvl ${predictionLevel})`, {
+                        body: `${translations[currentLanguage].period}: ${nextPeriod}\n${translations[currentLanguage].confidence_text} ${confidenceValue}%`,
                         icon: 'https://placehold.co/32x32/FF69B4/FFFFFF?text=AI' /* Updated icon color */
                     });
                 }
@@ -3257,14 +3497,14 @@
                 }
                 
                 if (entry.predictionType === 'size') {
-                    predictionDisplay = `<span class="font-medium">Size:</span> <span class="px-2 py-1 rounded-full ${entry.sizePrediction.toLowerCase()}-badge">${entry.sizePrediction}</span>`;
+                    predictionDisplay = `<span class="font-medium">${translations[currentLanguage].prediction}:</span> <span class="px-2 py-1 rounded-full ${entry.sizePrediction.toLowerCase()}-badge">${entry.sizePrediction}</span>`;
                     if (entry.resultStatus !== "Pending") {
-                        actualDisplay = `<span class="font-medium">Actual Size: ${entry.sizeResultType}</span>`;
+                        actualDisplay = `<span class="font-medium">${translations[currentLanguage].actual}: ${entry.sizeResultType}</span>`;
                     }
                 } else if (entry.predictionType === 'color') {
-                    predictionDisplay = `<span class="font-medium">Color:</span> <span class="px-2 py-1 rounded-full ${entry.colorPrediction.toLowerCase()}-badge">${entry.colorPrediction}</span>`;
+                    predictionDisplay = `<span class="font-medium">${translations[currentLanguage].prediction}:</span> <span class="px-2 py-1 rounded-full ${entry.colorPrediction.toLowerCase()}-badge">${entry.colorPrediction}</span>`;
                     if (entry.resultStatus !== "Pending") {
-                        actualDisplay = `<span class="font-medium">Actual Color: ${entry.colorResultType}</span>`;
+                        actualDisplay = `<span class="font-medium">${translations[currentLanguage].actual}: ${entry.colorResultType}</span>`;
                     }
                 }
 
@@ -3280,27 +3520,27 @@
                             <p class="text-lg font-semibold">${entry.period.slice(-5)} ${predictionLevelBadge}</p>
                             <div class="flex items-center text-sm space-x-2 mt-1">
                                 ${predictionDisplay}
+                                ${entry.result !== "-" ? `<p class="text-sm">${translations[currentLanguage].result_number}: ${entry.result}</p>` : ''}
                                 ${actualDisplay}
                             </div>
-                            ${entry.result !== "-" ? `<p class="text-sm mt-1">Resulting Number: ${entry.result}</p>` : ''}
-                            ${entry.confidence ? `<p class="text-sm mt-1">Confidence: ${entry.confidence}%</p>` : ''}
-                            <p class="text-sm capitalize mt-1">Status: ${status}</p>
+                            ${entry.confidence ? `<p class="text-sm mt-1">${translations[currentLanguage].confidence_text} ${entry.confidence}%</p>` : ''}
+                            <p class="text-sm capitalize mt-1">${translations[currentLanguage].status}: ${status}</p>
                         </div>
                     </div>
-                    <button class="delete-btn hover:text-90EE90 transition" data-index="${index}">
+                    <button class="delete-btn hover:text-primary-pink transition" data-index="${index}">
                         <i class="fas fa-trash-alt"></i>
                     </button>
                 `;
                 historyContainer.appendChild(historyItem);
 
                 historyItem.querySelector('.delete-btn').addEventListener('click', () => {
-                    showConfirmModal("Are you sure you want to delete this history item?", async () => {
+                    showConfirmModal(translations[currentLanguage].delete_item_confirm, async () => {
                         const deletedPeriod = historyData[index].period;
                         historyData.splice(index, 1);
                         updateHistory();
                         updateStats();
                         await saveHistoryToFirebase(); 
-                        showHistoryDeletedPopup(`Period ${deletedPeriod} deleted successfully`);
+                        showHistoryDeletedPopup(`${translations[currentLanguage].period} ${deletedPeriod} ${translations[currentLanguage].deleted_successfully}`);
                     });
                 });
             });
@@ -3349,13 +3589,13 @@
             if (lastFiveResultsElement) lastFiveResultsElement.textContent = historyData.slice(0, 5).map(item => item.resultStatus === 'WIN' ? 'W' : (item.resultStatus === 'LOSS' ? 'L' : '-')).join(', ') || '-';
 
             const settingsTotalWinsElement = document.getElementById("settingsTotalWins");
-            if (settingsTotalWinsElement) settingsTotalWinsElement.textContent = `Total Wins: ${wins}`;
+            if (settingsTotalWinsElement) settingsTotalWinsElement.textContent = `${translations[currentLanguage].total_wins_display} ${wins}`;
             const settingsTotalLossesElement = document.getElementById("settingsTotalLosses");
-            if (settingsTotalLossesElement) settingsTotalLossesElement.textContent = `Total Losses: ${losses}`;
+            if (settingsTotalLossesElement) settingsTotalLossesElement.textContent = `${translations[currentLanguage].total_losses_display} ${losses}`;
         }
 
         document.getElementById('deleteAllHistoryBtn').addEventListener('click', () => {
-            showConfirmModal("Are you sure you want to delete all history items?", async () => {
+            showConfirmModal(translations[currentLanguage].delete_all_confirm, async () => {
                 historyData = [];
                 streak = 0;
                 winLevel = 0;
@@ -3364,7 +3604,7 @@
                 updateHistory();
                 updateStats();
                 await saveHistoryToFirebase(); 
-                showHistoryDeletedPopup("All history deleted successfully");
+                showHistoryDeletedPopup(translations[currentLanguage].history_deleted_message);
             });
         });
 
@@ -3511,7 +3751,7 @@
                                 updatePrediction(); 
                             }
                             requestNotificationPermission(); 
-                            updateAdvancedStatusBarVisibility(); // Set initial visibility
+                            // updateAdvancedStatusBarVisibility(); // Already called by applySettingsToUI
                         }
                     });
                 }
