@@ -2540,7 +2540,19 @@
             if (confirmedHistory.length < 100) { 
                 masterLogic.push(`InsufficientHistory`);
                 const finalDecision = Math.random() > 0.5 ? "BIG" : "SMALL";
-                return { finalDecision, finalConfidence: 0.5, confidenceLevel: 1, isForcedPrediction: true, overallLogic: masterLogic.join('->'), source: "InsufficientHistory", consecutiveSkips: 0 };
+                return {
+                    finalDecision,
+                    finalConfidence: 0.5,
+                    confidenceLevel: 1,
+                    isForcedPrediction: true,
+                    overallLogic: masterLogic.join('->'),
+                    source: "InsufficientHistory",
+                    contributingSignals: [],
+                    currentMacroRegime: trendContext.macroRegime, // Still provide if possible
+                    predictionQualityScore: 0.5, // Default safe value
+                    uncertaintyScore: 0,       // Default safe value
+                    driftState: driftState
+                };
             }
 
             let signals = [];
