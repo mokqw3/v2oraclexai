@@ -15,7 +15,7 @@
         /* Base styles for both login and app */
         body {
             font-family: 'Inter', sans-serif; /* Changed to Inter as per instructions */
-            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+            background: linear-gradient(135deg, #FFD1DC, #FFC0CB); /* Light Pink Background */
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
@@ -24,28 +24,34 @@
             color: #1f2937;
         }
         :root {
-            --soft-black: #1f2937;
-            --light-black: #374151;
-            --light-gray: #d1d5db;
-            --purple: #a78bfa;
-            --green: #10b981;
-            --red: #ef4444;
-            --orange: #f97316;
-            --blue: #3b82f6;
-            --yellow: #f59e0b;
-            --pink: #ec4899;
-            --teal: #14b8a6;
-            --violet: #8A2BE2; /* Added Violet color for 0 and 5 */
+            /* Updated to Light Red and Pink Palette */
+            --soft-black: #2C002B; /* Darker tone for text, still in palette */
+            --light-black: #4A0048; /* Slightly lighter for secondary text */
+            --light-gray: #E0BBE4; /* Soft greyish pink */
+            --primary-pink: #FF69B4; /* Deep Pink */
+            --secondary-pink: #FFC0CB; /* Light Pink */
+            --accent-red: #FF416C; /* Bright Red-Pink for emphasis */
+            --dark-violet: #8A2BE2; /* For 0 and 5, deeper */
+
+            /* Redefining color usage for clarity and consistency */
+            --success-color: #A3D9B1; /* Soft Green for wins, as a contrasting accent */
+            --success-text: #1E8449;
+            --danger-color: #FF7B8C; /* Softer Red for losses */
+            --danger-text: #E74C3C;
+            --warning-color: #FFD1DC; /* Light Pink for pending/warnings */
+            --warning-text: #F39C12; /* Orange for warning text */
+            --info-color: #B2D7F6; /* Light Blue for info */
+            --info-text: #3498DB;
 
             /* Login specific colors, harmonized with app colors */
-            --login-primary: #A78BFA;
-            --login-primary-light: #EDE9FE;
-            --login-primary-dark: #8B5CF6;
-            --login-secondary: #8B5CF6;
+            --login-primary: var(--primary-pink);
+            --login-primary-light: var(--secondary-pink);
+            --login-primary-dark: var(--accent-red);
+            --login-secondary: var(--primary-pink);
             --login-white: #FFFFFF;
-            --login-light-bg: #F8FAFA;
-            --login-text-dark: #333333;
-            --login-text-light: #666666;
+            --login-light-bg: #FDF2F8;
+            --login-text-dark: var(--soft-black);
+            --login-text-light: var(--light-black);
         }
         * {
             color: var(--soft-black);
@@ -66,7 +72,7 @@
             background: var(--login-white);
             backdrop-filter: blur(8px);
             border-radius: 16px;
-            box-shadow: 0 10px 20px rgba(167, 139, 250, 0.15); /* Updated shadow color */
+            box-shadow: 0 10px 20px rgba(255, 105, 180, 0.2); /* Pink shadow */
             padding: 2rem;
             width: 100%;
             max-width: 400px;
@@ -83,7 +89,7 @@
             transform: translateY(0);
         }
         .login-container:hover {
-            box-shadow: 0 12px 25px rgba(167, 139, 250, 0.2); /* Updated shadow color */
+            box-shadow: 0 12px 25px rgba(255, 105, 180, 0.3); /* Pinker shadow */
             transform: translateY(-3px);
         }
         .logo-container {
@@ -98,13 +104,13 @@
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid var(--login-primary);
-            box-shadow: 0 8px 15px rgba(167, 139, 250, 0.2); /* Updated shadow color */
+            box-shadow: 0 8px 15px rgba(255, 105, 180, 0.25); /* Pink shadow */
             margin: 0 auto;
             transition: all 0.3s ease;
         }
         .logo-img:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(167, 139, 250, 0.3); /* Updated shadow color */
+            box-shadow: 0 10px 20px rgba(255, 105, 180, 0.4); /* Pink shadow */
         }
         .title {
             color: var(--login-primary-dark);
@@ -122,7 +128,7 @@
             font-weight: 500;
         }
         .error-message {
-            color: #D32F2F;
+            color: var(--danger-text);
             text-align: center;
             margin-top: 0.8rem;
             font-weight: 500;
@@ -131,11 +137,11 @@
             opacity: 0;
             padding: 8px;
             border-radius: 6px;
-            background-color: rgba(211, 47, 47, 0.05);
-            border-left: 3px solid #D32F2F;
+            background-color: rgba(255, 123, 140, 0.1);
+            border-left: 3px solid var(--danger-text);
         }
         .success-message {
-            color: #28a745;
+            color: var(--success-text);
             text-align: center;
             margin-top: 0.8rem;
             font-weight: 500;
@@ -144,8 +150,8 @@
             opacity: 0;
             padding: 8px;
             border-radius: 6px;
-            background-color: rgba(40, 167, 69, 0.05);
-            border-left: 3px solid #28a745;
+            background-color: rgba(163, 217, 177, 0.1);
+            border-left: 3px solid var(--success-text);
         }
         .input-group {
             position: relative;
@@ -175,7 +181,7 @@
         .input-field:focus {
             outline: none;
             border-color: var(--login-primary-dark);
-            box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.15); /* Updated shadow color */
+            box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.15); /* Pink shadow */
         }
         .input-field:focus + .input-icon {
             transform: translateY(-50%) scale(1.1);
@@ -194,7 +200,7 @@
             transition: all 0.3s ease;
             transform: translateY(20px);
             opacity: 0;
-            box-shadow: 0 5px 15px rgba(167, 139, 250, 0.2); /* Updated shadow color */
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2); /* Pink shadow */
             position: relative;
             overflow: hidden;
         }
@@ -210,7 +216,7 @@
         }
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(167, 139, 250, 0.3); /* Updated shadow color */
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3); /* Pink shadow */
         }
         .submit-btn:hover::before {
             left: 100%;
@@ -227,7 +233,7 @@
             margin-top: 0.8rem;
             transform: translateY(20px);
             opacity: 0;
-            box-shadow: 0 3px 10px rgba(167, 139, 250, 0.1); /* Updated shadow color */
+            box-shadow: 0 3px 10px rgba(255, 105, 180, 0.1); /* Pink shadow */
             position: relative;
             overflow: hidden;
         }
@@ -235,7 +241,7 @@
             background: var(--login-primary-dark);
             color: var(--login-white);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(167, 139, 250, 0.2); /* Updated shadow color */
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2); /* Pink shadow */
         }
         .copy-animation {
             position: absolute;
@@ -275,11 +281,11 @@
             font-size: 1.1rem;
             transition: all 0.3s ease;
             background: linear-gradient(to bottom right, var(--login-primary), var(--login-secondary));
-            box-shadow: 0 3px 10px rgba(167, 139, 250, 0.2); /* Updated shadow color */
+            box-shadow: 0 3px 10px rgba(255, 105, 180, 0.2); /* Pink shadow */
         }
         .social-link:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(167, 139, 250, 0.3); /* Updated shadow color */
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3); /* Pink shadow */
         }
         .floating-element {
             position: absolute;
@@ -348,7 +354,7 @@
             border: 2px solid var(--light-gray);
         }
         .popup.active, .modal.active { display: block; }
-        .win-popup, .loss-popup, .pattern-warning, .history-deleted-popup {
+        .win-popup, .loss-popup, .pattern-warning, .history-deleted-popup, .unstable-trend-popup {
             display: none;
             position: fixed;
             top: 50%;
@@ -362,12 +368,14 @@
             z-index: 1000;
             width: 90%;
             max-width: 400px;
-            border: 2px solid var(--green);
+            border: 2px solid var(--success-color); /* Win popup border */
             text-align: center;
         }
-        .loss-popup, .pattern-warning { border: 2px solid var(--red); }
-        .history-deleted-popup { border: 2px solid var(--purple); }
-        .win-popup.active, .loss-popup.active, .pattern-warning.active, .history-deleted-popup.active { display: block; }
+        .loss-popup, .pattern-warning { border: 2px solid var(--danger-color); }
+        .history-deleted-popup { border: 2px solid var(--primary-pink); }
+        .unstable-trend-popup { border: 2px solid var(--warning-color); } /* New popup border */
+
+        .win-popup.active, .loss-popup.active, .pattern-warning.active, .history-deleted-popup.active, .unstable-trend-popup.active { display: block; }
         .confetti-icon { font-size: 2rem; margin-bottom: 1rem; }
         .play-resume {
             display: none;
@@ -383,11 +391,11 @@
             z-index: 1000;
             width: 90%;
             max-width: 400px;
-            border: 2px solid var(--green);
+            border: 2px solid var(--success-color);
             text-align: center;
         }
         .play-resume.active { display: block; }
-        .play-icon { font-size: 2rem; margin-bottom: 1rem; color: var(--green); }
+        .play-icon { font-size: 2rem; margin-bottom: 1rem; color: var(--success-text); }
         .card {
             transition: all 0.3s ease;
             background: rgba(255, 255, 255, 0.95);
@@ -402,7 +410,7 @@
             transform: translateY(-6px) scale(1.03);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         }
-        .gradient-bg { background: linear-gradient(135deg, var(--green), var(--teal)); }
+        .gradient-bg { background: linear-gradient(135deg, var(--primary-pink), var(--accent-red)); } /* Pink/Red Gradient */
         svg {
             width: 100%;
             height: auto;
@@ -415,7 +423,7 @@
             text-transform: uppercase;
             animation: stroke 5s infinite alternate;
             stroke-width: 1.2;
-            stroke: var(--purple);
+            stroke: var(--primary-pink); /* Updated stroke color */
             font-size: 10vw; /* Adjusted for responsiveness */
             fill: rgba(255, 255, 255, 0);
         }
@@ -423,9 +431,9 @@
             svg text { font-size: 130px; } /* Larger font for desktop */
         }
         @keyframes stroke {
-            0% { fill: rgba(255, 255, 255, 0); stroke: var(--purple); stroke-dashoffset: 25%; stroke-dasharray: 0 50%; stroke-width: 1.2; }
-            70% { fill: rgba(255, 255, 255, 0); stroke: var(--blue); }
-            80% { fill: rgba(255, 255, 255, 0); stroke: var(--teal); stroke-width: 2.5; }
+            0% { fill: rgba(255, 255, 255, 0); stroke: var(--primary-pink); stroke-dashoffset: 25%; stroke-dasharray: 0 50%; stroke-width: 1.2; }
+            70% { fill: rgba(255, 255, 255, 0); stroke: var(--accent-red); } /* Updated stroke color */
+            80% { fill: rgba(255, 255, 255, 0); stroke: var(--secondary-pink); stroke-width: 2.5; } /* Updated stroke color */
             100% { fill: var(--light-gray); stroke: rgba(0, 0, 0, 0); stroke-dashoffset: -25%; stroke-dasharray: 50% 0; stroke-width: 0; }
         }
         .history-container {
@@ -450,10 +458,10 @@
             padding: 1.2rem;
             border-left: 4px solid transparent; 
         }
-        .history-item.win { border-left-color: var(--green); background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(255, 255, 255, 0.9)); }
-        .history-item.loss { border-left-color: var(--red); background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(255, 255, 255, 0.9)); }
-        .history-item.pending { border-left-color: var(--yellow); background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(255, 255, 255, 0.9)); }
-        .history-item.skipped { border-left-color: var(--light-gray); background: linear-gradient(135deg, rgba(209, 213, 219, 0.08), rgba(255, 255, 255, 0.9)); }
+        .history-item.win { border-left-color: var(--success-color); background: linear-gradient(135deg, rgba(163, 217, 177, 0.08), rgba(255, 255, 255, 0.9)); }
+        .history-item.loss { border-left-color: var(--danger-color); background: linear-gradient(135deg, rgba(255, 123, 140, 0.08), rgba(255, 255, 255, 0.9)); }
+        .history-item.pending { border-left-color: var(--warning-color); background: linear-gradient(135deg, rgba(255, 209, 220, 0.08), rgba(255, 255, 255, 0.9)); }
+        .history-item.skipped { border-left-color: var(--light-gray); background: linear-gradient(135deg, rgba(224, 187, 228, 0.08), rgba(255, 255, 255, 0.9)); }
         .history-item:hover { transform: scale(1.02); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15); }
         .history-item.fade-out { animation: fadeOut 0.5s ease forwards; }
         @keyframes fadeOut {
@@ -476,7 +484,7 @@
             position: absolute;
             width: 6px;
             height: 6px;
-            background: var(--teal);
+            background: var(--primary-pink); /* Updated dot color */
             border-radius: 50%;
             animation: float 4s infinite;
             z-index: 1;
@@ -486,11 +494,11 @@
             50% { transform: translate(12px, -12px); opacity: 0.5; }
             100% { transform: translate(0, 0); opacity: 0.9; }
         }
-        .delete-btn:hover { color: var(--purple); transform: scale(1.3); }
-        .win-badge { background: rgba(16, 185, 129, 0.15); color: var(--green); }
-        .loss-badge { background: rgba(239, 68, 68, 0.15); color: var(--red); }
-        .pending-badge { background: rgba(245, 158, 11, 0.15); color: var(--yellow); }
-        .skipped-badge { background: rgba(209, 213, 219, 0.15); color: var(--light-gray); }
+        .delete-btn:hover { color: var(--accent-red); transform: scale(1.3); } /* Updated delete btn hover */
+        .win-badge { background: rgba(163, 217, 177, 0.15); color: var(--success-text); }
+        .loss-badge { background: rgba(255, 123, 140, 0.15); color: var(--danger-text); }
+        .pending-badge { background: rgba(255, 209, 220, 0.15); color: var(--warning-text); }
+        .skipped-badge { background: rgba(224, 187, 228, 0.15); color: var(--light-black); }
         .status-icon {
             width: 40px;
             height: 40px;
@@ -512,14 +520,14 @@
             opacity: 0.2;
             background: radial-gradient(circle, currentColor 0%, transparent 70%);
         }
-        .win-icon { color: var(--green); animation: pulseWin 1.5s infinite; }
-        .loss-icon { color: var(--red); animation: pulseLoss 1s infinite; }
-        .pending-icon { color: var(--yellow); animation: rotate 2s infinite linear; }
-        .skipped-icon { color: var(--light-gray); animation: pulseSkip 1.5s infinite; }
+        .win-icon { color: var(--success-text); animation: pulseWin 1.5s infinite; }
+        .loss-icon { color: var(--danger-text); animation: pulseLoss 1s infinite; }
+        .pending-icon { color: var(--warning-text); animation: rotate 2s infinite linear; }
+        .skipped-icon { color: var(--light-black); animation: pulseSkip 1.5s infinite; }
         @keyframes pulseWin {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(163, 217, 177, 0.4); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(163, 217, 177, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(163, 217, 177, 0); }
         }
         @keyframes pulseLoss {
             0%, 100% { transform: scale(1); }
@@ -557,17 +565,17 @@
         }
         .confidence-fill {
             height: 100%;
-            background: var(--green);
+            background: var(--success-color); /* Default to success color */
             transition: width 0.5s ease;
         }
-        .confidence-fill.red { background: var(--red); }
-        .confidence-fill.violet { background: var(--violet); }
+        .confidence-fill.red { background: var(--danger-color); }
+        .confidence-fill.violet { background: var(--dark-violet); }
         /* Prediction badges for Size/Color */
-        .big-badge { background: rgba(25, 135, 84, 0.15); color: #198754; } /* A bit darker green for BIG */
-        .small-badge { background: rgba(220, 53, 69, 0.15); color: #dc3545; } /* A bit darker red for SMALL */
-        .green-badge { background: rgba(16, 185, 129, 0.15); color: var(--green); }
-        .red-badge { background: rgba(239, 68, 68, 0.15); color: var(--red); }
-        .violet-badge { background: rgba(139, 0, 255, 0.15); color: var(--violet); } /* Adjusted violet color for badge */
+        .big-badge { background: rgba(163, 217, 177, 0.15); color: var(--success-text); } /* Big (Success) */
+        .small-badge { background: rgba(255, 123, 140, 0.15); color: var(--danger-text); } /* Small (Danger) */
+        .green-badge { background: rgba(163, 217, 177, 0.15); color: var(--success-text); } /* Green (Success) */
+        .red-badge { background: rgba(255, 123, 140, 0.15); color: var(--danger-text); } /* Red (Danger) */
+        .violet-badge { background: rgba(138, 43, 226, 0.15); color: var(--dark-violet); } /* Violet (Dark Violet) */
 
 
         /* Confidence Level Badges */
@@ -582,9 +590,9 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .level-1-badge { background-color: #f59e0b; color: white; } /* Yellow/Orange */
-        .level-2-badge { background-color: #3b82f6; color: white; } /* Blue */
-        .level-3-badge { background-color: #10b981; color: white; } /* Green */
+        .level-1-badge { background-color: var(--warning-color); color: var(--warning-text); } /* Light Pink/Orange */
+        .level-2-badge { background-color: var(--info-color); color: var(--info-text); } /* Light Blue */
+        .level-3-badge { background-color: var(--success-color); color: var(--success-text); } /* Light Green */
 
 
         .navigation {
@@ -630,7 +638,7 @@
             transition: 0.5s;
             color: var(--soft-black);
         }
-        .navigation ul li.active a .icon { transform: translateY(-32px); color: var(--purple); }
+        .navigation ul li.active a .icon { transform: translateY(-32px); color: var(--primary-pink); } /* Updated nav icon color */
         .navigation ul li a .text {
             position: absolute;
             font-weight: 400;
@@ -647,9 +655,9 @@
             top: -50%;
             width: 70px;
             height: 70px;
-            background: var(--purple);
+            background: var(--primary-pink); /* Updated indicator color */
             border-radius: 50%;
-            border: 6px solid var(--light-gray);
+            border: 6px solid var(--secondary-pink); /* Updated border color */
             transition: 0.5s;
         }
         .indicator::before {
@@ -661,7 +669,7 @@
             height: 20px;
             background: transparent;
             border-top-right-radius: 20px;
-            box-shadow: 1px -10px 0 0 var(--light-gray);
+            box-shadow: 1px -10px 0 0 var(--secondary-pink); /* Updated shadow color */
         }
         .indicator::after {
             content: '';
@@ -672,7 +680,7 @@
             height: 20px;
             background: transparent;
             border-top-left-radius: 20px;
-            box-shadow: -1px -10px 0 0 var(--light-gray);
+            box-shadow: -1px -10px 0 0 var(--secondary-pink); /* Updated shadow color */
         }
         .navigation ul li:nth-child(1).active ~ .indicator { transform: translateX(calc(75px * 0)); }
         .navigation ul li:nth-child(2).active ~ .indicator { transform: translateX(calc(75px * 1)); }
@@ -710,7 +718,7 @@
             transition: .4s;
             border-radius: 50%;
         }
-        input:checked + .mode-slider { background-color: var(--green); }
+        input:checked + .mode-slider { background-color: var(--primary-pink); } /* Toggle active color */
         input:checked + .mode-slider:before { transform: translateX(30px); }
         .mode-icons {
             position: absolute;
@@ -742,7 +750,7 @@
         .contact-link i {
             font-size: 20px;
             margin-bottom: 5px;
-            color: var(--purple);
+            color: var(--primary-pink); /* Updated contact link icon color */
         }
         .period-id {
             font-family: monospace;
@@ -766,13 +774,13 @@
         }
         button, .btn {
             border-radius: 1rem;
-            background: var(--green);
+            background: var(--primary-pink); /* Updated button background */
             backdrop-filter: blur(8px);
             transition: all 0.3s ease;
             color: #ffffff;
         }
         button:hover, .btn:hover {
-            background: var(--teal);
+            background: var(--accent-red); /* Updated button hover */
             transform: scale(1.05);
         }
         .toast {
@@ -810,10 +818,10 @@
             border-radius: 0.5rem;
             font-weight: 500;
         }
-        .advanced-status-bar span.good { background-color: rgba(16, 185, 129, 0.2); color: var(--green); }
-        .advanced-status-bar span.warning { background-color: rgba(245, 158, 11, 0.2); color: var(--yellow); }
-        .advanced-status-bar span.danger { background-color: rgba(239, 68, 68, 0.2); color: var(--red); }
-        .advanced-status-bar span.info { background-color: rgba(59, 130, 246, 0.2); color: var(--blue); }
+        .advanced-status-bar span.good { background-color: rgba(163, 217, 177, 0.2); color: var(--success-text); }
+        .advanced-status-bar span.warning { background-color: rgba(255, 209, 220, 0.2); color: var(--warning-text); }
+        .advanced-status-bar span.danger { background-color: rgba(255, 123, 140, 0.2); color: var(--danger-text); }
+        .advanced-status-bar span.info { background-color: rgba(178, 215, 246, 0.2); color: var(--info-text); }
 
         /* Responsive Adjustments */
         @media (max-width: 768px) {
@@ -848,7 +856,7 @@
             .navigation ul li:nth-child(2).active ~ .indicator { transform: translateX(calc(62.5px * 1)); }
             .navigation ul li:nth-child(3).active ~ .indicator { transform: translateX(calc(62.5px * 2)); }
             .navigation ul li:nth-child(4).active ~ .indicator { transform: translateX(calc(62.5px * 3)); }
-            .popup, .modal, .win-popup, .loss-popup, .play-resume, .history-deleted-popup { max-width: 320px; padding: 1rem; border-radius: 1rem; }
+            .popup, .modal, .win-popup, .loss-popup, .play-resume, .history-deleted-popup, .unstable-trend-popup { max-width: 320px; padding: 1rem; border-radius: 1rem; }
             .advanced-status-bar {
                 font-size: 0.7rem; /* Smaller font for mobile */
                 padding: 0.5rem 0.75rem;
@@ -873,7 +881,7 @@
 
         <div class="login-container" id="loginContainer">
             <div class="logo-container">
-                <img src="https://placehold.co/90x90/A78BFA/FFFFFF?text=AI" alt="ORACLE X AI Logo" class="logo-img">
+                <img src="https://placehold.co/90x90/FF69B4/FFFFFF?text=AI" alt="ORACLE X AI Logo" class="logo-img">
                 <h1 class="title">ORACLE X AI</h1>
                 <div class="last-key" id="lastKey"></div>
                 <div class="error-message" id="error"></div>
@@ -1286,12 +1294,21 @@
             <p id="historyDeleteDetails" class="mb-4"></p>
         </div>
 
+        <!-- Unstable Trend Pause Popup (NEW) -->
+        <div id="unstableTrendPopup" class="unstable-trend-popup">
+            <div class="confetti-icon">⏳</div>
+            <h3 class="text-lg font-semibold mb-4">PREDICTION PAUSED: UNSTABLE TREND!</h3>
+            <p class="mb-4">Market trend is currently unstable. Predictions will resume automatically.</p>
+            <p class="text-2xl font-bold text-primary-pink mb-4" id="unstableTrendCountdown">20:00</p>
+            <button onclick="resumePlaying()" class="bg-primary-pink text-white px-4 py-2 rounded-lg hover:bg-accent-red transition">Resume Now</button>
+        </div>
+
         <!-- Play Resume Modal -->
         <div id="playResumeModal" class="play-resume">
             <div class="play-icon"><i class="fas fa-play"></i></div>
             <h3 class="text-lg font-semibold mb-4">Resume Playing</h3>
             <p class="mb-4">You can now resume predictions.</p>
-            <button onclick="resumePlaying()" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">Resume</button>
+            <button onclick="resumePlaying()" class="bg-success-color text-white px-4 py-2 rounded-lg hover:bg-success-text transition">Resume</button>
         </div>
 
         <!-- Confirmation Modal -->
@@ -1388,16 +1405,8 @@
 
         // Dynamic color scheme for overall app theme
         function getDailyColorScheme() {
-            const selectedScheme = {
-                primary: '#A78BFA',
-                secondary: '#EDE9FE',
-                tertiary: '#8B5CF6',
-                text: '#4C1D95'
-            };
-            document.documentElement.style.setProperty('--primary-color', selectedScheme.primary);
-            document.documentElement.style.setProperty('--secondary-color', selectedScheme.secondary);
-            document.documentElement.style.setProperty('--tertiary-color', selectedScheme.tertiary);
-            document.documentElement.style.setProperty('--text-color', selectedScheme.text);
+            // Colors are now primarily defined in CSS :root, but this function can
+            // be used for dynamic theme changes if desired later.
         }
         getDailyColorScheme();
 
@@ -1416,6 +1425,11 @@
         let isPatternGood = true; 
         const MAX_WIN_LEVEL = 3; 
         let currentSharedStats = { consecutiveSkips: 0 }; // Initialize shared stats
+
+        // New for Unstable Trend Pause
+        let unstableTrendTimerInterval = null;
+        let unstableTrendTimeRemaining = 0;
+        const UNSTABLE_TREND_PAUSE_DURATION_SECONDS = 20 * 60; // 20 minutes
 
         // User settings (now synchronized with Firebase)
         let isSoundEnabled = true; 
@@ -1493,7 +1507,7 @@
 
             for (let i = period + 1; i < chronologicalData.length; i++) {
                 const change = chronologicalData[i] - chronologicalData[i - 1];
-                let currentGain = change > 0 ? change : 0;
+                let currentGain = change > 0 ? currentGain : 0;
                 let currentLoss = change < 0 ? Math.abs(change) : 0;
                 avgGain = (avgGain * (period - 1) + currentGain) / period;
                 avgLoss = (avgLoss * (period - 1) + currentLoss) / period;
@@ -2850,7 +2864,46 @@
             document.getElementById('playResumeModal').classList.add('active');
         }
 
+        function showUnstableTrendPopup() {
+            document.getElementById('unstableTrendPopup').classList.add('active');
+            isPaused = true;
+            isPatternGood = false; // Mark pattern as not good, effectively pausing
+            clearInterval(predictionInterval);
+            predictionInterval = null;
+
+            unstableTrendTimeRemaining = UNSTABLE_TREND_PAUSE_DURATION_SECONDS;
+            updateUnstableTrendCountdownDisplay();
+
+            unstableTrendTimerInterval = setInterval(() => {
+                unstableTrendTimeRemaining--;
+                updateUnstableTrendCountdownDisplay();
+                if (unstableTrendTimeRemaining <= 0) {
+                    clearInterval(unstableTrendTimerInterval);
+                    unstableTrendTimerInterval = null;
+                    document.getElementById('unstableTrendPopup').classList.remove('active');
+                    resumePlaying(); // Automatically resume predictions
+                }
+            }, 1000);
+
+            document.getElementById("currentPredictionResult").firstChild.textContent = "PAUSED";
+            document.getElementById("predictionLevelDisplay").textContent = ""; // Clear level
+            document.getElementById("predictionLevelDisplay").className = "level-badge"; // Reset class
+            document.getElementById("predictionTitle").textContent = "Prediction";
+            showToast("Predictions paused due to unstable trend.");
+        }
+
+        function updateUnstableTrendCountdownDisplay() {
+            const minutes = Math.floor(unstableTrendTimeRemaining / 60);
+            const seconds = unstableTrendTimeRemaining % 60;
+            const formattedTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            const countdownElement = document.getElementById('unstableTrendCountdown');
+            if (countdownElement) {
+                countdownElement.textContent = formattedTime;
+            }
+        }
+
         function pausePredictions() {
+            // This function is for the 5-consecutive-loss pause, not the unstable trend pause.
             document.getElementById('patternWarningPopup').classList.remove('active');
             clearInterval(predictionInterval);
             predictionInterval = null; 
@@ -2868,13 +2921,24 @@
         }
 
         function resumePlaying() {
+            // This function is used to resume from both types of pauses
             document.getElementById('playResumeModal').classList.remove('active');
+            document.getElementById('unstableTrendPopup').classList.remove('active'); // Ensure unstable popup is hidden
+            
             isPaused = false;
             isPatternGood = true;
+            
+            if (unstableTrendTimerInterval) { // Clear timer if still running
+                clearInterval(unstableTrendTimerInterval);
+                unstableTrendTimerInterval = null;
+                unstableTrendTimeRemaining = 0;
+            }
+
             if (!predictionInterval) { 
                 predictionInterval = setInterval(updatePrediction, 5000);
                 updatePrediction(); 
             }
+            showToast("Predictions resumed.");
         }
 
         // --- Settings Handlers ---
@@ -2962,6 +3026,13 @@
                 lossStreak = 0;
                 consecutiveLosses = 0;
                 showWinPopup(currentHistoryEntry.period, predictedValue, actualValue, currentHistoryEntry.predictionType);
+
+                // NEW: Check for unstable trend after a win
+                const trendStability = analyzeTrendStability(historyData); // Re-analyze with latest data
+                if (!trendStability.isStable) {
+                    console.log("Unstable trend detected after a win. Pausing predictions.");
+                    showUnstableTrendPopup();
+                }
             } else {
                 winLevel = 0;
                 streak = 0;
@@ -3004,11 +3075,11 @@
             if (statusElement && indicator) { 
                 if (isConnected) {
                     statusElement.textContent = "Connected";
-                    indicator.classList.add('animate-ping', 'bg-green-400'); /* bg-90EE90 is not a Tailwind class */
+                    indicator.classList.add('animate-ping', 'bg-success-color'); /* Updated color */
                     indicator.classList.remove('bg-gray-500');
                 } else {
                     statusElement.textContent = "Disconnected";
-                    indicator.classList.remove('animate-ping', 'bg-green-400');
+                    indicator.classList.remove('animate-ping', 'bg-success-color');
                     indicator.classList.add('bg-gray-500');
                 }
             }
@@ -3057,13 +3128,13 @@
                 currentPredictionValue = "SKIPPED";
                 confidenceValue = 0;
                 predictionLevel = 0; // Explicitly no level for skipped
-                confidenceColorClass = 'light-gray';
+                confidenceColorClass = 'light-gray'; // Using a variable from :root
             } else {
                 if (currentPredictionType === 'size') {
-                    confidenceColorClass = currentPredictionValue === 'BIG' ? 'green' : 'red';
+                    confidenceColorClass = currentPredictionValue === 'BIG' ? 'green' : 'red'; // These resolve to specific color variables in CSS
                     document.getElementById("predictionTitle").textContent = "Size Pred.";
                 } else { // color
-                    confidenceColorClass = currentPredictionValue.toLowerCase();
+                    confidenceColorClass = currentPredictionValue.toLowerCase(); // Will be 'green', 'red', 'violet'
                     document.getElementById("predictionTitle").textContent = "Color Pred.";
                 }
             }
@@ -3146,12 +3217,12 @@
                 if (currentPredictionType === 'size') {
                     new Notification(`New Size Prediction: ${currentPredictionValue} (Lvl ${predictionLevel})`, {
                         body: `Period: ${nextPeriod}\nConfidence: ${confidenceValue}%`,
-                        icon: 'https://placehold.co/32x32/10b981/FFFFFF?text=AI'
+                        icon: 'https://placehold.co/32x32/FF69B4/FFFFFF?text=AI' /* Updated icon color */
                     });
                 } else if (currentPredictionType === 'color') {
                     new Notification(`New Color Prediction: ${currentPredictionValue} (Lvl ${predictionLevel})`, {
                         body: `Period: ${nextPeriod}\nConfidence: ${confidenceValue}%`,
-                        icon: 'https://placehold.co/32x32/10b981/FFFFFF?text=AI'
+                        icon: 'https://placehold.co/32x32/FF69B4/FFFFFF?text=AI' /* Updated icon color */
                     });
                 }
             }
