@@ -599,7 +599,7 @@
             transform: translateX(-50%);
             width: 350px;
             height: 70px;
-            background: var(--dark-bg-card); /* Dark translucent background */
+            background: var(--dark-bg-card);
             backdrop-filter: blur(8px);
             display: flex;
             justify-content: center;
@@ -607,7 +607,7 @@
             border-radius: 1.5rem;
             box-shadow: 0 6px 12px var(--dark-shadow);
             z-index: 1000;
-            border: 1px solid var(--dark-border); /* Subtle border */
+            border: 1px solid var(--dark-border);
         }
         .navigation ul { display: flex; width: 300px; }
         .navigation ul li {
@@ -626,7 +626,7 @@
             width: 100%;
             text-align: center;
             font-weight: 500;
-            color: var(--dark-text-medium); /* Medium text for inactive nav items */
+            color: var(--dark-text-medium);
         }
         .navigation ul li a .icon {
             position: relative;
@@ -656,7 +656,7 @@
             height: 70px;
             background: var(--purple-accent);
             border-radius: 50%;
-            border: 6px solid var(--dark-bg-secondary); /* Border color matching cards */
+            border: 6px solid var(--dark-bg-secondary);
             transition: 0.5s;
         }
         .indicator::before {
@@ -702,7 +702,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: var(--dark-text-dark); /* Dark gray for off state */
+            background-color: var(--dark-text-dark);
             transition: .4s;
             border-radius: 34px;
         }
@@ -713,11 +713,11 @@
             width: 22px;
             left: 4px;
             bottom: 4px;
-            background-color: #ffffff; /* White circle */
+            background-color: #ffffff;
             transition: .4s;
             border-radius: 50%;
         }
-        input:checked + .mode-slider { background-color: var(--green-accent); } /* Green for on state */
+        input:checked + .mode-slider { background-color: var(--green-accent); }
         input:checked + .mode-slider:before { transform: translateX(30px); }
         .mode-icons {
             position: absolute;
@@ -731,7 +731,7 @@
         }
         .mode-icons i, .mode-icons span {
             font-size: 14px;
-            color: var(--dark-text-light); /* Light icon text */
+            color: var(--dark-text-light);
         }
         .contact-links {
             display: flex;
@@ -744,19 +744,19 @@
             align-items: center;
             text-decoration: none;
             font-size: 12px;
-            color: var(--dark-text-light); /* Light text for contact links */
+            color: var(--dark-text-light);
         }
         .contact-link i {
             font-size: 20px;
             margin-bottom: 5px;
-            color: var(--purple-accent); /* Accent color for contact icons */
+            color: var(--purple-accent);
         }
         .period-id {
             font-family: monospace;
             letter-spacing: 2px;
             font-size: 1.2rem;
-            background: var(--dark-bg-primary) !important; /* Darker background for period/prediction */
-            border: 1px solid var(--dark-border); /* Subtle border */
+            background: var(--dark-bg-primary) !important;
+            border: 1px solid var(--dark-border);
         }
         #currentPeriod, #currentResult { border: none !important; }
         .video-container {
@@ -764,7 +764,7 @@
             padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
-            display: none; /* Hidden as per request */
+            display: none;
         }
         .video-container iframe {
             position: absolute;
@@ -775,13 +775,13 @@
         }
         button, .btn {
             border-radius: 1rem;
-            background: linear-gradient(135deg, var(--green-accent), var(--teal-accent)); /* Gradient button */
+            background: linear-gradient(135deg, var(--green-accent), var(--teal-accent));
             backdrop-filter: blur(8px);
             transition: all 0.3s ease;
-            color: #ffffff; /* White text for buttons */
+            color: #ffffff;
         }
         button:hover, .btn:hover {
-            background: linear-gradient(135deg, var(--teal-accent), var(--green-accent)); /* Reversed gradient on hover */
+            background: linear-gradient(135deg, var(--teal-accent), var(--green-accent));
             transform: scale(1.05);
         }
         .toast {
@@ -789,24 +789,24 @@
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--dark-bg-card); /* Dark translucent toast */
+            background: var(--dark-bg-card);
             padding: 10px 20px;
             border-radius: 10px;
             box-shadow: 0 4px 10px var(--dark-shadow);
             z-index: 2000;
-            color: var(--dark-text-light); /* Light text */
+            color: var(--dark-text-light);
             border: 1px solid var(--dark-border);
         }
 
         /* Advanced Status Bar Styles (Hidden from UI) */
         .advanced-status-bar {
-            display: none; /* Always hidden as per previous user request, despite being conceptually "advanced" */
+            display: none; /* Keep hidden as per previous instruction */
         }
 
         /* New styles for Red/Green/Violet badges and text */
         .red-badge { background: rgba(239, 68, 68, 0.25); color: var(--red-accent); }
         .green-badge { background: rgba(16, 185, 129, 0.25); color: var(--green-accent); }
-        .violet-badge { background: rgba(138, 43, 226, 0.25); color: var(--violet-accent); } /* Adjusted violet for badge */
+        .violet-badge { background: rgba(138, 43, 226, 0.25); color: var(--violet-accent); }
 
         /* Responsive Adjustments */
         @media (max-width: 768px) {
@@ -843,7 +843,7 @@
             .navigation ul li:nth-child(4).active ~ .indicator { transform: translateX(calc(62.5px * 3)); }
             .popup, .modal, .win-popup, .loss-popup, .play-resume, .history-deleted-popup { max-width: 320px; padding: 1rem; border-radius: 1rem; }
             .advanced-status-bar {
-                font-size: 0.7rem; /* Smaller font for mobile */
+                font-size: 0.7rem;
                 padding: 0.5rem 0.75rem;
             }
             .advanced-status-bar span {
@@ -1301,11 +1301,9 @@
         // Import Firebase modules for Realtime Database and Authentication
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
         import { getDatabase, ref, get, child, set, update, remove, onValue } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js'; // Import onAuthStateChanged
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js';
 
         // Placeholder for Firebase Config (Canvas will inject this)
-        // IMPORTANT: Replace 'YOUR_ACTUAL_...' with your real Firebase project configuration.
-        // You can find this in your Firebase project console -> Project settings -> Your apps -> Web app.
         const firebaseConfig = typeof __firebase_config !== 'undefined'
             ? JSON.parse(__firebase_config)
             : {
@@ -1315,7 +1313,6 @@
                   storageBucket: "newq-7386b.firebase-storage.app", 
                   messagingSenderId: "939070208594",
                   appId: "1:939070208594:web:b7b952fb7ca541ab32fd8b",
-                  // Added databaseURL for Realtime Database
                   databaseURL: "https://newq-7386b-default-rtdb.firebaseio.com/" 
                 };
 
@@ -1325,19 +1322,16 @@
         const auth = getAuth(app);
         
         // References to Firebase database nodes
-        // This path is for access keys. You might want to secure this more in production.
         const accessKeysRef = ref(db, 'accessKeys'); 
-        let userHistoryRef; // Will be set after user authentication
-        let userSettingsRef; // Will be set after user authentication
+        let userHistoryRef;
+        let userSettingsRef;
 
-        let currentUserUid = null; // Stores the Firebase Authentication UID
-        let isAuthReady = false; // Flag to indicate if initial Firebase auth check is complete
+        let currentUserUid = null;
+        let isAuthReady = false;
 
-        // Dynamically get app ID from Canvas environment or default
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
-        // --- Firebase Authentication for Main App ---
-        // This function attempts to sign in the user (anonymously or with custom token)
+        // --- Firebase Authentication ---
         async function initiateAuthentication() {
             try {
                 if (typeof __initial_auth_token !== 'undefined') {
@@ -1349,29 +1343,21 @@
             } catch (error) {
                 console.error("Firebase Authentication initiation failed:", error);
                 showToast("Authentication failed. Please try again.");
-                // Ensure login screen is visible if auth fails
                 document.getElementById('mainAppScreen').style.display = 'none';
                 document.getElementById('loginScreen').style.display = 'flex';
             }
         }
 
-        // Use onAuthStateChanged to react to authentication state changes
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                // User is signed in.
                 currentUserUid = user.uid;
-                // Use correct path for user-specific data in Realtime Database
                 userHistoryRef = ref(db, `users/${currentUserUid}/predictionHistory`);
                 userSettingsRef = ref(db, `users/${currentUserUid}/userSettings`);
                 console.log("Firebase authentication successful. User UID:", currentUserUid);
-
-                // Load user data and initialize app data (but don't transition UI yet)
                 await loadUserDataFromFirebase(); 
             } else {
-                // User is signed out.
                 console.log("User is signed out or authentication failed.");
-                currentUserUid = null; // Clear UID
-                // Ensure the login screen is active if auth state changes to signed out.
+                currentUserUid = null;
                 document.getElementById('mainAppScreen').style.display = 'none';
                 document.getElementById('loginScreen').style.display = 'flex';
                 if (predictionInterval) {
@@ -1379,112 +1365,107 @@
                     predictionInterval = null;
                 }
             }
-            isAuthReady = true; // Mark auth as ready after the initial check
+            isAuthReady = true;
         });
 
-        // Call initiateAuthentication on DOMContentLoaded to ensure anonymous auth starts early
         document.addEventListener('DOMContentLoaded', initiateAuthentication);
 
-
-        // Dynamic color scheme for overall app theme
-        function getDailyColorScheme() {
-            // Colors are now handled by CSS variables within :root
-            // This function is kept for structural consistency but doesn't modify colors directly anymore
-        }
-        getDailyColorScheme();
-
         // --- Global variables for application state ---
-        let historyData = []; // Stores historical prediction data
-        let currentPredictionType = 'size'; // 'size' or 'color' - determines which type of prediction is active
-        let predictionSwitchCounter = 0; // Counts predictions of the current type before switching
-        const PREDICTION_SWITCH_THRESHOLD = 3; // Number of predictions before switching type
+        let historyData = [];
+        let currentPredictionType = 'size';
+        let predictionSwitchCounter = 0;
+        const PREDICTION_SWITCH_THRESHOLD = 3;
 
-        let streak = 0; // Current win streak
-        let winLevel = 0; // Win level for strategy adjustment
-        let lossStreak = 0; // Current loss streak
-        let consecutiveLosses = 0; // Consecutive losses for pattern warning
-        let isPaused = false; // Flag to pause predictions
-        let isPatternGood = true; // Flag indicating if the pattern is stable enough to predict
-        const MAX_WIN_LEVEL = 3; // Maximum win level before strategy inversion
+        let streak = 0;
+        let winLevel = 0;
+        let lossStreak = 0;
+        let consecutiveLosses = 0;
+        let isPaused = false;
+        let isPatternGood = true;
+        const MAX_WIN_LEVEL = 3;
 
-        // User settings (now synchronized with Firebase)
         let isSoundEnabled = true; 
         let isNotificationsEnabled = false;
         let isAdvancedMode = false;
 
-        // --- Prediction Accuracy Controls (New) ---
-        // These thresholds can dynamically adjust based on recent performance or pattern stability
-        let MIN_CONFIDENCE_FOR_PREDICTION = 60; // Minimum confidence percentage to make a prediction
-        const MIN_PATTERN_STABILITY_FOR_PREDICTION = 0.4; // Minimum pattern score (0-1) to make a prediction
-        const MIN_PATTERN_COHERENCE_TO_PREDICT = 0.3; // Very low score, force skip
-
+        // --- Prediction Accuracy Controls & Dynamic Thresholds ---
+        let MIN_CONFIDENCE_FOR_PREDICTION = 60; // Base confidence. This will adjust dynamically.
+        const MIN_PATTERN_COHERENCE_TO_PREDICT = 0.3; // Very low score, force skip regardless of confidence
+        const MIN_RSI_SIGNAL_DEVIATION = 10; // RSI needs to be outside 50 +/- 10 for a clear signal (40-60 range is neutral)
+        const HIGH_VOLATILITY_THRESHOLD_ATR = 1.5; // ATR value above which volatility is considered high. Adjust based on observed game range.
 
         // --- Analytical Modules and Logics (Conceptual Simulation) ---
-        // For demonstration, we'll keep a simplified structure, but imagine these are much more complex ML models.
+        // For demonstration, we'll keep a simplified structure for the 'modules'
+        // In a real advanced AI, these would be complex, trained models.
         const analyticalModules = {};
 
-        // Generate 10000 analytical modules with 1000 logics each
-        // This is primarily for demonstrating the 'scale' aspect, not real deep learning.
-        for (let i = 1; i <= 10000; i++) { // 10000 modules
-            const moduleName = `Module${String(i).padStart(5, '0')}`; // Pad with 5 zeros for 10000 modules
+        for (let i = 1; i <= 10; i++) { // Reduced modules for performance in browser, but conceptually still 'many'
+            const moduleName = `DL_Mod${String(i).padStart(2, '0')}`;
             const logics = [];
-            for (let j = 0; j < 1000; j++) { // 1000 logics per module
-                logics.push((data, history) => { // Added history to logic for more context
-                    // Advanced "fuzzy" logic for pattern detection and signal weighting
-                    const entropyFactor = Math.abs(data.volatilityIndex - 0.5) * 2; // Closer to 0 or 1 means less entropy (more predictable)
-                    const trendAlignment = data.isUpwardTrend && data.currentPredictionType === 'size' ? 1 : 0; // Simplified for demo
-                    const historicalBias = (data.successRate * 0.3) + (data.patternStability * 0.7);
+            for (let j = 0; j < 50; j++) { // Reduced logics, but still a decent number for internal 'ensemble'
+                logics.push((data, history) => {
+                    // Simulating various deep learning inspired "logic cells"
+                    let score = 0;
+                    
+                    // Input: current data and historical context
+                    const recentNumbers = history.slice(0, 5).map(e => e.result);
+                    const avgRecent = recentNumbers.filter(n => n !== '-').reduce((sum, n) => sum + n, 0) / (recentNumbers.filter(n => n !== '-').length || 1);
 
-                    const baseLogic = (data.period % (i % 10 + 2) === 0) || (Math.random() * historicalBias > 0.4);
-
-                    switch (j % 5) { // More diverse logic types
-                        case 0: return baseLogic && (data.momentumScore > 0.6);
-                        case 1: return baseLogic && (data.patternStability > 0.5 - entropyFactor * 0.1);
-                        case 2: return baseLogic && (data.rsi !== null && Math.abs(data.rsi - 50) > 10); // Not completely neutral RSI
-                        case 3: return baseLogic && (trendAlignment > 0.5 || Math.random() > 0.7);
-                        case 4: return baseLogic && (data.volatilityIndex < 0.7); // Only predict if volatility is not too high
-                        default: return baseLogic;
+                    // Logic based on a combination of indicators and a simulated "weight"
+                    if (data.trendStrength > 0.5) score += 0.2;
+                    if (data.trendStrength < -0.5) score -= 0.2;
+                    
+                    if (data.rsi !== null) {
+                        if (data.rsi > 70 && data.currentPredictionType === 'size' && data.sizePrediction === 'SMALL') score += 0.15;
+                        if (data.rsi < 30 && data.currentPredictionType === 'size' && data.sizePrediction === 'BIG') score += 0.15;
                     }
+                    
+                    if (data.volatilityIndex < 0.5) score += 0.1; // Favor stability
+
+                    if (data.patternStability > 0.7) score += 0.2; // High coherence is good
+                    else if (data.patternStability < 0.4) score -= 0.2; // Low coherence is bad
+
+                    // Simulated "Mean Reversion" logic
+                    if (data.currentValue !== null && avgRecent !== null && Math.abs(data.currentValue - avgRecent) > 3) {
+                        if (data.currentValue > avgRecent && data.sizePrediction === 'SMALL') score += 0.1; // Predict down if high and past avg
+                        if (data.currentValue < avgRecent && data.sizePrediction === 'BIG') score += 0.1; // Predict up if low and past avg
+                    }
+
+                    // Introduce some randomness, simulating non-linear activation functions
+                    score += (Math.random() - 0.5) * 0.1;
+
+                    // Decision based on threshold
+                    return score > (j % 10 / 100); // Dynamic threshold for each logic
                 });
             }
             analyticalModules[moduleName] = { logics: logics };
         }
 
-
         // This function simulates running all analytical modules and their logics
         function runAnalyticalModules(predictionData, history) {
             let totalLogics = 0;
             let supportingLogics = 0;
-            let moduleSummary = []; // For potential internal logging/debugging
-
+            // Removed moduleSummary for UI, kept for potential internal debugging if needed.
+            
             for (const moduleName in analyticalModules) {
                 const module = analyticalModules[moduleName];
-                let moduleSupportingCount = 0;
-                
                 module.logics.forEach(logic => {
                     totalLogics++;
-                    if (logic(predictionData, history)) { // Pass history to individual logics
+                    if (logic(predictionData, history)) {
                         supportingLogics++;
-                        moduleSupportingCount++;
                     }
                 });
-                // Define agreementPercentage within the loop before using it
-                const agreementPercentage = (module.logics.length > 0) ? (moduleSupportingCount / module.logics.length * 100).toFixed(0) : 0; 
-                moduleSummary.push(`${moduleName}: ${agreementPercentage}%`);
             }
             
             const overallSupportRate = totalLogics > 0 ? (supportingLogics / totalLogics) : 0;
-            return { overallSupportRate, moduleSummary };
+            return { overallSupportRate }; // Return just the overall rate for confidence calculation
         }
 
-        // Apply saved user settings on load
-        // These will be updated by loadUserDataFromFirebase
         document.getElementById('notificationToggle').checked = isNotificationsEnabled;
         document.getElementById('soundToggle').checked = isSoundEnabled;
         document.getElementById('predictionModeToggle').checked = isAdvancedMode;
 
         // --- Firebase Data Loading and Saving ---
-
         async function loadUserDataFromFirebase() {
             if (!currentUserUid) {
                 console.warn("loadUserDataFromFirebase called without currentUserUid. Skipping data load.");
@@ -1492,20 +1473,17 @@
             }
 
             try {
-                // Load History Data
                 const historySnapshot = await get(userHistoryRef);
                 if (historySnapshot.exists()) {
                     historyData = historySnapshot.val();
-                    // Ensure historyData is an array. If it was stored as an object with Firebase keys, convert it.
                     if (typeof historyData === 'object' && !Array.isArray(historyData)) {
-                        historyData = Object.values(historyData); // Convert object values to array
+                        historyData = Object.values(historyData);
                     }
-                    historyData.sort((a, b) => b.period - a.period); // Ensure descending order by period
+                    historyData.sort((a, b) => b.period - a.period);
                 } else {
                     historyData = [];
                 }
 
-                // Load User Settings
                 const settingsSnapshot = await get(userSettingsRef);
                 if (settingsSnapshot.exists()) {
                     const settings = settingsSnapshot.val();
@@ -1513,16 +1491,13 @@
                     isNotificationsEnabled = settings.isNotificationsEnabled !== undefined ? settings.isNotificationsEnabled : false;
                     isAdvancedMode = settings.isAdvancedMode !== undefined ? settings.isAdvancedMode : false;
 
-                    // Update UI toggles
                     document.getElementById('notificationToggle').checked = isNotificationsEnabled;
                     document.getElementById('soundToggle').checked = isSoundEnabled;
                     document.getElementById('predictionModeToggle').checked = isAdvancedMode;
                 } else {
-                    // Save default settings to Firebase if none exist
                     await saveUserSettingsToFirebase();
                 }
 
-                // Initialize stats and history display after loading
                 updateHistory();
                 updateStats();
 
@@ -1538,9 +1513,6 @@
                 return;
             }
             try {
-                // Firebase Realtime Database prefers flat data or objects for direct keys.
-                // Storing an array directly might result in Firebase automatically converting it to an object with integer keys.
-                // For simplicity here, we'll save the array as is. When fetched, we'll convert back if needed.
                 await set(userHistoryRef, historyData);
                 console.log("History saved to Firebase.");
             } catch (error) {
@@ -1648,14 +1620,14 @@
             const confirmHandler = () => {
                 onConfirm();
                 document.getElementById('confirmModal').classList.remove('active');
-                confirmBtn.removeEventListener('click', confirmHandler); // Prevent multiple listeners
-                cancelBtn.removeEventListener('click', cancelHandler); // Prevent multiple listeners
+                confirmBtn.removeEventListener('click', confirmHandler);
+                cancelBtn.removeEventListener('click', cancelHandler);
             };
 
             const cancelHandler = () => {
                 document.getElementById('confirmModal').classList.remove('active');
-                confirmBtn.removeEventListener('click', confirmHandler); // Prevent multiple listeners
-                cancelBtn.removeEventListener('click', cancelHandler); // Prevent multiple listeners
+                confirmBtn.removeEventListener('click', confirmHandler);
+                cancelBtn.removeEventListener('click', cancelHandler);
             };
 
             confirmBtn.addEventListener('click', confirmHandler);
@@ -1669,22 +1641,22 @@
         function pausePredictions() {
             document.getElementById('patternWarningPopup').classList.remove('active');
             clearInterval(predictionInterval);
-            predictionInterval = null; // Clear the interval ID
+            predictionInterval = null;
             isPaused = true;
-            isPatternGood = false; // Mark pattern as not good, implying a forced pause
+            isPatternGood = false;
             document.getElementById("currentPredictionResult").textContent = "PAUSED";
             document.getElementById("predictionTitle").textContent = "Prediction";
             setTimeout(() => {
                 showPlayResumeModal();
-            }, 15 * 60 * 1000);
+            }, 15 * 60 * 1000); // 15 minutes
             showToast("Predictions paused for 15 minutes due to unstable pattern.");
         }
 
         function resumePlaying() {
             document.getElementById('playResumeModal').classList.remove('active');
             isPaused = false;
-            isPatternGood = true; // Assume pattern is good after manual resume/time-out
-            if (!predictionInterval) { // Only set if not already running
+            isPatternGood = true;
+            if (!predictionInterval) {
                 predictionInterval = setInterval(updatePrediction, 5000);
             }
             updatePrediction();
@@ -1693,7 +1665,7 @@
         // --- Settings Handlers ---
         document.getElementById('notificationToggle').addEventListener('change', async (e) => {
             isNotificationsEnabled = e.target.checked;
-            await saveUserSettingsToFirebase(); // Save to Firebase
+            await saveUserSettingsToFirebase();
             if (isNotificationsEnabled && Notification.permission !== 'granted') {
                 Notification.requestPermission();
             }
@@ -1701,12 +1673,12 @@
 
         document.getElementById('soundToggle').addEventListener('change', async (e) => {
             isSoundEnabled = e.target.checked;
-            await saveUserSettingsToFirebase(); // Save to Firebase
+            await saveUserSettingsToFirebase();
         });
 
         document.getElementById('predictionModeToggle').addEventListener('change', async (e) => {
             isAdvancedMode = e.target.checked;
-            await saveUserSettingsToFirebase(); // Save to Firebase
+            await saveUserSettingsToFirebase();
         });
 
         function resetSettings() {
@@ -1714,7 +1686,7 @@
                 isSoundEnabled = true;
                 isNotificationsEnabled = false;
                 isAdvancedMode = false;
-                await saveUserSettingsToFirebase(); // Save default to Firebase
+                await saveUserSettingsToFirebase();
                 document.getElementById('notificationToggle').checked = false;
                 document.getElementById('soundToggle').checked = true;
                 document.getElementById('predictionModeToggle').checked = false;
@@ -1723,82 +1695,55 @@
         }
         
         /**
-         * Calculates the Relative Strength Index (RSI) for a given history of results.
-         * @param {Array<Object>} history - The history data, containing objects with 'result' (number).
-         * @param {number} period - The RSI period (default 14).
-         * @returns {number | null} The RSI value, or null if not enough data.
+         * Calculates the Relative Strength Index (RSI).
          */
         function calculateRSI(history, period = 14) {
             const relevantResults = history
                 .filter(entry => entry.result !== '-' && typeof entry.result === 'number' && !isNaN(entry.result))
                 .map(entry => entry.result)
-                .reverse(); // Reverse to have oldest first for calculation
+                .reverse();
             
-            if (relevantResults.length < period + 1) { // Need at least period + 1 data points for initial averages
-                return null;
-            }
+            if (relevantResults.length < period + 1) return null;
 
             let gains = [];
             let losses = [];
-
-            // Calculate initial gains and losses
             for (let i = 1; i < relevantResults.length; i++) {
                 const change = relevantResults[i] - relevantResults[i - 1];
-                if (change > 0) {
-                    gains.push(change);
-                    losses.push(0);
-                } else {
-                    gains.push(0);
-                    losses.push(Math.abs(change));
-                }
+                gains.push(Math.max(0, change));
+                losses.push(Math.max(0, -change));
             }
 
-            if (gains.length < period) return null; // Not enough data for period
+            let avgGain = gains.slice(0, period).reduce((sum, val) => sum + val, 0) / period;
+            let avgLoss = losses.slice(0, period).reduce((sum, val) => sum + val, 0) / period;
 
-            let initialAvgGain = gains.slice(0, period).reduce((sum, val) => sum + val, 0) / period;
-            let initialAvgLoss = losses.slice(0, period).reduce((sum, val) => sum + val, 0) / period;
-
-            let avgGain = initialAvgGain;
-            let avgLoss = initialAvgLoss;
-
-            // Calculate smoothed averages
             for (let i = period; i < gains.length; i++) {
                 avgGain = ((avgGain * (period - 1)) + gains[i]) / period;
                 avgLoss = ((avgLoss * (period - 1)) + losses[i]) / period;
             }
             
-            let rs = avgLoss === 0 ? (avgGain > 0 ? 100 : 0) : avgGain / avgLoss; // Handle division by zero for RS
-            if (avgGain === 0 && avgLoss === 0) return 50; // Neutral if no movement
-            if (avgLoss === 0 && avgGain > 0) return 100; // If only gains, RSI approaches 100
-            if (avgGain === 0 && avgLoss > 0) return 0; // If only losses, RSI approaches 0
-
-
+            if (avgLoss === 0) return (avgGain > 0 ? 100 : 50);
+            let rs = avgGain / avgLoss;
             return 100 - (100 / (1 + rs));
         }
 
         /**
-         * Calculates the Average True Range (ATR) as a measure of volatility.
-         * @param {Array<Object>} history - The history data, containing objects with 'result' (number).
-         * @param {number} period - The ATR period (default 14).
-         * @returns {number | null} The ATR value, or null if not enough data.
+         * Calculates the Average True Range (ATR) for volatility.
          */
         function calculateATR(history, period = 14) {
             const relevantResults = history
                 .filter(entry => entry.result !== '-' && typeof entry.result === 'number' && !isNaN(entry.result))
                 .map(entry => entry.result)
-                .reverse(); // Oldest first
+                .reverse();
 
-            if (relevantResults.length < period + 1) { // Need at least period + 1 for initial TR
-                return null;
-            }
+            if (relevantResults.length < period + 1) return null;
 
             let trueRanges = [];
             for (let i = 1; i < relevantResults.length; i++) {
-                const high = Math.max(relevantResults[i], relevantResults[i-1]); // Simplified high/low for single number result
-                const low = Math.min(relevantResults[i], relevantResults[i-1]);
+                const high = relevantResults[i];
+                const low = relevantResults[i]; // For single number, high=low. Consider using actual high/low if available.
                 const prevClose = relevantResults[i-1];
                 
-                const tr1 = high - low;
+                const tr1 = Math.abs(high - low);
                 const tr2 = Math.abs(high - prevClose);
                 const tr3 = Math.abs(low - prevClose);
                 trueRanges.push(Math.max(tr1, tr2, tr3));
@@ -1806,9 +1751,7 @@
 
             if (trueRanges.length < period) return null;
 
-            let initialATR = trueRanges.slice(0, period).reduce((sum, val) => sum + val, 0) / period;
-            let atr = initialATR;
-
+            let atr = trueRanges.slice(0, period).reduce((sum, val) => sum + val, 0) / period;
             for (let i = period; i < trueRanges.length; i++) {
                 atr = ((atr * (period - 1)) + trueRanges[i]) / period;
             }
@@ -1816,27 +1759,27 @@
         }
 
         /**
-         * Calculates Simple Moving Average (SMA) for a given period.
-         * @param {Array<number>} data - Array of numbers to calculate SMA for.
-         * @param {number} period - The SMA period.
-         * @returns {number | null} The SMA value, or null if not enough data.
+         * Calculates Simple Moving Average (SMA).
          */
         function calculateSMA(data, period) {
-            if (data.length < period) return null;
+            if (!data || data.length < period) return null;
             return data.slice(0, period).reduce((sum, val) => sum + val, 0) / period;
         }
 
-        // --- Prediction AI Logic ---
+        // --- Advanced Pattern Analysis ---
         function analyzePattern(history, type) {
-            if (history.length < 20) { // Need more history for robust analysis
+            const LOOKBACK_PERIOD = 30; // Increased lookback for more robust analysis
+            if (history.length < LOOKBACK_PERIOD) {
+                // Return default/neutral values if not enough history
                 return { 
-                    isStable: true, patternScore: 0.5, patternCoherence: 0.5,
+                    isStable: false, patternScore: 0.5, patternCoherence: 0.5,
                     trendStrength: 0, volatility: 0, rsi: null, 
                     sma5: null, sma10: null, sma20: null,
-                    outcomeBalance: 0.5, alternationScore: 0.5 
+                    outcomeBalance: 0.5, alternationScore: 0.5,
+                    isTrending: false, isOverbought: false, isOversold: false
                 };
             }
-            const recent = history.slice(0, 20); // Look at last 20 for more robust pattern analysis
+            const recent = history.slice(0, LOOKBACK_PERIOD);
 
             let countType1 = 0;
             let countType2 = 0;
@@ -1845,30 +1788,27 @@
             let lastResultType = null;
             let alternations = 0;
             
-            let prevValue = null;
-            let sumAbsDiff = 0; // For basic volatility calculation
+            const numbersOnly = recent.filter(entry => entry.result !== '-' && typeof entry.result === 'number' && !isNaN(entry.result)).map(entry => entry.result).reverse(); // Oldest first
+            if (numbersOnly.length === 0) {
+                 return { /* default values */ };
+            }
 
-            const relevantEntries = type === 'size'
+            // Iterate over relevant entries for pattern analysis (size/color specific)
+            const relevantEntriesForType = type === 'size'
                 ? recent.filter(entry => entry.sizeResultType !== '-')
                 : recent.filter(entry => entry.colorResultType !== '-');
 
-            if (relevantEntries.length === 0) {
-                 return { 
-                    isStable: true, patternScore: 0.5, patternCoherence: 0.5,
-                    trendStrength: 0, volatility: 0, rsi: null, 
-                    sma5: null, sma10: null, sma20: null,
-                    outcomeBalance: 0.5, alternationScore: 0.5 
-                };
+            if (relevantEntriesForType.length === 0) {
+                 return { /* default values */ };
             }
 
-            lastResultType = type === 'size' ? relevantEntries[0].sizeResultType : relevantEntries[0].colorResultType;
+            lastResultType = type === 'size' ? relevantEntriesForType[0].sizeResultType : relevantEntriesForType[0].colorResultType;
             currentStreakLength = 1;
             maxStreakLength = 1;
 
-            for (let i = 0; i < relevantEntries.length; i++) {
-                const currentEntry = relevantEntries[i];
+            for (let i = 0; i < relevantEntriesForType.length; i++) {
+                const currentEntry = relevantEntriesForType[i];
                 const currentType = type === 'size' ? currentEntry.sizeResultType : currentEntry.colorResultType;
-                const actualNumber = currentEntry.result !== '-' && !isNaN(Number(currentEntry.result)) ? Number(currentEntry.result) : null;
 
                 if (type === 'size') {
                     if (currentType === "BIG") countType1++;
@@ -1876,7 +1816,6 @@
                 } else if (type === 'color') {
                     if (currentType === "GREEN") countType1++;
                     else if (currentType === "RED") countType2++;
-                    // VIOLET results are tracked but not part of RED/GREEN prediction counts
                 }
 
                 if (i > 0) {
@@ -1887,243 +1826,217 @@
                         alternations++;
                         currentStreakLength = 1;
                     }
-                    if (actualNumber !== null && prevValue !== null) {
-                        sumAbsDiff += Math.abs(actualNumber - prevValue);
-                    }
                 }
                 lastResultType = currentType;
-                prevValue = actualNumber;
             }
 
-            const totalRelevantEntries = countType1 + countType2; // Only count two main types
-            const totalActualEntries = relevantEntries.length; // Total considered entries
+            const totalRelevantEntries = countType1 + countType2;
+            const totalConsideredEntries = relevantEntriesForType.length;
 
-            // Balance Score: How balanced are the occurrences of the two main types
-            const outcomeBalance = totalRelevantEntries > 0 ? Math.abs(countType1 - countType2) / totalRelevantEntries : 0; // 0 is perfectly balanced, 1 is totally skewed
+            const outcomeBalance = totalRelevantEntries > 0 ? Math.abs(countType1 - countType2) / totalRelevantEntries : 0;
+            const alternationScore = totalConsideredEntries > 1 ? alternations / (totalConsideredEntries - 1) : 0;
+            const normalizedMaxStreak = totalConsideredEntries > 0 ? maxStreakLength / totalConsideredEntries : 0;
 
-            // Alternation Score: How frequently does it alternate?
-            const alternationScore = totalActualEntries > 1 ? alternations / (totalActualEntries - 1) : 0; // 1 is perfect alternation, 0 is no alternation
+            const rsiValue = calculateRSI(history, 14);
+            const atrValue = calculateATR(history, 14); // ATR as primary volatility measure
 
-            // Normalized Streak Factor: Penalize very long streaks.
-            const normalizedMaxStreak = totalActualEntries > 0 ? maxStreakLength / totalActualEntries : 0;
-            const streakFactor = Math.min(normalizedMaxStreak, 0.8); // Cap influence of extremely long streaks
+            const sma5 = calculateSMA(numbersOnly, 5);
+            const sma10 = calculateSMA(numbersOnly, 10);
+            const sma20 = calculateSMA(numbersOnly, 20);
 
-            // Volatility: Average absolute difference between consecutive results
-            const volatility = totalActualEntries > 1 ? (sumAbsDiff / (totalActualEntries - 1)) : 0;
-            const normalizedVolatility = Math.min(volatility / 5, 1); // Normalize assuming max typical diff is around 5 for 0-9 scale
-
-            // RSI and SMAs
-            const allNumbers = history.filter(entry => entry.result !== '-' && typeof entry.result === 'number' && !isNaN(entry.result)).map(entry => entry.result).reverse(); // Oldest first
-            const rsiValue = calculateRSI(history); // Use entire relevant history for RSI
-            const sma5 = calculateSMA(allNumbers, 5);
-            const sma10 = calculateSMA(allNumbers, 10);
-            const sma20 = calculateSMA(allNumbers, 20);
-
-            // Trend Strength: Based on SMA crossover or simple direction
-            let trendStrength = 0; // -1 for downtrend, 1 for uptrend, 0 for flat
-            if (sma5 !== null && sma10 !== null) {
-                if (sma5 > sma10 + 0.1) trendStrength = 1; // Short-term above medium-term
-                else if (sma5 < sma10 - 0.1) trendStrength = -1; // Short-term below medium-term
-            } else if (allNumbers.length >= 2) { // Simpler trend if not enough for SMAs
-                const firstRecent = allNumbers[0];
-                const lastRecent = allNumbers[allNumbers.length -1];
-                if (firstRecent > lastRecent + 1) trendStrength = -1; // Numbers generally decreasing
-                else if (firstRecent < lastRecent - 1) trendStrength = 1; // Numbers generally increasing
+            // Trend Strength: More nuanced, based on multiple SMA relationships
+            let trendStrength = 0; // -1 (strong down), 0 (sideways), 1 (strong up)
+            let isTrending = false;
+            if (sma5 !== null && sma10 !== null && sma20 !== null) {
+                if (sma5 > sma10 && sma10 > sma20 && sma5 - sma10 > 0.5) { // Clear uptrend
+                    trendStrength = 1;
+                    isTrending = true;
+                } else if (sma5 < sma10 && sma10 < sma20 && sma10 - sma5 > 0.5) { // Clear downtrend
+                    trendStrength = -1;
+                    isTrending = true;
+                } else if (Math.abs(sma5 - sma10) < 0.2 && Math.abs(sma10 - sma20) < 0.2) { // Sideways/Consolidation
+                    trendStrength = 0;
+                }
+            } else if (numbersOnly.length >= 5) { // Basic trend if not enough for all SMAs
+                const last5Avg = calculateSMA(numbersOnly, 5);
+                const first5Avg = calculateSMA(numbersOnly.slice(numbersOnly.length - 5).reverse(), 5); // Average of first 5 in recent slice
+                if (last5Avg !== null && first5Avg !== null) {
+                    if (last5Avg > first5Avg + 0.5) { trendStrength = 0.5; isTrending = true; }
+                    else if (last5Avg < first5Avg - 0.5) { trendStrength = -0.5; isTrending = true; }
+                }
             }
 
-            // Pattern Coherence Score (0-1, 1 being perfectly coherent/predictable)
+            // Pattern Coherence Score: A composite metric of predictability
             let patternCoherence = 0;
-            patternCoherence += (1 - outcomeBalance) * 0.25; // Closer to 0 outcomeBalance (balanced) is more predictable
-            patternCoherence += alternationScore * 0.25;     // Closer to 1 alternationScore (regular switches) is more predictable
-            patternCoherence += (1 - normalizedMaxStreak) * 0.20; // Lower max streak (avoiding extreme one-sided runs) is more predictable
-            patternCoherence += (1 - normalizedVolatility) * 0.15; // Lower volatility is more predictable
+            patternCoherence += (1 - outcomeBalance) * 0.2; // Balanced outcomes are more predictable
+            patternCoherence += alternationScore * 0.2;     // Regular alternation suggests pattern
+            patternCoherence += (1 - normalizedMaxStreak) * 0.2; // Avoid extreme one-sided streaks
+            patternCoherence += (atrValue !== null ? (1 - Math.min(atrValue / 5, 1)) : 0.1) * 0.2; // Low volatility is coherent
 
-            if (rsiValue !== null) { // How far RSI is from extremes (stable range 30-70)
-                const rsiDistanceFrom50 = Math.abs(rsiValue - 50);
-                patternCoherence += (1 - Math.min(rsiDistanceFrom50 / 50, 1)) * 0.15; // Max 15% contribution
+            if (rsiValue !== null) {
+                const rsiSignal = Math.abs(rsiValue - 50);
+                if (rsiSignal > MIN_RSI_SIGNAL_DEVIATION) { // RSI indicates a strong direction
+                    patternCoherence += Math.min(rsiSignal / 50, 1) * 0.1; // Contribution based on strength of RSI signal
+                }
+            }
+            if (isTrending) {
+                patternCoherence += Math.abs(trendStrength) * 0.1; // Contribution if there's a clear trend
             }
 
-            patternCoherence = Math.max(0, Math.min(1, patternCoherence)); // Clamp between 0 and 1
+            patternCoherence = Math.max(0, Math.min(1, patternCoherence));
+
+            // Overbought/Oversold status
+            const isOverbought = rsiValue !== null && rsiValue > 70;
+            const isOversold = rsiValue !== null && rsiValue < 30;
 
             return { 
-                isStable: patternCoherence > MIN_PATTERN_COHERENCE_TO_PREDICT, // Link to skip logic threshold
-                patternScore: patternCoherence, // Using patternCoherence as the primary pattern score
-                patternCoherence: patternCoherence, // Redundant but explicit
+                isStable: patternCoherence > MIN_PATTERN_COHERENCE_TO_PREDICT,
+                patternScore: patternCoherence, // Primary metric for overall pattern health
+                patternCoherence: patternCoherence,
                 trendStrength: trendStrength,
-                volatility: volatility, // Raw volatility
+                volatility: atrValue, // Using ATR as the primary volatility indicator
                 rsi: rsiValue,
                 sma5: sma5,
                 sma10: sma10,
                 sma20: sma20,
                 outcomeBalance: outcomeBalance, 
                 alternationScore: alternationScore,
+                isTrending: isTrending,
+                isOverbought: isOverbought,
+                isOversold: isOversold
             };
         }
 
-        // Base prediction logic using period number and overall pattern score
-        function weightedPredictionLogic(periodNumber, patternCoherence) {
-            // Stronger pattern coherence makes prediction more "deterministic"
-            const predictabilityFactor = 0.5 + (patternCoherence * 0.4); // Ranges from 0.5 to 0.9
-
-            const basePred = (periodNumber * 7) % 10;
-            const altPred = (periodNumber * 3) % 10;
-            
-            // Blend based on predictability, favoring the 'basePred' when patterns are strong
-            let combinedValue = (predictabilityFactor * basePred) + ((1 - predictabilityFactor) * altPred);
-
-            // Introduce a subtle "quantum" shift based on pattern complexity
-            const quantumShift = (1 - patternCoherence) * (Math.random() - 0.5) * 5; // Larger shift for less coherent patterns
-            combinedValue += quantumShift;
-
-            return combinedValue;
-        }
-
+        // --- Ensemble Prediction & Confidence Calculation ---
         async function ultraAIPredictSize(history, periodNumber) {
             const patternAnalysis = analyzePattern(history, 'size');
-            const { patternScore, trendStrength, volatility, rsi, sma5, sma10, outcomeBalance, alternationScore, patternCoherence } = patternAnalysis;
+            const { patternCoherence, trendStrength, volatility, rsi, sma5, sma10, isOverbought, isOversold, outcomeBalance, alternationScore } = patternAnalysis;
 
-            // Use the sophisticated weighted prediction logic
-            const rawPredictionValue = weightedPredictionLogic(Number(periodNumber), patternCoherence);
-            let prediction = rawPredictionValue >= 5 ? "BIG" : "SMALL";
+            // Core prediction influenced by period and pattern coherence
+            let predictionValue = (periodNumber * 7) % 10;
+            predictionValue += (patternCoherence * 3) * (Math.random() - 0.5); // More deterministic with high coherence
 
-            let confidence = 0.5; // Base confidence
+            let prediction = predictionValue >= 5 ? "BIG" : "SMALL";
+            let baseConfidence = 0.5;
 
-            // Influence of overall pattern coherence
-            confidence += (patternCoherence - 0.5) * 0.4; // Stronger patterns increase base confidence
-            
-            // Volatility adjustment: high volatility reduces confidence
-            confidence -= (volatility * 0.05); // Reduce confidence by 5% per unit of raw volatility (adjust scaling as needed)
+            // Ensemble Confidence Factors: Each factor simulates an "expert" opinion
+            let trendExpertConfidence = 0;
+            if (trendStrength > 0.5) trendExpertConfidence = (prediction === "BIG" ? 0.3 : -0.15); // Strong uptrend, favor BIG
+            else if (trendStrength < -0.5) trendExpertConfidence = (prediction === "SMALL" ? 0.3 : -0.15); // Strong downtrend, favor SMALL
 
-            // RSI adjustment: if RSI is extreme and prediction goes against expected reversal, reduce confidence
+            let momentumExpertConfidence = 0;
             if (rsi !== null) {
-                if (rsi > 70) { // Overbought
-                    if (prediction === "BIG") confidence -= 0.15; // Stronger penalty for BIG if overbought
-                    else if (prediction === "SMALL") confidence += 0.05; // Small boost for SMALL if overbought
-                } else if (rsi < 30) { // Oversold
-                    if (prediction === "SMALL") confidence -= 0.15; // Stronger penalty for SMALL if oversold
-                    else if (prediction === "BIG") confidence += 0.05; // Small boost for BIG if oversold
+                if (isOverbought) momentumExpertConfidence = (prediction === "SMALL" ? 0.2 : -0.1); // Overbought, favor reversal (SMALL)
+                else if (isOversold) momentumExpertConfidence = (prediction === "BIG" ? 0.2 : -0.1); // Oversold, favor reversal (BIG)
+            }
+
+            let stabilityExpertConfidence = (patternCoherence - 0.5) * 0.4; // High coherence adds confidence
+            stabilityExpertConfidence -= (volatility !== null ? (volatility / HIGH_VOLATILITY_THRESHOLD_ATR) * 0.1 : 0); // High volatility reduces confidence
+
+            let alternationExpertConfidence = (alternationScore - 0.5) * 0.1; // Favor patterns close to 0.5 alternation
+
+            // Aggregate confidence from "experts"
+            let totalConfidence = baseConfidence + trendExpertConfidence + momentumExpertConfidence + stabilityExpertConfidence + alternationExpertConfidence;
+
+            // Adaptive Bias based on recent performance (simulated self-improvement)
+            const recentWinRate = history.filter(h => h.resultStatus === 'WIN').length / (history.filter(h => h.resultStatus !== 'Pending' && h.resultStatus !== 'Skipped').length || 1);
+            if (recentWinRate > 0.7) totalConfidence += 0.05; // Boost if AI is performing well recently
+            else if (recentWinRate < 0.4) totalConfidence -= 0.05; // Reduce if performing poorly
+
+            // Apply strategy inversion at MAX_WIN_LEVEL, but with intelligence
+            if (winLevel >= MAX_WIN_LEVEL) {
+                const inversePrediction = prediction === "BIG" ? "SMALL" : "BIG";
+                // Only invert if pattern coherence is not extremely low OR if it's a very strong reversal signal (e.g., extreme RSI)
+                if (patternCoherence > 0.6 || (isOverbought && prediction === "BIG") || (isOversold && prediction === "SMALL")) {
+                    prediction = inversePrediction;
+                    totalConfidence = Math.max(0.3, totalConfidence * 0.7); // Confidence penalty for strategic reversal
+                } else {
+                    // If not ideal conditions for reversal, stick to original but with higher caution
+                    totalConfidence = Math.max(0.2, totalConfidence * 0.8);
                 }
             }
 
-            // Trend alignment: If prediction aligns with a strong SMA trend, boost confidence
-            if (trendStrength !== 0) {
-                if (prediction === "BIG" && trendStrength > 0) confidence += 0.08;
-                if (prediction === "SMALL" && trendStrength < 0) confidence += 0.08;
+            // Final clamp and "quantum jump" for extreme uncertainty
+            totalConfidence = Math.max(0.1, Math.min(0.98, totalConfidence));
+
+            if (totalConfidence * 100 < 40 && Math.random() < (0.4 - (totalConfidence * 100) / 100)) { 
+                 prediction = prediction === "BIG" ? "SMALL" : "BIG";
+                 totalConfidence *= 0.5;
             }
 
-            // Balance and Alternation: deviations from ideal balance/alternation reduce confidence
-            confidence -= Math.abs(outcomeBalance - 0.5) * 0.1; // Penalize imbalance
-            confidence -= Math.abs(alternationScore - 0.5) * 0.05; // Penalize non-alternating patterns
-
-            // Simulating "Ensemble Voting" - more supporting internal modules, higher confidence
-            const mockEnsembleSupport = (patternCoherence * 0.5) + (Math.random() * 0.1); // Simulated consensus
-            confidence += mockEnsembleSupport;
-
-            // Final check to ensure confidence is within bounds
-            confidence = Math.max(0.1, Math.min(0.98, confidence)); // Min confidence of 10% for non-skipped, Max 98%
-
-            // Adaptive Confidence Threshold for skipping (simulated self-correction)
-            let effectiveMinConfidence = MIN_CONFIDENCE_FOR_PREDICTION;
-            if (lossStreak > 0) { // If on a loss streak, require higher confidence
-                effectiveMinConfidence += (lossStreak * 2); // 2% higher confidence per loss in streak
-            } else if (streak > 0) { // If on a win streak, can be slightly more aggressive
-                effectiveMinConfidence -= (streak * 1); // 1% lower confidence per win in streak (but don't go below 50)
-                effectiveMinConfidence = Math.max(50, effectiveMinConfidence);
-            }
-            MIN_CONFIDENCE_FOR_PREDICTION = effectiveMinConfidence; // Update global threshold (simulated adaptation)
-
-            // A final probabilistic "quantum jump" based on a very low confidence threshold
-            // This happens *after* the decision for 'prediction' and affects its final outcome (and further reduces confidence)
-            if (confidence * 100 < 40 && Math.random() < (0.4 - (confidence * 100) / 100)) { 
-                 prediction = prediction === "BIG" ? "SMALL" : "BIG"; // Simulate a random "flip" for low confidence
-                 confidence *= 0.5; // Further reduce confidence for such a flip
-            }
-
-            return { prediction, confidence: confidence * 100 }; // Return as percentage
+            return { prediction, confidence: totalConfidence * 100 };
         }
 
         async function ultraAIPredictColor(history, periodNumber) {
             const patternAnalysis = analyzePattern(history, 'color');
-            const { patternScore, trendStrength, volatility, rsi, sma5, sma10, outcomeBalance, alternationScore, patternCoherence } = patternAnalysis;
+            const { patternCoherence, trendStrength, volatility, rsi, sma5, sma10, isOverbought, isOversold, outcomeBalance, alternationScore } = patternAnalysis;
 
-            let recentColors = history.filter(h => h.predictionType === 'color' && h.colorResultType !== "-").slice(0, 15); // Use more history for color trends
+            let recentColors = history.filter(h => h.colorResultType !== "-").slice(0, 15);
             let redCount = 0;
             let greenCount = 0;
-            let violetCount = 0; // Still track for internal analysis, but won't be predicted directly as RED/GREEN
-            let weight = 1; // Introduce weighting for recency
+            let violetCount = 0;
+            let weight = 1;
 
-            // Apply higher weight to more recent results
             for (let i = recentColors.length - 1; i >= 0; i--) {
                 let color = recentColors[i].colorResultType;
                 if (color === "RED") redCount += weight;
                 else if (color === "GREEN") greenCount += weight;
-                else if (color === "VIOLET") violetCount += weight; // Track violet counts for overall balance
-                weight *= 1.2; // Exponential increase in weight for recent data
+                else if (color === "VIOLET") violetCount += weight;
+                weight *= 1.2;
             }
 
-            // ATS: Adjust bias based on recent dominance and trend
             let rawPrediction;
-            if (greenCount > redCount * 1.2) { // Green has significant lead, stronger threshold
-                rawPrediction = "GREEN";
-            } else if (redCount > greenCount * 1.2) { // Red has significant lead, stronger threshold
-                rawPrediction = "RED";
-            } else {
-                // If counts are balanced, or small lead, apply more probabilistic approach
-                rawPrediction = Math.random() < 0.5 ? "RED" : "GREEN";
-            }
+            if (greenCount > redCount * 1.2) rawPrediction = "GREEN";
+            else if (redCount > greenCount * 1.2) rawPrediction = "RED";
+            else rawPrediction = Math.random() < 0.5 ? "RED" : "GREEN";
 
-            // Incorporate trend strength from pattern analysis for stronger bias
-            if (trendStrength > 0.15 && rawPrediction === "GREEN") { // Positive trend (higher numbers) might strongly lean green
-                rawPrediction = "GREEN";
-            } else if (trendStrength < -0.15 && rawPrediction === "RED") { // Negative trend (lower numbers) might strongly lean red
-                rawPrediction = "RED";
-            }
+            if (trendStrength > 0.15 && rawPrediction === "GREEN") rawPrediction = "GREEN";
+            else if (trendStrength < -0.15 && rawPrediction === "RED") rawPrediction = "RED";
             
-            let prediction = rawPrediction; // Final prediction (always RED or GREEN)
+            let prediction = rawPrediction;
 
-            let confidence = 0.5;
-            // Influence of overall pattern coherence
-            confidence += (patternCoherence - 0.5) * 0.4;
-            
-            // Volatility adjustment
-            confidence -= (volatility * 0.05);
+            let baseConfidence = 0.5;
+            let trendExpertConfidence = 0;
+            if (trendStrength > 0.5) trendExpertConfidence = (prediction === "GREEN" ? 0.3 : -0.15);
+            else if (trendStrength < -0.5) trendExpertConfidence = (prediction === "RED" ? 0.3 : -0.15);
 
-            // RSI adjustment for color predictions
+            let momentumExpertConfidence = 0;
             if (rsi !== null) {
-                if (rsi > 70) { // Overbought: potential for lower numbers (more RED)
-                    if (prediction === "GREEN") confidence -= 0.15;
-                    else if (prediction === "RED") confidence += 0.05;
-                } else if (rsi < 30) { // Oversold: potential for higher numbers (more GREEN)
-                    if (prediction === "RED") confidence -= 0.15;
-                    else if (prediction === "GREEN") confidence += 0.05;
+                if (isOverbought) momentumExpertConfidence = (prediction === "RED" ? 0.2 : -0.1);
+                else if (isOversold) momentumExpertConfidence = (prediction === "GREEN" ? 0.2 : -0.1);
+            }
+
+            let stabilityExpertConfidence = (patternCoherence - 0.5) * 0.4;
+            stabilityExpertConfidence -= (volatility !== null ? (volatility / HIGH_VOLATILITY_THRESHOLD_ATR) * 0.1 : 0);
+
+            let alternationExpertConfidence = (alternationScore - 0.5) * 0.1;
+
+            let totalConfidence = baseConfidence + trendExpertConfidence + momentumExpertConfidence + stabilityExpertConfidence + alternationExpertConfidence;
+
+            const recentWinRate = history.filter(h => h.resultStatus === 'WIN').length / (history.filter(h => h.resultStatus !== 'Pending' && h.resultStatus !== 'Skipped').length || 1);
+            if (recentWinRate > 0.7) totalConfidence += 0.05;
+            else if (recentWinRate < 0.4) totalConfidence -= 0.05;
+
+            // Apply strategy inversion at MAX_WIN_LEVEL, but with intelligence
+            if (winLevel >= MAX_WIN_LEVEL) {
+                const inversePrediction = prediction === "RED" ? "GREEN" : "RED";
+                if (patternCoherence > 0.6 || (isOverbought && prediction === "GREEN") || (isOversold && prediction === "RED")) {
+                    prediction = inversePrediction;
+                    totalConfidence = Math.max(0.3, totalConfidence * 0.7);
+                } else {
+                    totalConfidence = Math.max(0.2, totalConfidence * 0.8);
                 }
             }
 
-            // Trend alignment for color
-            if (trendStrength !== 0) {
-                if (prediction === "GREEN" && trendStrength > 0) confidence += 0.08;
-                if (prediction === "RED" && trendStrength < 0) confidence += 0.08;
-            }
+            totalConfidence = Math.max(0.1, Math.min(0.98, totalConfidence));
 
-            // Balance and Alternation: deviations from ideal reduce confidence
-            confidence -= Math.abs(outcomeBalance - 0.5) * 0.1; 
-            confidence -= Math.abs(alternationScore - 0.5) * 0.05;
-
-            // Simulating "Ensemble Voting"
-            const mockEnsembleSupport = (patternCoherence * 0.5) + (Math.random() * 0.1);
-            confidence += mockEnsembleSupport;
-
-            confidence = Math.max(0.1, Math.min(0.98, confidence));
-
-            // Small chance for random flip if confidence is very low, even for color
-            if (confidence * 100 < 40 && Math.random() < (0.4 - (confidence * 100) / 100)) {
+            if (totalConfidence * 100 < 40 && Math.random() < (0.4 - (totalConfidence * 100) / 100)) {
                 prediction = prediction === "RED" ? "GREEN" : "RED";
-                confidence *= 0.5;
+                totalConfidence *= 0.5;
             }
 
-            return { prediction, confidence: confidence * 100 };
+            return { prediction, confidence: totalConfidence * 100 };
         }
-
 
         function determineColor(number) {
             if (number === 0 || number === 5) return 'VIOLET';
@@ -2159,7 +2072,7 @@
         function updateServerStatus(isConnected) {
             const statusElement = document.getElementById('serverStatus');
             const indicator = document.getElementById('serverStatusIndicator');
-            if (statusElement && indicator) { // Check if elements exist
+            if (statusElement && indicator) {
                 if (isConnected) {
                     statusElement.textContent = "Connected";
                     indicator.classList.add('animate-ping');
@@ -2168,7 +2081,7 @@
                 } else {
                     statusElement.textContent = "Disconnected";
                     indicator.classList.remove('animate-ping');
-                    indicator.style.backgroundColor = 'var(--red-accent)'; // Red for disconnected
+                    indicator.style.backgroundColor = 'var(--red-accent)';
                     indicator.classList.add('bg-gray-500');
                 }
             }
@@ -2182,7 +2095,7 @@
             setTimeout(() => toast.remove(), 3000);
         }
 
-        let predictionInterval; // Declare globally for clearInterval
+        let predictionInterval;
 
         async function updatePrediction() {
             if (isPaused || !currentUserUid) { 
@@ -2196,14 +2109,12 @@
                 return;
             }
 
-            updateServerStatus(true); // Assuming successful API fetch means connected
+            updateServerStatus(true);
 
             const apiIssueNumber = String(latestApiResult.issueNumber);
             const apiActualNumber = Number(latestApiResult.number);
             const currentApiPeriodShort = apiIssueNumber.slice(-4);
 
-            // 1. Update any *pending* history entries with the *current* API result
-            // Check if the latest API result's period matches the period of our most recent pending prediction
             let mostRecentPendingEntry = historyData.length > 0 ? historyData.find(entry => entry.resultStatus === "Pending") : null;
             
             if (mostRecentPendingEntry && mostRecentPendingEntry.period === currentApiPeriodShort) {
@@ -2230,7 +2141,6 @@
 
                 mostRecentPendingEntry.resultStatus = match ? 'WIN' : 'LOSS';
 
-                // Update streaks, levels, and show popups based on this result
                 if (match) {
                     winLevel = Math.min(winLevel + 1, MAX_WIN_LEVEL);
                     streak++;
@@ -2244,24 +2154,21 @@
                     consecutiveLosses++;
                     showLossPopup(mostRecentPendingEntry.period, predictedValue, actualValue, mostRecentPendingEntry.predictionType);
                     if (consecutiveLosses >= 5) {
-                        showPatternWarningPopup(); // Still retain forced pause for severe consecutive losses
-                        isPatternGood = false; // Mark as not good to stop further predictions
+                        showPatternWarningPopup();
+                        isPatternGood = false;
                     }
                 }
 
-                // Sort history after updating a result to ensure newest completed results are at the top
                 historyData.sort((a, b) => b.period - a.period);
 
-                await saveHistoryToFirebase(); // Save the updated history entry
-                updateHistory(); // Re-render history and stats
+                await saveHistoryToFirebase();
+                updateHistory();
                 updateStats();
             }
 
-            // 2. Decide if we need to make a NEW prediction for the *next* period
             const nextPeriodFull = (BigInt(apiIssueNumber) + 1n).toString();
             const nextPeriodShort = nextPeriodFull.slice(-4);
 
-            // Check if we already have a pending OR SKIPPED prediction for `nextPeriodShort`
             const alreadyPredictedForNextPeriod = historyData.some(entry => 
                 entry.period === nextPeriodShort && 
                 (entry.resultStatus === "Pending" || entry.resultStatus === "Skipped")
@@ -2269,9 +2176,7 @@
 
             if (alreadyPredictedForNextPeriod) {
                 console.log(`Prediction for period ${nextPeriodShort} already pending or skipped. Skipping new prediction generation.`);
-                // Update UI to show the correct *next* period, even if we don't generate a new prediction
                 document.getElementById("currentPeriod").textContent = nextPeriodShort;
-                // If there's an existing pending prediction, display its value
                 const existingPrediction = historyData.find(entry => entry.period === nextPeriodShort && entry.resultStatus === "Pending");
                 if (existingPrediction) {
                     document.getElementById("currentPredictionResult").textContent = existingPrediction.predictionType === 'size' ? existingPrediction.sizePrediction : existingPrediction.colorPrediction;
@@ -2283,13 +2188,13 @@
                         if (existingPrediction.predictionType === 'size') {
                             confidenceFillElement.classList.add(existingPrediction.sizePrediction === 'BIG' ? 'green' : 'red');
                         } else {
-                             confidenceFillElement.classList.add(existingPrediction.colorPrediction.toLowerCase()); // Red or Green
+                             confidenceFillElement.classList.add(existingPrediction.colorPrediction.toLowerCase());
                         }
                     }
                     const confidenceTextElement = document.getElementById("confidenceText");
                     if (confidenceTextElement) confidenceTextElement.textContent = `Confidence: ${existingPrediction.confidence.toFixed(0)}%`;
 
-                } else { // If it was skipped, display SKIPPED
+                } else {
                      document.getElementById("currentPredictionResult").textContent = "SKIPPED";
                      document.getElementById("predictionTitle").textContent = "Prediction";
                      const confidenceFillElement = document.getElementById("confidenceFill");
@@ -2303,7 +2208,6 @@
                 return; 
             }
 
-            // If we reach here, it means no pending or skipped prediction for the *next* period, so generate one.
             const typeForThisPeriod = currentPredictionType;
             let currentPredictionValue = "N/A";
             let sizePredictionValue = "N/A";
@@ -2311,129 +2215,111 @@
             let confidenceValue = 0;
             let confidenceColorClass = '';
 
-            const patternAnalysisForNext = analyzePattern(historyData, typeForThisPeriod); // Run ATS for next prediction
-            const { patternScore, volatility, rsi, sma5, sma10, sma20, outcomeBalance, alternationScore, trendStrength, patternCoherence } = patternAnalysisForNext;
+            const patternAnalysisForNext = analyzePattern(historyData, typeForThisPeriod);
+            const { patternCoherence, volatility, rsi, trendStrength, isTrending, isOverbought, isOversold } = patternAnalysisForNext;
 
             const predictionData = {
                 period: parseInt(nextPeriodShort), 
-                momentumScore: trendStrength, // Use calculated trendStrength as momentum
+                momentumScore: trendStrength,
                 volatilityIndex: volatility, 
-                patternStability: patternScore, 
-                recentAvg: historyData.slice(0, 5).filter(entry => entry.result !== '-' && !isNaN(Number(entry.result))).reduce((sum, entry) => sum + (Number(entry.result) || 0), 0) / (historyData.slice(0, 5).filter(entry => entry.result !== '-' && !isNaN(Number(entry.result))).length || 1),
+                patternStability: patternCoherence, 
                 currentValue: apiActualNumber,
                 isUpwardTrend: trendStrength > 0, 
                 successRate: (historyData.filter(item => item.resultStatus === 'WIN').length / (historyData.filter(item => item.resultStatus === 'WIN' || item.resultStatus === 'LOSS').length || 1)),
                 currentPredictionType: typeForThisPeriod, 
-                rsi: rsi 
+                rsi: rsi,
+                sizePrediction: (typeForThisPeriod === 'size' ? 'N/A' : null), // Temp placeholder for logic consistency
+                colorPrediction: (typeForThisPeriod === 'color' ? 'N/A' : null) // Temp placeholder for logic consistency
             };
 
-            const { overallSupportRate, moduleSummary } = runAnalyticalModules(predictionData, historyData); 
-
-            // Update hidden advanced status bar
-            const advancedStatusBarElement = document.getElementById('advancedStatusBar');
-            if (advancedStatusBarElement) {
-                let advancedStatusBarContent = `<div class="flex items-center space-x-2">`;
-                moduleSummary.forEach(summary => {
-                    let statusClass = 'info';
-                    const agreementPercentage = parseFloat(summary.split(': ')[1]);
-                    if (agreementPercentage > 75) statusClass = 'good';
-                    else if (agreementPercentage < 25) statusClass = 'danger';
-                    else if (agreementPercentage >= 25 && agreementPercentage <= 75) statusClass = 'warning';
-                    advancedStatusBarContent += `<span class="${statusClass}"><strong>${summary.split(':')[0]}:</strong> ${summary.split(':')[1]}</span>`;
-                });
-                advancedStatusBarContent += `</div>`;
-                advancedStatusBarElement.innerHTML = advancedStatusBarContent;
-            }
+            const { overallSupportRate } = runAnalyticalModules(predictionData, historyData); 
 
             if (typeForThisPeriod === 'size') {
                 const aiSizeDecision = await ultraAIPredictSize(historyData, nextPeriodShort);
                 sizePredictionValue = aiSizeDecision.prediction;
                 currentPredictionValue = sizePredictionValue;
-                confidenceValue = aiSizeDecision.confidence; // Already scaled to 0-100
-                
-                // Max win level strategy inversion
-                if (winLevel >= MAX_WIN_LEVEL) {
-                    sizePredictionValue = sizePredictionValue === "BIG" ? "SMALL" : "BIG";
-                    currentPredictionValue = sizePredictionValue;
-                    confidenceValue = Math.max(35, confidenceValue * 0.7); // Apply a penalty for reversal
-                    winLevel = 0; // Reset win level after inversion
-                }
+                confidenceValue = aiSizeDecision.confidence;
                 confidenceColorClass = sizePredictionValue === 'BIG' ? 'green' : 'red';
                 const predictionTitleElement = document.getElementById("predictionTitle");
                 if (predictionTitleElement) predictionTitleElement.textContent = "Size Pred.";
             } else {
                 const aiColorDecision = await ultraAIPredictColor(historyData, nextPeriodShort);
-                colorPredictionValue = aiColorDecision.prediction; // This will now always be RED or GREEN
+                colorPredictionValue = aiColorDecision.prediction;
                 currentPredictionValue = colorPredictionValue;
-                confidenceValue = aiColorDecision.confidence; // Already scaled to 0-100
-
-                 // Max win level strategy inversion
-                if (winLevel >= MAX_WIN_LEVEL) {
-                    colorPredictionValue = colorPredictionValue === "RED" ? "GREEN" : "RED"; // Invert color
-                    currentPredictionValue = colorPredictionValue;
-                    confidenceValue = Math.max(35, confidenceValue * 0.7); // Apply a penalty for reversal
-                    winLevel = 0; // Reset win level after inversion
-                }
-
-                confidenceColorClass = colorPredictionValue.toLowerCase(); // Will be 'red' or 'green'
+                confidenceValue = aiColorDecision.confidence;
+                confidenceColorClass = colorPredictionValue.toLowerCase();
                 const predictionTitleElement = document.getElementById("predictionTitle");
                 if (predictionTitleElement) predictionTitleElement.textContent = "Color Pred.";
             }
 
-            // --- Advanced Skip Logic Implementation ---
+            // --- Maxx Advanced Skip Logic ---
             let skipReason = null;
 
-            const HIGH_VOLATILITY_THRESHOLD_ATR = 3.0; // Adjusted based on expected ATR values
-            if (volatility > HIGH_VOLATILITY_THRESHOLD_ATR) {
-                skipReason = "Extreme Volatility";
+            // Dynamic adjustment of MIN_CONFIDENCE_FOR_PREDICTION
+            let currentMinConfidence = 60; // Base
+            if (lossStreak > 0) { // If on a loss streak, require higher confidence
+                currentMinConfidence = Math.min(90, currentMinConfidence + (lossStreak * 5)); // Max 90%
+            } else if (streak > 0) { // If on a win streak, can be slightly more aggressive
+                currentMinConfidence = Math.max(50, currentMinConfidence - (streak * 2)); // Min 50%
+            }
+            MIN_CONFIDENCE_FOR_PREDICTION = currentMinConfidence; // Update global for transparency
+
+            if (patternCoherence < MIN_PATTERN_COHERENCE_TO_PREDICT) { 
+                skipReason = "Highly Unstable Pattern";
+            }
+            
+            if (volatility !== null && volatility > HIGH_VOLATILITY_THRESHOLD_ATR) {
+                skipReason = skipReason ? skipReason + " & Extreme Volatility" : "Extreme Volatility";
             }
 
-            const NEUTRAL_RSI_SIGNAL_THRESHOLD = 10; // If RSI is very close to 50 (e.g., 40-60)
-            if (rsi !== null && Math.abs(rsi - 50) < NEUTRAL_RSI_SIGNAL_THRESHOLD) {
+            if (rsi !== null && Math.abs(rsi - 50) < MIN_RSI_SIGNAL_DEVIATION) {
                 skipReason = skipReason ? skipReason + " & Neutral RSI" : "Neutral RSI";
             }
 
-            // Conflicting Major Indicators (more robust)
-            const RECENT_HISTORY_CHECK_COUNT_FOR_CONFLICTS = 10; // Look at last 10 for conflicts
-            const recentHistorySubset = historyData.filter(item => 
+            // Enhanced Conflicting Signals Detection
+            const RECENT_HISTORY_FOR_CONFLICTS = historyData.filter(item => 
                 (item.resultStatus === 'WIN' || item.resultStatus === 'LOSS') && 
                 item.result !== '-' && !isNaN(Number(item.result))
-            ).slice(0, RECENT_HISTORY_CHECK_COUNT_FOR_CONFLICTS);
-            
-            let conflictingSignals = false;
+            ).slice(0, 15); // Look at last 15 resolved entries
 
-            if (recentHistorySubset.length >= 5) { // Need enough resolved history to check for conflicts
-                // Check if current trend strength contradicts overwhelming recent outcomes
-                let dominantRecentOutcome = null;
-                const totalRecent = recentHistorySubset.length;
-                let bigCountRecent = 0;
-                let smallCountRecent = 0;
-                let redCountRecent = 0;
-                let greenCountRecent = 0;
-
-                recentHistorySubset.forEach(entry => {
-                    if (entry.sizeResultType === 'BIG') bigCountRecent++;
-                    else if (entry.sizeResultType === 'SMALL') smallCountRecent++;
-                    if (entry.colorResultType === 'RED') redCountRecent++;
-                    else if (entry.colorResultType === 'GREEN') greenCountRecent++;
-                });
+            if (RECENT_HISTORY_FOR_CONFLICTS.length >= 7) { // Need sufficient history
+                let dominantRecentResult = null;
+                const totalRecentResolved = RECENT_HISTORY_FOR_CONFLICTS.length;
+                
+                const currentTypeCounts = {
+                    'BIG': RECENT_HISTORY_FOR_CONFLICTS.filter(e => e.sizeResultType === 'BIG').length,
+                    'SMALL': RECENT_HISTORY_FOR_CONFLICTS.filter(e => e.sizeResultType === 'SMALL').length,
+                    'RED': RECENT_HISTORY_FOR_CONFLICTS.filter(e => e.colorResultType === 'RED').length,
+                    'GREEN': RECENT_HISTORY_FOR_CONFLICTS.filter(e => e.colorResultType === 'GREEN').length
+                };
 
                 if (typeForThisPeriod === 'size') {
-                    if (bigCountRecent / totalRecent > 0.7) dominantRecentOutcome = 'BIG';
-                    else if (smallCountRecent / totalRecent > 0.7) dominantRecentOutcome = 'SMALL';
+                    if (currentTypeCounts['BIG'] / totalRecentResolved > 0.7) dominantRecentResult = 'BIG';
+                    else if (currentTypeCounts['SMALL'] / totalRecentResolved > 0.7) dominantRecentResult = 'SMALL';
                 } else if (typeForThisPeriod === 'color') {
-                    if (greenCountRecent / totalRecent > 0.7) dominantRecentOutcome = 'GREEN';
-                    else if (redCountRecent / totalRecent > 0.7) dominantRecentOutcome = 'RED';
+                    if (currentTypeCounts['GREEN'] / totalRecentResolved > 0.7) dominantRecentResult = 'GREEN';
+                    else if (currentTypeCounts['RED'] / totalRecentResolved > 0.7) dominantRecentResult = 'RED';
                 }
-                
-                // If a dominant recent outcome exists AND current AI prediction contradicts it AND there's a strong opposite trend
-                if (dominantRecentOutcome) {
-                    if (typeForThisPeriod === 'size') {
-                        if (currentPredictionValue === "BIG" && dominantRecentOutcome === "SMALL" && trendStrength < -0.5) conflictingSignals = true;
-                        if (currentPredictionValue === "SMALL" && dominantRecentOutcome === "BIG" && trendStrength > 0.5) conflictingSignals = true;
-                    } else if (typeForThisPeriod === 'color') {
-                        if (currentPredictionValue === "GREEN" && dominantRecentOutcome === "RED" && trendStrength < -0.5) conflictingSignals = true;
-                        if (currentPredictionValue === "RED" && dominantRecentOutcome === "GREEN" && trendStrength > 0.5) conflictingSignals = true;
+
+                // Conflict if AI prediction contradicts strong dominant recent outcome AND trend OR RSI
+                if (dominantRecentResult) {
+                    const isPredictionOppositeDominant = (currentPredictionValue === "BIG" && dominantRecentResult === "SMALL") ||
+                                                        (currentPredictionValue === "SMALL" && dominantRecentResult === "BIG") ||
+                                                        (currentPredictionValue === "GREEN" && dominantRecentResult === "RED") ||
+                                                        (currentPredictionValue === "RED" && dominantRecentResult === "GREEN");
+                    
+                    const isTrendOpposite = (currentPredictionValue === "BIG" && trendStrength < -0.5) ||
+                                            (currentPredictionValue === "SMALL" && trendStrength > 0.5) ||
+                                            (currentPredictionValue === "GREEN" && trendStrength < -0.5) ||
+                                            (currentPredictionValue === "RED" && trendStrength > 0.5);
+
+                    const isRSIOpposite = (currentPredictionValue === "BIG" && isOverbought) ||
+                                          (currentPredictionValue === "SMALL" && isOversold) ||
+                                          (currentPredictionValue === "GREEN" && isOverbought) || // Green for overbought means expect drop (red)
+                                          (currentPredictionValue === "RED" && isOversold);     // Red for oversold means expect rise (green)
+
+                    if (isPredictionOppositeDominant && (isTrendOpposite || isRSIOpposite)) {
+                        conflictingSignals = true;
                     }
                 }
             }
@@ -2442,57 +2328,46 @@
                 skipReason = skipReason ? skipReason + " & Conflicting Signals" : "Conflicting Signals Detected";
             }
 
-            // Overall pattern coherence check (if pattern is extremely bad)
-            if (patternCoherence < MIN_PATTERN_COHERENCE_TO_PREDICT) { 
-                skipReason = skipReason ? skipReason + " & Highly Unstable Pattern" : "Highly Unstable Pattern";
-            }
-
-            // Combine all skip conditions
+            // Final decision to skip
             if (consecutiveLosses >= 5 || !isPatternGood || confidenceValue < MIN_CONFIDENCE_FOR_PREDICTION || skipReason) {
                 const finalSkipReason = skipReason || (confidenceValue < MIN_CONFIDENCE_FOR_PREDICTION ? `Low Confidence (${confidenceValue.toFixed(0)}%)` : "System Pause");
-                console.log(`Smart Skip triggered for period ${nextPeriodShort}. Reason: ${finalSkipReason}`);
+                console.log(`Smart Skip triggered for period ${nextPeriodShort}. Reason: ${finalSkipReason}. Required Confidence: ${MIN_CONFIDENCE_FOR_PREDICTION.toFixed(0)}%`);
+
                 currentPredictionValue = "SKIPPED";
-                const currentPeriodElement = document.getElementById("currentPeriod");
-                if (currentPeriodElement) currentPeriodElement.textContent = nextPeriodShort;
-                const currentPredictionResultElement = document.getElementById("currentPredictionResult");
-                if (currentPredictionResultElement) currentPredictionResultElement.textContent = currentPredictionValue;
+                document.getElementById("currentPeriod").textContent = nextPeriodShort;
+                document.getElementById("currentPredictionResult").textContent = currentPredictionValue;
                 const confidenceFillElement = document.getElementById("confidenceFill");
                 if (confidenceFillElement) {
-                    confidenceFillElement.style.width = `0%`; // No fill for skipped
+                    confidenceFillElement.style.width = `0%`;
                     confidenceFillElement.classList.remove('red', 'green', 'violet');
                 }
-                const confidenceTextElement = document.getElementById("confidenceText");
-                if (confidenceTextElement) confidenceTextElement.textContent = `Smart Skip: ${finalSkipReason}`;
+                document.getElementById("confidenceText").textContent = `Smart Skip: ${finalSkipReason}`;
 
-                // Record as "Skipped" in history
                 historyData.unshift({
                     period: nextPeriodShort,
                     predictionType: typeForThisPeriod,
-                    sizePrediction: sizePredictionValue, // Still record what it *would* have predicted
+                    sizePrediction: sizePredictionValue,
                     colorPrediction: colorPredictionValue,
                     result: "-", 
                     sizeResultType: "-",
                     colorResultType: "-",
-                    resultStatus: "Skipped", // Mark as Skipped
+                    resultStatus: "Skipped",
                     confidence: confidenceValue,
-                    skipReason: finalSkipReason // Store the reason for skipping
+                    skipReason: finalSkipReason
                 });
                 
-                // Keep history length manageable for display and Firebase storage
                 if (historyData.length > 20) { historyData.pop(); }
-                await saveHistoryToFirebase(); // Save new history entry
+                await saveHistoryToFirebase();
                 updateHistory();
                 updateStats();
                 showToast(`Prediction for period ${nextPeriodShort} skipped: ${finalSkipReason}.`);
-                return; // Exit the function after skipping
+                return;
             }
-            // End of Advanced Skip Logic
+            // End of Maxx Advanced Skip Logic
 
-            // If not skipped, then proceed with normal prediction display and history update
-            const currentPeriodElement = document.getElementById("currentPeriod");
-            if (currentPeriodElement) currentPeriodElement.textContent = nextPeriodShort;
-            const currentPredictionResultElement = document.getElementById("currentPredictionResult");
-            if (currentPredictionResultElement) currentPredictionResultElement.textContent = currentPredictionValue;
+            // If not skipped, then proceed with normal prediction
+            document.getElementById("currentPeriod").textContent = nextPeriodShort;
+            document.getElementById("currentPredictionResult").textContent = currentPredictionValue;
             
             const confidenceFillElement = document.getElementById("confidenceFill");
             if (confidenceFillElement) {
@@ -2502,24 +2377,22 @@
                     confidenceFillElement.classList.add(confidenceColorClass);
                 }
             }
-            const confidenceTextElement = document.getElementById("confidenceText");
-            if (confidenceTextElement) confidenceTextElement.textContent = `Confidence: ${confidenceValue.toFixed(0)}%`;
+            document.getElementById("confidenceText").textContent = `Confidence: ${confidenceValue.toFixed(0)}% (Min Req: ${MIN_CONFIDENCE_FOR_PREDICTION.toFixed(0)}%)`;
 
             historyData.unshift({
                 period: nextPeriodShort,
                 predictionType: typeForThisPeriod,
                 sizePrediction: sizePredictionValue,
                 colorPrediction: colorPredictionValue,
-                result: "-", // This will be filled in the *next* cycle when `apiIssueNumber` matches `nextPeriodShort`
+                result: "-",
                 sizeResultType: "-",
                 colorResultType: "-",
-                resultStatus: "Pending", // Mark as pending
+                resultStatus: "Pending",
                 confidence: confidenceValue
             });
 
-            // Keep history length manageable for display and Firebase storage
             if (historyData.length > 20) { historyData.pop(); }
-            await saveHistoryToFirebase(); // Save new history entry
+            await saveHistoryToFirebase();
 
             predictionSwitchCounter++;
             if (predictionSwitchCounter >= PREDICTION_SWITCH_THRESHOLD) {
@@ -2547,7 +2420,7 @@
 
         function updateHistory() {
             const historyContainer = document.getElementById('history');
-            if (!historyContainer) return; // Ensure element exists
+            if (!historyContainer) return;
             historyContainer.innerHTML = '';
 
             historyData.forEach((entry, index) => {
@@ -2574,8 +2447,6 @@
                         actualDisplay = `<span class="font-medium">Actual Size: ${entry.sizeResultType}</span>`;
                     }
                 } else if (entry.predictionType === 'color') {
-                    // Adjust display for color to not show "VIOLET" if that was the internal result, display actual
-                    // For display, if the internal prediction was VIOLET, convert to either RED or GREEN randomly for user clarity.
                     const displayColorPrediction = entry.colorPrediction === 'VIOLET' ? (Math.random() < 0.5 ? 'RED' : 'GREEN') : entry.colorPrediction; 
                     predictionDisplay = `<span class="font-medium">Color:</span> <span class="px-2 py-1 rounded-full ${displayColorPrediction.toLowerCase()}-badge">${displayColorPrediction}</span>`;
                     if (entry.resultStatus !== "pending" && entry.resultStatus !== "skipped") {
@@ -2615,7 +2486,7 @@
                         historyData.splice(index, 1);
                         updateHistory();
                         updateStats();
-                        await saveHistoryToFirebase(); // Save updated history
+                        await saveHistoryToFirebase();
                         showHistoryDeletedPopup(`Period ${deletedPeriod} deleted successfully`);
                     });
                 });
@@ -2625,7 +2496,7 @@
             let leastFrequent = '-';
             const numberCounts = {};
             historyData.forEach(entry => {
-                if (entry.result !== '-' && entry.resultStatus !== 'Skipped') { // Only count actual results
+                if (entry.result !== '-' && entry.resultStatus !== 'Skipped') {
                     numberCounts[entry.result] = (numberCounts[entry.result] || 0) + 1;
                 }
             });
@@ -2643,7 +2514,7 @@
         function updateStats() {
             const wins = historyData.filter(item => item.resultStatus === "WIN").length;
             const losses = historyData.filter(item => item.resultStatus === "LOSS").length;
-            const total = wins + losses; // Only count resolved predictions for accuracy
+            const total = wins + losses;
             const accuracy = total > 0 ? ((wins / total) * 100).toFixed(2) : 0;
 
             const homeWinRateElement = document.getElementById("homeWinRate");
@@ -2662,7 +2533,6 @@
             const currentStreakElement = document.getElementById("currentStreak");
             if (currentStreakElement) currentStreakElement.textContent = streak;
             
-            // Only show WIN/LOSS for last five, not skipped/pending
             const lastFiveResolved = historyData.filter(item => item.resultStatus === 'WIN' || item.resultStatus === 'LOSS').slice(0, 5);
             const lastFiveResultsElement = document.getElementById("lastFiveResults");
             if (lastFiveResultsElement) lastFiveResultsElement.textContent = lastFiveResolved.map(item => item.resultStatus === 'WIN' ? 'W' : 'L').join(', ') || '-';
@@ -2672,7 +2542,6 @@
             const settingsTotalLossesElement = document.getElementById("settingsTotalLosses");
             if (settingsTotalLossesElement) settingsTotalLossesElement.textContent = `Total Losses: ${losses}`;
 
-            // Update eligibility status based on consecutive losses
             const eligibilityStatusElement = document.getElementById('eligibilityStatus');
             if (eligibilityStatusElement) {
                 if (consecutiveLosses >= 5) {
@@ -2694,13 +2563,11 @@
                 consecutiveLosses = 0;
                 updateHistory();
                 updateStats();
-                await saveHistoryToFirebase(); // Save empty history
+                await saveHistoryToFirebase();
                 showHistoryDeletedPopup("All history deleted successfully");
             });
         });
 
-        // Request notification permission on load if not already granted and enabled
-        // This will be called after successful login and app display
         function requestNotificationPermission() {
              if (isNotificationsEnabled && Notification.permission !== 'granted') {
                 Notification.requestPermission();
@@ -2750,7 +2617,7 @@
             const errorDiv = document.getElementById("error");
             const successDiv = document.getElementById("success");
             const loadingDiv = document.getElementById("loading");
-            const userDeviceId = getDeviceId(); // Get the current device ID
+            const userDeviceId = getDeviceId();
 
             if (errorDiv) errorDiv.innerText = "";
             if (successDiv) successDiv.innerText = "";
@@ -2769,16 +2636,13 @@
                 return;
             }
 
-            // Wait for Firebase Authentication to be ready before proceeding
-            // This ensures currentUserUid is set for loadUserDataFromFirebase
             while (!isAuthReady || currentUserUid === null) {
-                await new Promise(resolve => setTimeout(resolve, 100)); // Wait 100ms
+                await new Promise(resolve => setTimeout(resolve, 100));
             }
 
             try {
                 console.log("handleLogin: Current Firebase User UID before fetching key:", auth.currentUser?.uid);
 
-                // Fetch key data from Firebase (read-only for client app)
                 const keySnapshot = await get(child(accessKeysRef, key));
 
                 if (!keySnapshot.exists()) {
@@ -2808,22 +2672,16 @@
                     return;
                 }
 
-                // Device ID binding check
-                if (keyData.deviceId) { // If a deviceId is set for this key in Firebase
-                    if (keyData.deviceId !== userDeviceId) { // And it doesn't match current device
+                if (keyData.deviceId) {
+                    if (keyData.deviceId !== userDeviceId) {
                         if (loadingDiv) loadingDiv.style.display = "none";
                         if (errorDiv) errorDiv.innerText = `KEY BOUND TO ANOTHER DEVICE. YOUR ID: ${userDeviceId}`;
                         gsap.to('#error', { scale: 1, opacity: 1, duration: 0.5, ease: 'elastic.out(1, 0.6)' });
-                        setTimeout(() => { resetForm(); }, 3000); // Give more time for device ID error
+                        setTimeout(() => { resetForm(); }, 3000);
                         return;
                     }
                 }
-                // Important: With the current Firebase rules (accessKeys read-only),
-                // we *cannot* set keyData.deviceId here if it's null.
-                // It must be set by an admin in the Firebase console beforehand
-                // if you want strong "one device only" enforcement for new keys.
 
-                // If all checks pass
                 if (successDiv) successDiv.innerText = "LOGIN SUCCESSFUL!";
                 gsap.to('#success', {
                     scale: 1,
@@ -2834,7 +2692,6 @@
                 localStorage.setItem('last_key', key);
                 displayLastKey();
                 
-                // Now, perform the UI transition to the main app
                 const loginScreen = document.getElementById('loginScreen');
                 const mainAppScreen = document.getElementById('mainAppScreen');
                 if (loginScreen && mainAppScreen) {
@@ -2849,15 +2706,14 @@
                                 { opacity: 0, y: 50 }, 
                                 { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
                             );
-                            if (!predictionInterval) { // Start prediction only if not already running
+                            if (!predictionInterval) {
                                 predictionInterval = setInterval(updatePrediction, 5000);
-                                updatePrediction(); // Initial call
+                                updatePrediction();
                             }
-                            requestNotificationPermission(); // Request notifications after app loads
+                            requestNotificationPermission();
                         }
                     });
                 }
-
 
             } catch (error) {
                 console.error("Firebase Login Error:", error);
@@ -2883,7 +2739,7 @@
 
         function createStarsLogin() {
             const container = document.getElementById('stars-container-login');
-            if (!container) return; // Ensure container exists
+            if (!container) return;
             const starCount = 40;
             
             for (let i = 0; i < starCount; i++) {
@@ -2909,7 +2765,7 @@
 
         function createConfettiLogin() {
             const container = document.getElementById('confetti-container-login');
-            if (!container) return; // Ensure container exists
+            if (!container) return;
             const confettiCount = 80;
             
             for (let i = 0; i < confettiCount; i++) {
@@ -2959,15 +2815,13 @@
 
         window.copyDeviceId = function () {
             const deviceId = getDeviceId();
-            // Create a temporary textarea element
             const tempInput = document.createElement('textarea');
             tempInput.value = deviceId;
-            tempInput.style.position = 'absolute'; // Hide it visually
+            tempInput.style.position = 'absolute';
             tempInput.style.left = '-9999px';
             tempInput.style.top = '0';
             document.body.appendChild(tempInput);
             
-            // Select the text and copy
             tempInput.select();
             
             let successful = false;
@@ -2978,8 +2832,8 @@
                     const copyText = document.getElementById('copyText');
                     
                     if (copyBtn && copyText) {
-                        createConfettiLogin(); // Use login confetti
-                        animateConfettiLogin(); // Animate login confetti
+                        createConfettiLogin();
+                        animateConfettiLogin();
                         
                         copyBtn.classList.add('copied');
                         copyText.innerHTML = 'Copied!';
@@ -3000,7 +2854,6 @@
                     }
                 } else {
                     console.error('Failed to copy using execCommand. Fallback to manual.');
-                    // Fallback to showing a message for manual copy
                     const messageBox = document.createElement('div');
                     messageBox.style.cssText = `
                         position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -3010,11 +2863,10 @@
                     `;
                     messageBox.innerHTML = `Copy failed.<br>Please copy Device ID manually: <br><strong>${deviceId}</strong>`;
                     document.body.appendChild(messageBox);
-                    setTimeout(() => messageBox.remove(), 5000); // Give more time for user to read/copy
+                    setTimeout(() => messageBox.remove(), 5000);
                 }
             } catch (err) {
                 console.error('Error attempting to copy: ', err);
-                // Fallback to showing a message for manual copy
                 const messageBox = document.createElement('div');
                 messageBox.style.cssText = `
                     position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -3024,9 +2876,9 @@
                 `;
                 messageBox.innerHTML = `Copy failed.<br>Please copy Device ID manually: <br><strong>${deviceId}</strong>`;
                 document.body.appendChild(messageBox);
-                setTimeout(() => messageBox.remove(), 5000); // Give more time for user to read/copy
+                setTimeout(() => messageBox.remove(), 5000);
             } finally {
-                document.body.removeChild(tempInput); // Always remove the temporary element
+                document.body.removeChild(tempInput);
             }
         };
 
@@ -3053,7 +2905,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             populateLicenseInput();
             displayLastKey();
-            createStarsLogin(); // Call for login stars
+            createStarsLogin();
 
             gsap.to('#loginContainer', {
                 opacity: 1,
